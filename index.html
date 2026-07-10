@@ -74,9 +74,12 @@
     transition:background .2s, border-color .2s; will-change:transform; touch-action:manipulation}
   .starbtn .sdot{width:8px; height:8px; border-radius:50%; background:var(--c); box-shadow:0 0 8px var(--c); flex:none}
   .starbtn:hover{background:rgba(255,255,255,.14); border-color:var(--c)}
+  .starbtn{transition:opacity .5s ease}
   .starbtn.hid{display:none!important}
+  .hero.nolabels .starbtn{opacity:0!important; pointer-events:none}
   @media(max-width:640px){ .starbtn{font-size:9.5px; padding:4px 8px} }
-  .hint{position:absolute; left:50%; transform:translateX(-50%); bottom:16px; z-index:3; font-family:var(--mono); font-size:11px; letter-spacing:.12em; color:var(--faint); text-transform:uppercase; text-align:center; pointer-events:none; background:rgba(10,11,30,.4); padding:6px 14px; border-radius:999px; border:1px solid var(--line)}
+  .hint{display:none; position:absolute; left:50%; transform:translateX(-50%); bottom:16px; z-index:3; font-family:var(--mono); font-size:11px; letter-spacing:.12em; color:var(--faint); text-transform:uppercase; text-align:center; pointer-events:none; background:rgba(10,11,30,.4); padding:6px 14px; border-radius:999px; border:1px solid var(--line)}
+  .hint.vis{display:block; animation:fade .2s ease}
   .hint b{color:var(--muted)}
   .fallback-note{position:absolute; inset:0; display:none; align-items:center; justify-content:center; text-align:center; padding:24px; color:var(--muted); font-family:var(--mono); font-size:13px; z-index:2}
 
@@ -374,6 +377,16 @@
   .obsnav .cnt{font-size:9.5px; opacity:.7}
   /* timeline chart */
   .tl-controls{display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap}
+  .tl-bar{display:flex; align-items:center; gap:10px 16px; flex-wrap:wrap; margin-bottom:10px; padding:10px 12px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.02)}
+  .tl-fset{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .tl-flab{font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
+  .tl-chips{display:flex; gap:6px; flex-wrap:wrap}
+  .tl-tools{display:flex; align-items:center; gap:8px; margin-left:auto}
+  .tl-info{width:32px; height:32px; border-radius:9px; border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--muted); font-size:15px; cursor:pointer}
+  .tl-info:hover{color:var(--star); border-color:var(--f5)}
+  .tl-note{display:none; border:1px dashed var(--line); border-radius:12px; padding:12px 14px; margin-bottom:12px; background:rgba(255,255,255,.02)}
+  .tl-note.vis{display:block; animation:fade .18s ease}
+  .tl-note p{font-size:12.5px; color:var(--muted); margin:0}
   .tl-layers{display:flex; gap:4px; background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:999px; padding:3px}
   .tl-layers button{font-family:var(--mono); font-size:11px; border:0; background:transparent; color:var(--muted); padding:6px 13px; border-radius:999px; cursor:pointer; transition:.15s}
   .tl-layers button.on{background:linear-gradient(90deg,#ff6b6b,#ff9a5a); color:#fff}
@@ -387,7 +400,21 @@
   .ld.vulnmk{background:#9fb6ff; border:2px solid #fff}
   .ld.techmk{background:transparent; border:2px solid #9fb6ff}
   .ld.attackmk{background:#ff6b6b; border:2px solid #fff; transform:rotate(45deg); border-radius:1px}
-  .tl-wrap{overflow-x:auto; overflow-y:hidden; border:1px solid var(--line); border-radius:14px; background:#070a18; cursor:grab; -webkit-overflow-scrolling:touch; touch-action:pan-x}
+  .ld.aimk{background:#ff4fd8; clip-path:polygon(50% 0,100% 100%,0 100%)}
+  .ld.estmk{background:transparent; border:1.5px dashed #dbe6ff; border-radius:50%}
+  .tl-legend .lg-h{font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-left:2px}
+  .hint-btn{position:absolute; right:clamp(12px,3vw,22px); top:14px; z-index:4; width:34px; height:34px; border-radius:10px; border:1px solid var(--line); background:rgba(10,11,30,.5); backdrop-filter:blur(8px); color:var(--star); font-size:17px; cursor:pointer}
+  .hint-btn:hover{border-color:var(--f3)}
+  #muteBtn .ic-on,#muteBtn .ic-off{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+  #muteBtn .ic-off{display:none}
+  #muteBtn.muted .ic-on{display:none}
+  #muteBtn.muted .ic-off{display:inline}
+  .ai-toggle{font-family:var(--mono); font-size:11px; padding:7px 13px; border-radius:999px; border:1px dashed #ff4fd8; background:transparent; color:#ff9fe4; cursor:pointer; transition:.15s}
+  .ai-toggle.on{background:rgba(255,79,216,.22); color:#fff; border-style:solid}
+  .ai-toggle:hover{border-style:solid}
+  .tl-wrap{position:relative; height:348px; border:1px solid var(--line); border-radius:14px; background:#070a18; cursor:grab; touch-action:pan-y; overflow:hidden; user-select:none}
+  .tl-wrap.grabbing{cursor:grabbing}
+  .tl-wrap svg{display:block; width:100%; height:100%}
   .tl-wrap.grabbing{cursor:grabbing}
   .tl-wrap svg{display:block}
   .tlpt{cursor:pointer; transition:opacity .15s}
@@ -397,6 +424,8 @@
   .tlband{opacity:.05}
   .tlgrid{stroke:rgba(255,255,255,.06); stroke-width:1}
   .tlaxis{fill:var(--faint); font-family:ui-monospace,monospace; font-size:10px}
+  .tllab{font-family:ui-monospace,monospace; font-size:8.6px; pointer-events:none}
+  .tllab.attack{fill:#ffd0c8} .tllab.vuln{fill:#dbe6ff} .tllab.tech{fill:#aab3d6}
   .tlbandlab{fill:var(--faint); font-family:ui-monospace,monospace; font-size:9px; opacity:.7}
   .tlnow{stroke:#ff6b6b; stroke-width:1; stroke-dasharray:3 3; opacity:.4}
   /* CVE cards */
@@ -601,8 +630,9 @@
 </head>
 <body>
 <div class="appbar">
-  <div class="brand"><h1>The Model <span>Cortex</span></h1></div>
+  <div class="brand"><h1>The AI Model <span>Cortex</span></h1></div>
   <div class="aright">
+    <button class="ibtn" id="muteBtn" aria-label="Mute or unmute music" title="Music on / off" onclick="toggleMute()"><svg class="ic-on" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4 4 0 0 1 0 7M18.5 6a7 7 0 0 1 0 12"/></svg><svg class="ic-off" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><line x1="16" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="16" y2="15"/></svg></button>
     <button class="ibtn" id="themeBtn" aria-label="Toggle theme" title="Light / dark"><svg id="themeIc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></button>
     <button class="ibtn" id="menuBtn" aria-haspopup="true" aria-expanded="false" aria-label="More" title="More" onclick="toggleHmenu(event)"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.4" fill="currentColor" stroke="none"/></svg></button>
   </div>
@@ -631,8 +661,10 @@
       <div class="viewctl">
         <button id="viewBtn" title="Switch view">&#10022; Constellation</button>
         <button id="skullBtn" class="on" title="Toggle skull">&#9682; Skull</button>
+        <button id="labelBtn" class="on" title="Toggle labels">&#127991; Labels</button>
       </div>
-      <div class="hint"><b>Tap a name</b> to open &nbsp;·&nbsp; <b>Drag</b> to rotate the brain &nbsp;·&nbsp; <b>+/−</b> to zoom into the neurons</div>
+      <button class="hint-btn" id="hintBtn" aria-label="How to use" title="How to use" onclick="document.getElementById('cortexHint').classList.toggle('vis')">&#9432;</button>
+      <div class="hint" id="cortexHint"><b>Tap a name</b> to open &nbsp;·&nbsp; <b>Drag</b> to rotate the brain &nbsp;·&nbsp; <b>+/−</b> to zoom &nbsp;·&nbsp; bottom-left toggles the <b>skull</b>, <b>labels</b> &amp; <b>constellation</b></div>
     </section>
     <div class="filters" id="filters"><span class="lbl">Brain regions</span></div>
     <div class="grid-wrap">
@@ -1211,6 +1243,14 @@ window.addEventListener("error",function(ev){
   allChip.innerHTML='<span class="dot" style="background:linear-gradient(90deg,#f5b642,#38d6e0,#e857a8,#8b6cff,#4bd19a,#ff7a59)"></span><span style="color:var(--star)">All</span>';
   allChip.addEventListener("click", function(){ toggleFam(null); });
   filters.appendChild(allChip);
+  var noneChip=document.createElement("button");
+  noneChip.className="chip"; noneChip.dataset.fam="__none";
+  noneChip.innerHTML='<span class="dot" style="background:#6b7291"></span><span style="color:var(--star)">None</span>';
+  noneChip.addEventListener("click", function(){
+    if(window.setCortexLabels) window.setCortexLabels(false);
+    document.querySelectorAll("#filters .chip").forEach(function(ch){ ch.classList.toggle("solo", ch===noneChip); ch.classList.toggle("off", ch!==noneChip); });
+  });
+  filters.appendChild(noneChip);
   REGIONS.forEach(function(f){
     var c=document.createElement("button");
     c.className="chip"; c.dataset.fam=f.key; c.style.color=f.color;
@@ -1219,9 +1259,11 @@ window.addEventListener("error",function(ev){
     filters.appendChild(c);
   });
   function toggleFam(key){
+    if(window.setCortexLabels) window.setCortexLabels(true);
     soloFam=(key===null||soloFam===key)?null:key;
     document.querySelectorAll("#filters .chip").forEach(function(ch){
       var k=ch.dataset.fam||null;
+      if(k==="__none"){ ch.classList.remove("solo"); ch.classList.toggle("off", !!soloFam); return; }
       if(k===null){
         ch.classList.toggle("solo", soloFam===null);
         ch.classList.remove("off");
@@ -1232,6 +1274,15 @@ window.addEventListener("error",function(ev){
     });
     render(); dim3D();
   }
+  /* after the tour: reveal each region's labels one group at a time, highlighting the filter */
+  window.revealCortexRegions=function(){
+    if(window.setCortexLabels) window.setCortexLabels(true);
+    var keys=REGIONS.map(function(r){return r.key;}), i=0;
+    (function step(){
+      if(i<keys.length){ toggleFam(keys[i]); i++; setTimeout(step, 1050); }
+      else { toggleFam(null); }
+    })();
+  };
 
   var grid=document.getElementById("grid"), countEl=document.getElementById("count");
   function match(m){
@@ -1414,124 +1465,131 @@ window.addEventListener("error",function(ev){
     world.add(brainGrp); world.add(skullGrp);
     function tagB(m,bo){ m.userData.bo=bo; brainGrp.add(m); return m; }
     function tagS(m,bo){ m.userData.bo=bo; skullGrp.add(m); return m; }
+    function smat(hex,op){ var m=new THREE.MeshBasicMaterial({color:hex,transparent:true,opacity:op}); m.depthWrite=false; return m; }
+    function bar(a,b,rad,op,col){ var av=new THREE.Vector3(a[0],a[1],a[2]),bv=new THREE.Vector3(b[0],b[1],b[2]); var dir=new THREE.Vector3().subVectors(bv,av),len=dir.length(); var m=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,len,6,1,true),wmat(col||0xc4e4ff,op)); m.position.copy(av).add(bv).multiplyScalar(0.5); m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir.clone().normalize()); tagS(m,op); return m; }
+    var BONE=0xd8d0bc;
 
-    /* CEREBRUM hemispheres — multi-layer gyri folding */
+    /* ===================== HUMAN BRAIN ===================== */
+    /* cerebral hemispheres with deep organic gyri */
     [-1,1].forEach(function(sgn){
-      var g=new THREE.SphereGeometry(1.96,52,36, sgn>0?0:Math.PI, Math.PI);
+      var g=new THREE.SphereGeometry(1.95,68,48, sgn>0?0:Math.PI, Math.PI);
       var pos=g.attributes.position;
       for(var i=0;i<pos.count;i++){
         var x=pos.getX(i),y=pos.getY(i),z=pos.getZ(i);
-        /* anatomical shaping */
-        if(z>0.5){ x*=0.88; }              /* frontal poles narrow */
-        if(z>1.0){ y*=0.92; z*=1.06; }    /* forehead juts */
-        if(y<-0.2 && y>-1.5 && Math.abs(x)>0.3) x*=1.16; /* temporal bulge */
-        if(y<-1.0){ y*=0.83; }             /* flat base */
-        if(z<-1.0){ z*=1.10; }             /* occipital point */
-        /* multi-frequency gyri (sulci are valleys, gyri ridges) */
-        var l=Math.sqrt(x*x+y*y+z*z)||1;
-        var nx=x/l,ny=y/l,nz=z/l;
-        var w = 0.11*Math.sin(x*4.8+z*2.1)*Math.cos(y*5.2)   /* primary gyri */
-              + 0.065*Math.sin(y*8.5+x*3.3)*Math.cos(z*6.0)  /* secondary */
-              + 0.038*Math.sin((x+2*y-z)*12.0)               /* fine sulci */
-              + 0.024*Math.sin((z-y)*16.0+x*4.0);            /* micro-folds */
+        if(z>0.5){ x*=0.88; }                       /* frontal pole narrows */
+        if(z>1.1){ y*=0.93; z*=1.05; }              /* forehead */
+        if(y<-0.2 && y>-1.5 && Math.abs(x)>0.3) x*=1.17; /* temporal lobe bulge */
+        if(y<-1.0){ y*=0.85; }                      /* base flattens */
+        if(z<-1.0){ z*=1.12; }                      /* occipital pole */
+        var l=Math.sqrt(x*x+y*y+z*z)||1, nx=x/l,ny=y/l,nz=z/l;
+        /* layered convolutions -> gyri (ridges) and sulci (valleys) */
+        var w = 0.135*Math.sin(x*4.2+z*2.6)*Math.cos(y*4.6)
+              + 0.090*Math.sin(y*7.0+x*2.4)*Math.cos(z*5.2)
+              + 0.058*Math.sin((x*1.3+y*2.1-z*1.7)*9.5)
+              + 0.034*Math.sin((z*2.0-y*1.4)*15.0+x*3.0)
+              + 0.020*Math.cos((x+z)*20.0+y*4.0);
         pos.setXYZ(i, x+nx*w, y+ny*w, z+nz*w);
       }
-      var mesh=new THREE.Mesh(g, wmat(0xffa0cc,0.15));
-      mesh.scale.set(1.44,1.22,1.82); mesh.position.set(sgn*0.17,0.14,-0.08);
-      tagB(mesh,0.15);
+      g.computeVertexNormals();
+      var mesh=new THREE.Mesh(g, wmat(0xff9ec4,0.19));
+      mesh.scale.set(1.42,1.2,1.8); mesh.position.set(sgn*0.16,0.16,-0.08);
+      tagB(mesh,0.19);
     });
-    /* longitudinal fissure: thin slab between hemispheres */
-    var fisMat=new THREE.MeshBasicMaterial({color:0x06070f,side:THREE.DoubleSide,transparent:true,opacity:0.22});
-    var fis=new THREE.Mesh(new THREE.PlaneGeometry(0.06,3.8,1,1),fisMat);
-    fis.rotation.y=Math.PI/2; fis.position.set(0,0.2,0); fis.userData.bo=0.22; brainGrp.add(fis);
-    /* lateral sulcus (Sylvian fissure) hint */
+    /* longitudinal fissure (dark midline slab) */
+    var fis=new THREE.Mesh(new THREE.PlaneGeometry(0.06,3.7,1,1), smat(0x0a0712,0.28));
+    fis.rotation.y=Math.PI/2; fis.position.set(0,0.2,-0.05); tagB(fis,0.28);
+    /* lateral (Sylvian) fissure hint */
     [-1,1].forEach(function(sgn){
-      var syl=new THREE.Mesh(new THREE.TorusGeometry(0.7,0.022,4,24,Math.PI*0.7), wmat(0x050510,0.25));
-      syl.position.set(sgn*2.3,-0.7,0.1); syl.rotation.set(0.2,sgn*0.8,0.5); tagB(syl,0.25);
+      var syl=new THREE.Mesh(new THREE.TorusGeometry(0.72,0.02,4,24,Math.PI*0.7), wmat(0x2a0a18,0.22));
+      syl.position.set(sgn*2.35,-0.7,0.15); syl.rotation.set(0.2,sgn*0.85,0.5); tagB(syl,0.22);
     });
-    /* CORPUS CALLOSUM (white matter bridge) */
-    var cc=new THREE.Mesh(new THREE.TorusGeometry(0.75,0.13,8,30,Math.PI*1.1), wmat(0xffc8e0,0.12));
-    cc.position.set(0,0.2,0.2); cc.rotation.x=Math.PI/2; cc.rotation.z=0.05; tagB(cc,0.12);
-    /* CEREBELLUM: bilateral, transverse folia */
+    /* cerebellum (finely-foliated, lower-posterior) */
     [-1,1].forEach(function(sgn){
-      var g2=new THREE.SphereGeometry(0.78,24,18);
-      var pos2=g2.attributes.position;
-      for(var i=0;i<pos2.count;i++){
-        var x=pos2.getX(i),y=pos2.getY(i),z=pos2.getZ(i);
-        var l=Math.sqrt(x*x+y*y+z*z)||1;
-        var w2=0.06*Math.sin(y*18.0+x*2.0)+0.03*Math.sin(x*12.0+z*5.0);
-        pos2.setXYZ(i,x+(x/l)*w2,y+(y/l)*w2,z+(z/l)*w2);
-      }
-      var cm=new THREE.Mesh(g2,wmat(0xffb0d5,0.17)); cm.scale.set(1.08,0.64,0.88);
-      cm.position.set(sgn*0.52,-1.60,-1.68); tagB(cm,0.17);
+      var g2=new THREE.SphereGeometry(0.82,28,20); var p2=g2.attributes.position;
+      for(var i=0;i<p2.count;i++){ var x=p2.getX(i),y=p2.getY(i),z=p2.getZ(i),l=Math.sqrt(x*x+y*y+z*z)||1;
+        var w=0.06*Math.sin(y*20.0+x*2.0)+0.03*Math.sin((x+z)*11.0); p2.setXYZ(i,x+x/l*w,y+y/l*w,z+z/l*w); }
+      var cm=new THREE.Mesh(g2,wmat(0xffb0d5,0.2)); cm.scale.set(1.08,0.6,0.82); cm.position.set(sgn*0.5,-1.7,-1.95); tagB(cm,0.2);
     });
-    /* vermis (central cerebellum) */
-    var verm=new THREE.Mesh(new THREE.SphereGeometry(0.5,16,12), wmat(0xffb0d5,0.15));
-    verm.scale.set(0.5,0.55,0.82); verm.position.set(0,-1.65,-1.72); tagB(verm,0.15);
-    /* BRAINSTEM (pons + medulla shape) */
-    var pons=new THREE.Mesh(new THREE.CylinderGeometry(0.28,0.24,0.65,12,2,true), wmat(0xffc0dc,0.14));
-    pons.position.set(0,-1.72,-0.82); pons.rotation.x=0.38; tagB(pons,0.14);
-    var med=new THREE.Mesh(new THREE.CylinderGeometry(0.21,0.18,1.05,10,2,true), wmat(0xffb8d8,0.13));
-    med.position.set(0,-2.15,-0.95); med.rotation.x=0.42; tagB(med,0.13);
+    var verm=new THREE.Mesh(new THREE.SphereGeometry(0.5,16,12),wmat(0xffb0d5,0.18)); verm.scale.set(0.45,0.55,0.8); verm.position.set(0,-1.72,-2.0); tagB(verm,0.18);
+    /* brainstem: pons + medulla descending to foramen magnum */
+    var pons=new THREE.Mesh(new THREE.CylinderGeometry(0.3,0.24,0.7,12,2,true),wmat(0xffc0dc,0.19)); pons.position.set(0,-1.75,-1.0); pons.rotation.x=0.4; tagB(pons,0.19);
+    var med=new THREE.Mesh(new THREE.CylinderGeometry(0.22,0.17,1.15,10,2,true),wmat(0xffb8d8,0.17)); med.position.set(0,-2.25,-1.15); med.rotation.x=0.45; tagB(med,0.17);
 
-    /* ===== SKULL: lathe head profile + facial features ===== */
-    /* lateral profile [r,y] top→chin */
-    var prof=[
-      [0.04,4.40],[0.90,4.20],[1.62,3.82],[2.08,3.22],[2.40,2.52],[2.52,1.72],
-      [2.52,0.92],[2.44,0.18],[2.52,-0.46],[2.64,-0.88], /* brow/temple/cheek */
-      [2.44,-1.38],[2.00,-1.90],[1.50,-2.40],            /* lower cheek */
-      [1.08,-2.82],[0.68,-3.12],[0.20,-3.22]             /* chin */
-    ];
-    var pts=prof.map(function(p){return new THREE.Vector2(p[0],p[1]);});
-    var lathe=new THREE.LatheGeometry(pts,52);
-    var lp=lathe.attributes.position;
-    for(var i=0;i<lp.count;i++){
-      var x=lp.getX(i),y=lp.getY(i),z=lp.getZ(i);
-      x*=0.84;                    /* narrower laterally */
-      z*=1.08;                    /* deeper A-P */
-      if(z>0 && y<0.8) z*=1.10;  /* prognathic lower face */
-      if(y>2.8) x*=0.94;         /* crown taper */
-      if(y<-2.0) x*=0.90;        /* chin narrows */
-      lp.setXYZ(i,x,y,z);
-    }
-    lathe.computeVertexNormals();
-    var head=new THREE.Mesh(lathe, wmat(0x9fc0ff,0.065)); head.position.y=0.34; tagS(head,0.065);
-    /* SUPRAORBITAL RIDGE */
-    var sob=new THREE.Mesh(new THREE.TorusGeometry(1.32,0.048,7,34,Math.PI*1.04), wmat(0x9fc0ff,0.14));
-    sob.position.set(0,0.08,2.24); sob.rotation.x=Math.PI/2.05; tagS(sob,0.14);
-    /* EYE ORBITS (torus) */
+    /* ===================== ROBOTIC SKULL ===================== */
+    var STEEL=0x9fc4e8, SEAM=0xc4e4ff, GLOW=0x3ce6e6, BOLT=0xbfd6f0;
+    /* faceted cranial shell (geodesic panels), faint so the brain shows */
+    var shellG=new THREE.IcosahedronGeometry(2.95,2); var sp=shellG.attributes.position;
+    for(var i=0;i<sp.count;i++){ var x=sp.getX(i),y=sp.getY(i),z=sp.getZ(i);
+      if(y<-0.3){ x*=0.9; z*=0.94; } if(z<-0.2){ z*=1.12; } if(y>1.6){ z*=1.03; } sp.setXYZ(i,x,y,z); }
+    shellG.computeVertexNormals();
+    var shell=new THREE.Mesh(shellG, wmat(STEEL,0.1)); shell.scale.set(0.97,1.06,1.15); shell.position.set(0,0.6,-0.15); tagS(shell,0.1);
+    /* bright structural seams */
+    var sag=new THREE.Mesh(new THREE.TorusGeometry(2.9,0.03,4,40,Math.PI),wmat(SEAM,0.28)); sag.position.set(0,0.6,-0.15); sag.rotation.x=Math.PI/2; sag.rotation.z=Math.PI/2; tagS(sag,0.28);
+    var cor=new THREE.Mesh(new THREE.TorusGeometry(2.86,0.03,4,40,Math.PI),wmat(SEAM,0.24)); cor.position.set(0,0.72,-0.15); tagS(cor,0.24);
+    var band=new THREE.Mesh(new THREE.TorusGeometry(2.7,0.035,4,44),wmat(SEAM,0.2)); band.position.set(0,0.25,-0.15); band.rotation.x=Math.PI/2.2; tagS(band,0.2);
+    /* forehead sensor: hex plate + inner glow */
+    var fhex=new THREE.Mesh(new THREE.TorusGeometry(0.42,0.05,6,6),wmat(SEAM,0.35)); fhex.position.set(0,1.5,2.35); fhex.rotation.x=-0.5; tagS(fhex,0.35);
+    var fdot=new THREE.Mesh(new THREE.CircleGeometry(0.18,18),smat(GLOW,0.5)); fdot.position.set(0,1.5,2.33); fdot.rotation.x=-0.5; tagS(fdot,0.5);
+    /* antenna */
+    var ant=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.05,0.9,6),wmat(SEAM,0.4)); ant.position.set(0.7,3.35,-0.3); ant.rotation.z=-0.18; tagS(ant,0.4);
+    var antip=new THREE.Mesh(new THREE.SphereGeometry(0.11,10,8),smat(GLOW,0.7)); antip.position.set(0.62,3.78,-0.32); tagS(antip,0.7);
+    /* ---- FACE: mechanical outlines ---- */
+    /* brow bar */
+    var brow=new THREE.Mesh(new THREE.BoxGeometry(2.6,0.12,0.14),wmat(SEAM,0.3)); brow.position.set(0,0.42,2.62); brow.rotation.x=0.12; tagS(brow,0.3);
+    /* central face seam */
+    var fseam=new THREE.Mesh(new THREE.BoxGeometry(0.05,3.4,0.05),smat(SEAM,0.22)); fseam.position.set(0,-0.9,2.7); tagS(fseam,0.22);
+    /* EYE OPTICS: hexagonal socket outline + glowing sensor + iris ring */
     [-1,1].forEach(function(sgn){
-      var orb=new THREE.Mesh(new THREE.TorusGeometry(0.44,0.055,10,26), wmat(0x9fc0ff,0.18));
-      orb.scale.set(1,0.88,1); orb.position.set(sgn*0.73,-0.46,2.20); orb.rotation.y=sgn*0.14; tagS(orb,0.18);
-      /* nasal bone lateral process */
-      var np=new THREE.Mesh(new THREE.CylinderGeometry(0.055,0.04,0.48,8,1,true),wmat(0x9fc0ff,0.11));
-      np.position.set(sgn*0.30,-0.58,2.38); np.rotation.z=sgn*0.3; tagS(np,0.11);
-      /* zygomatic arch */
-      var zyg=new THREE.Mesh(new THREE.TorusGeometry(0.52,0.040,7,20,Math.PI*0.72), wmat(0x9fc0ff,0.10));
-      zyg.position.set(sgn*1.62,-0.92,0.88); zyg.rotation.set(0.34,sgn*1.18,0); tagS(zyg,0.10);
+      var hex=new THREE.Mesh(new THREE.TorusGeometry(0.6,0.06,5,6),wmat(SEAM,0.4)); hex.position.set(sgn*0.92,-0.28,2.66); hex.rotation.z=Math.PI/6; hex.rotation.y=sgn*0.14; tagS(hex,0.4);
+      var socket=new THREE.Mesh(new THREE.SphereGeometry(0.52,16,12),smat(0x061016,0.5)); socket.scale.set(1,0.92,0.5); socket.position.set(sgn*0.92,-0.28,2.42); tagS(socket,0.5);
+      var iris=new THREE.Mesh(new THREE.CircleGeometry(0.34,22),smat(GLOW,0.7)); iris.position.set(sgn*0.92,-0.28,2.5); iris.rotation.y=sgn*0.14; tagS(iris,0.7);
+      var oring=new THREE.Mesh(new THREE.TorusGeometry(0.34,0.03,8,24),wmat(0x9ff4f4,0.7)); oring.position.set(sgn*0.92,-0.28,2.53); oring.rotation.y=sgn*0.14; tagS(oring,0.7);
+      var pupil=new THREE.Mesh(new THREE.CircleGeometry(0.12,14),smat(0x03252a,0.85)); pupil.position.set(sgn*0.92,-0.28,2.55); pupil.rotation.y=sgn*0.14; tagS(pupil,0.85);
     });
-    /* NASAL APERTURE (piriform) */
-    var nas=new THREE.Mesh(new THREE.TorusGeometry(0.22,0.044,7,20,Math.PI), wmat(0x9fc0ff,0.13));
-    nas.position.set(0,-0.95,2.38); nas.rotation.x=Math.PI/2; tagS(nas,0.13);
-    var nasBr=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.04,0.52,7,1,true),wmat(0x9fc0ff,0.10));
-    nasBr.position.set(0,-0.72,2.42); tagS(nasBr,0.10);
-    /* MAXILLA (upper jaw) + MANDIBLE (lower jaw) */
-    var max=new THREE.Mesh(new THREE.TorusGeometry(0.82,0.048,7,28,Math.PI),wmat(0x9fc0ff,0.11));
-    max.position.set(0,-1.68,1.62); max.rotation.x=-Math.PI/2; tagS(max,0.11);
-    var man=new THREE.Mesh(new THREE.TorusGeometry(0.94,0.052,7,30,Math.PI),wmat(0x9fc0ff,0.11));
-    man.position.set(0,-2.22,1.28); man.rotation.x=-Math.PI/2+0.18; tagS(man,0.11);
-    /* MASTOID behind ear */
+    /* NOSE: prominent projecting robotic nose — ridge, tip, nostrils */
+    var nridge=new THREE.Mesh(new THREE.BoxGeometry(0.22,0.95,0.34),wmat(SEAM,0.34)); nridge.position.set(0,-0.5,2.92); nridge.rotation.x=0.22; tagS(nridge,0.34);
+    /* angular nose bridge edges */
+    bar([0,-0.05,2.78],[0,-1.0,3.12],0.045,0.4,SEAM);
+    [-1,1].forEach(function(sgn){ bar([sgn*0.16,-0.1,2.7],[0,-1.05,3.12],0.035,0.3,SEAM); });
+    /* nose tip (projecting pyramid) */
+    var ntip=new THREE.Mesh(new THREE.ConeGeometry(0.24,0.5,4),wmat(SEAM,0.4)); ntip.position.set(0,-1.12,3.12); ntip.rotation.set(Math.PI/2+0.35,Math.PI/4,0); tagS(ntip,0.4);
+    var ntipg=new THREE.Mesh(new THREE.SphereGeometry(0.06,8,6),smat(GLOW,0.5)); ntipg.position.set(0,-1.16,3.28); tagS(ntipg,0.5);
+    /* nostril vents */
+    [-1,1].forEach(function(sgn){ var nos=new THREE.Mesh(new THREE.BoxGeometry(0.09,0.22,0.06),smat(0x061016,0.5)); nos.position.set(sgn*0.15,-1.28,2.98); nos.rotation.z=sgn*0.22; tagS(nos,0.5);
+      var nosr=new THREE.Mesh(new THREE.BoxGeometry(0.11,0.24,0.05),wmat(SEAM,0.26)); nosr.position.set(sgn*0.15,-1.28,3.0); nosr.rotation.z=sgn*0.22; tagS(nosr,0.26); });
+    /* CHEEK / side panels (angular) sweeping to audio sensors */
     [-1,1].forEach(function(sgn){
-      var mast=new THREE.Mesh(new THREE.SphereGeometry(0.25,10,8),wmat(0x9fc0ff,0.09));
-      mast.position.set(sgn*2.28,-1.30,-0.72); tagS(mast,0.09);
+      var cheek=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,1.5,4,1,true),wmat(SEAM,0.2)); cheek.position.set(sgn*1.35,-0.7,1.6); cheek.rotation.set(0.2,sgn*0.9,sgn*0.5); tagS(cheek,0.2);
+      /* audio sensor disc (ear) */
+      var ear=new THREE.Mesh(new THREE.TorusGeometry(0.34,0.05,5,8),wmat(SEAM,0.3)); ear.position.set(sgn*2.55,-0.45,-0.2); ear.rotation.y=sgn*Math.PI/2; tagS(ear,0.3);
+      var earc=new THREE.Mesh(new THREE.CircleGeometry(0.16,14),smat(GLOW,0.4)); earc.position.set(sgn*2.6,-0.45,-0.2); earc.rotation.y=-sgn*Math.PI/2; tagS(earc,0.4);
     });
-    /* CRANIAL SUTURES */
-    var sag=new THREE.Mesh(new THREE.TorusGeometry(2.30,0.022,4,52,Math.PI),wmat(0x9fc0ff,0.08));
-    sag.position.y=0.65; sag.rotation.x=Math.PI/2; sag.rotation.z=Math.PI/2; tagS(sag,0.08);
-    var cor=new THREE.Mesh(new THREE.TorusGeometry(2.26,0.022,4,52,Math.PI),wmat(0x9fc0ff,0.08));
-    cor.position.y=0.72; tagS(cor,0.08);
-    var lamb=new THREE.Mesh(new THREE.TorusGeometry(1.8,0.020,4,36,Math.PI*0.9),wmat(0x9fc0ff,0.08));
-    lamb.position.set(0,-0.2,-1.1); lamb.rotation.x=0.55; tagS(lamb,0.08);
+    /* MOUTH: robotic grille (horizontal slats) instead of teeth */
+    for(var g=0; g<4; g++){ var slat=new THREE.Mesh(new THREE.BoxGeometry(1.4-g*0.18,0.08,0.1),wmat(SEAM,0.26));
+      slat.position.set(0,-1.7-g*0.16,2.5-g*0.06); tagS(slat,0.26); }
+    var mouthO=new THREE.Mesh(new THREE.TorusGeometry(0.85,0.05,4,4),wmat(SEAM,0.28)); mouthO.position.set(0,-1.9,2.42); mouthO.rotation.x=-Math.PI/2; mouthO.rotation.z=Math.PI/4; tagS(mouthO,0.28);
+    /* JAW: angular mandible plate + chin point + hinges */
+    var jaw=new THREE.Mesh(new THREE.CylinderGeometry(1.15,0.62,0.9,6,1,true),wmat(SEAM,0.26)); jaw.position.set(0,-2.35,1.55); jaw.rotation.x=1.15; tagS(jaw,0.26);
+    var chin=new THREE.Mesh(new THREE.ConeGeometry(0.5,0.7,4),wmat(SEAM,0.3)); chin.position.set(0,-2.75,1.95); chin.rotation.x=Math.PI+0.5; chin.rotation.y=Math.PI/4; tagS(chin,0.3);
+    var chind=new THREE.Mesh(new THREE.CircleGeometry(0.14,10),smat(GLOW,0.4)); chind.position.set(0,-2.62,2.28); chind.rotation.x=-0.5; tagS(chind,0.4);
+    [-1,1].forEach(function(sgn){
+      var ramus=new THREE.Mesh(new THREE.BoxGeometry(0.13,1.5,0.16),wmat(SEAM,0.22)); ramus.position.set(sgn*1.4,-1.25,0.7); ramus.rotation.set(0.5,0,sgn*0.3); tagS(ramus,0.22);
+      var hinge=new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.16,0.24,10),wmat(SEAM,0.3)); hinge.position.set(sgn*1.55,-0.5,0.1); hinge.rotation.z=Math.PI/2; tagS(hinge,0.3);
+      var hglow=new THREE.Mesh(new THREE.SphereGeometry(0.07,8,6),smat(GLOW,0.5)); hglow.position.set(sgn*1.55,-0.5,0.24); tagS(hglow,0.5);
+    });
+    /* DEFINED JAWLINE: bright edge from each hinge, along the gonial angle, to the chin */
+    [-1,1].forEach(function(sgn){
+      bar([sgn*1.55,-0.5,0.1],[sgn*1.44,-1.55,0.6],0.055,0.44,SEAM);
+      bar([sgn*1.44,-1.55,0.6],[sgn*1.12,-2.3,1.4],0.055,0.44,SEAM);
+      bar([sgn*1.12,-2.3,1.4],[0,-2.72,2.05],0.055,0.44,SEAM);
+      var gon=new THREE.Mesh(new THREE.SphereGeometry(0.1,8,6),smat(GLOW,0.42)); gon.position.set(sgn*1.44,-1.55,0.6); tagS(gon,0.42);
+    });
+    /* BOLTS at panel junctions */
+    [[0,2.5,1.9],[1.6,1.6,1.7],[-1.6,1.6,1.7],[2.2,-0.1,1.0],[-2.2,-0.1,1.0],[0,-1.2,2.7],[1.9,-1.5,0.6],[-1.9,-1.5,0.6]].forEach(function(bp){
+      var bolt=new THREE.Mesh(new THREE.SphereGeometry(0.07,8,6),smat(BOLT,0.4)); bolt.position.set(bp[0],bp[1],bp[2]); tagS(bolt,0.4);
+    });
+    /* enlarge the skull so the brain sits fully inside its outline */
+    skullGrp.scale.set(1.26,1.2,1.3); skullGrp.position.y=-0.05;
   }
 
   function initUniverse(){
@@ -1540,7 +1598,7 @@ window.addEventListener("error",function(ev){
     try{
       var hero=canvas.parentElement, W=hero.clientWidth, H=hero.clientHeight;
       scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(0x05070f,0.016);
-      camera=new THREE.PerspectiveCamera(55,W/H,0.1,120); camera.position.set(0,0,(W/H<0.9)?13.5:10.5);
+      camera=new THREE.PerspectiveCamera(55,W/H,0.1,120); camera.position.set(0,0,(W/H<0.9)?15.5:12);
       renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
       renderer.setPixelRatio(Math.min(window.devicePixelRatio,2)); renderer.setSize(W,H);
       world=new THREE.Group(); scene.add(world);
@@ -1549,10 +1607,13 @@ window.addEventListener("error",function(ev){
       buildBrain(world);
       var perR={}; MODELS.forEach(function(m){ perR[m.region]=(perR[m.region]||0)+1; });
       var idx={};
+      var BC=[0,0.16,-0.08], BA=[2.5,2.05,3.2];
+      function clampBrain(v){ var ox=v.x-BC[0],oy=v.y-BC[1],oz=v.z-BC[2]; var d=Math.sqrt((ox/BA[0])*(ox/BA[0])+(oy/BA[1])*(oy/BA[1])+(oz/BA[2])*(oz/BA[2])); if(d>0.88){ var f=0.88/d; v.set(BC[0]+ox*f,BC[1]+oy*f,BC[2]+oz*f); } return v; }
       MODELS.forEach(function(m){
         var reg=RBYKEY[m.region], ci=reg.anchor, count=perR[m.region], k=(idx[m.region]=(idx[m.region]||0)); idx[m.region]=k+1;
         var gr=0.95, y=count>1?(1-(k/(count-1))*1.6):0.1, rr=Math.sqrt(Math.max(1e-4,1-y*y)), phi=k*2.399963;
-        var pos=new THREE.Vector3(ci[0]+Math.cos(phi)*rr*gr, ci[1]+y*gr, ci[2]+Math.sin(phi)*rr*gr);
+        var pos=clampBrain(new THREE.Vector3(ci[0]+Math.cos(phi)*rr*gr, ci[1]+y*gr, ci[2]+Math.sin(phi)*rr*gr));
+        var caV=clampBrain(new THREE.Vector3(ci[0],ci[1],ci[2]));
         var col=new THREE.Color(m.color);
         var sp=new THREE.Sprite(new THREE.SpriteMaterial({map:glow,color:col,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:1}));
         sp.scale.set(1.45,1.45,1); sp.position.copy(pos);
@@ -1566,7 +1627,7 @@ window.addEventListener("error",function(ev){
         btn.innerHTML='<span class="sdot"></span>'+m.name.replace(/ \(.*\)/,"");
         btn.addEventListener("click", function(ev){ ev.stopPropagation(); openDrawer(m); });
         hero.appendChild(btn); sp.userData.btn=btn;
-        var line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(ci[0],ci[1],ci[2]),pos]), new THREE.LineBasicMaterial({color:col,transparent:true,opacity:.18}));
+        var line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([caV,pos]), new THREE.LineBasicMaterial({color:col,transparent:true,opacity:.18}));
         line.userData.vo=.18; world.add(line); sp.userData.line=line;
       });
       var sN=1000,sg=new THREE.BufferGeometry(),sa=new Float32Array(sN*3);
@@ -1632,6 +1693,9 @@ window.addEventListener("error",function(ev){
       if(active) focusNode(active);
     });
     if(sb) sb.addEventListener("click",function(){ skullOn=!skullOn; sb.classList.toggle("on",skullOn); });
+    var lb=document.getElementById("labelBtn");
+    window.setCortexLabels=function(on){ var h=document.getElementById("universe"); h=h&&h.parentElement; if(h) h.classList.toggle("nolabels",!on); if(lb) lb.classList.toggle("on",on); };
+    if(lb) lb.addEventListener("click",function(){ var h=document.getElementById("universe"); h=h&&h.parentElement; window.setCortexLabels(!!(h&&h.classList.contains("nolabels"))); });
   }
   function pick(e){
     lastPick=Date.now();
@@ -1787,14 +1851,58 @@ function sourcesHTML(){
 /* ================= GUIDED TOUR (no video) ================= */
 var TOUR=[
   {h:"A brain, not a filing cabinet", b:"<p>This app maps <b>23 AI architectures</b> onto the region of the human brain whose job most resembles what each model does. It\u2019s an analogy for learning, not a claim of biological equivalence.</p><ul><li><b>Vision</b> models sit at the occipital lobe; <b>language</b> models at the temporal lobe; the <b>router</b> (Mixture-of-Experts) at the thalamus; <b>reinforcement learning</b> at the basal ganglia.</li></ul>"},
-  {h:"Explore the 3D brain", b:"<p><b>Drag</b> to rotate the wireframe brain, <b>pinch</b> or use <b>+/\u2212</b> to zoom into the neurons. Each glowing neuron is an architecture \u2014 <b>tap its name</b> to open a full dossier.</p><p>Bottom-left toggles: hide the <b>skull</b> wireframe, or switch the whole cortex into a <b>constellation view</b>.</p><p>No connection? The brain quietly steps aside and the same 23 architectures appear as cards below.</p>"},
+  {h:"Explore the 3D brain", b:"<p><b>Drag</b> to rotate the wireframe brain, <b>pinch</b> or use <b>+/\u2212</b> to zoom into the neurons. Each glowing neuron is an architecture \u2014 <b>tap its name</b> to open a full dossier.</p><p>Bottom-left toggles: hide the <b>labels</b> to admire the robot skull and brain, hide the <b>skull</b>, or switch to a <b>constellation view</b>.</p><p>No connection? The brain quietly steps aside and the same 23 architectures appear as cards below.</p>"},
   {h:"Every dossier teaches", b:"<p>Each card opens with an <b>analogy</b>, a hands-on <b>\u201cplay with it\u201d</b> link, a combined <b>plain-English + technical</b> explanation, how it\u2019s <b>trained</b> and <b>secured</b>, <b>why that brain region</b> was chosen, the <b>best sources</b> to learn more, and a quick <b>quiz</b>.</p>"},
   {h:"The Security tab", b:"<p>The second tab opens with an <b>interactive control map</b>: architecture families \u2192 lifecycle controls \u2192 standards and laws from around the world \u2014 NCSC to NIST, the EU AI Act to Korea\u2019s Basic Act, and <b>Ofgem\u2019s Ethical AI guidance</b> for the energy sector. Tap any node to light up its connections, <b>from design, through development, to run</b>; every card links to its primary source.</p>"},
   {h:"The \u22ee menu", b:"<p>Top-right you\u2019ll find the <b>glossary</b> of every acronym, <b>all sources</b>, a <b>copy-link</b> and <b>save-as-PDF</b>, and this tour again. The <b>sun/moon</b> toggles light and dark. It works on phones, tablets and large monitors.</p>"}
 ];
 var _ti=0;
 function showTour(){ _ti=0; renderTour(); document.getElementById("welcome").hidden=false; }
-function closeTour(){ var w=document.getElementById("welcome"); if(w) w.hidden=true; }
+var _muted=false;
+function toggleMute(){ _muted=!_muted; var b=document.getElementById("muteBtn"); if(b) b.classList.toggle("muted",_muted); if(window.Ambient) window.Ambient.setMuted(_muted); }
+var Ambient=(function(){
+  var ctx,master,playing=false,muted=false,voices=[],stopT=null;
+  function ensure(){ if(ctx) return true; try{ var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; ctx=new AC(); master=ctx.createGain(); master.gain.value=0.0001; master.connect(ctx.destination); }catch(e){ return false; } return true; }
+  function start(dur){
+    if(!ensure()) return; if(ctx.state==="suspended"){ try{ctx.resume();}catch(e){} }
+    if(playing) return; playing=true;
+    var now=ctx.currentTime;
+    var filt=ctx.createBiquadFilter(); filt.type="lowpass"; filt.frequency.value=520; filt.Q.value=0.6; filt.connect(master);
+    var delay=ctx.createDelay(2.0); delay.delayTime.value=0.5; var fb=ctx.createGain(); fb.gain.value=0.34;
+    delay.connect(fb); fb.connect(delay); filt.connect(delay); delay.connect(master);
+    var freqs=[110,164.81,220,329.63,440]; /* A minor-ish pad */
+    freqs.forEach(function(f,i){
+      var o=ctx.createOscillator(); o.type=(i>2?"triangle":"sine"); o.frequency.value=f;
+      var o2=ctx.createOscillator(); o2.type="sine"; o2.frequency.value=f*1.006;
+      var g=ctx.createGain(); g.gain.value=0; o.connect(g); o2.connect(g); g.connect(filt);
+      var lfo=ctx.createOscillator(); lfo.frequency.value=0.045+i*0.017; var lg=ctx.createGain(); lg.gain.value=0.05;
+      lfo.connect(lg); lg.connect(g.gain);
+      var lvl=0.11/(i+1);
+      g.gain.setValueAtTime(0,now); g.gain.linearRampToValueAtTime(lvl,now+3.5);
+      o.start(now); o2.start(now); lfo.start(now); voices.push(o,o2,lfo);
+    });
+    filt.frequency.setValueAtTime(420,now); filt.frequency.linearRampToValueAtTime(1150,now+9); filt.frequency.linearRampToValueAtTime(650,now+18);
+    var target=muted?0.0001:0.42;
+    master.gain.cancelScheduledValues(now); master.gain.setValueAtTime(0.0001,now); master.gain.linearRampToValueAtTime(target,now+3);
+    if(dur){ master.gain.setValueAtTime(target,now+dur-4); master.gain.linearRampToValueAtTime(0.0001,now+dur);
+      clearTimeout(stopT); stopT=setTimeout(stop,(dur+0.6)*1000); }
+  }
+  function stop(){ if(!playing||!ctx) return; playing=false; var now=ctx.currentTime;
+    try{ master.gain.cancelScheduledValues(now); master.gain.linearRampToValueAtTime(0.0001,now+1.4); }catch(e){}
+    setTimeout(function(){ voices.forEach(function(v){ try{v.stop();}catch(e){} }); voices=[]; },1600); }
+  function setMuted(m){ muted=m; if(ctx&&master){ try{ master.gain.linearRampToValueAtTime(m?0.0001:(playing?0.42:0.0001), ctx.currentTime+0.35); }catch(e){} } }
+  return {start:start,stop:stop,setMuted:setMuted,isMuted:function(){return muted;}};
+})();
+window.Ambient=Ambient;
+function closeTour(){ var w=document.getElementById("welcome"); if(w) w.hidden=true;
+  if(window._tourDone) return; window._tourDone=1;
+  /* first close: reveal the robot skull + brain cleanly for 5s, then bring the labels in */
+  try{ showTab("cortex"); }catch(e){}
+  try{ if(window.Ambient && !window.Ambient.isMuted()) window.Ambient.start(20); }catch(e){}
+  if(window.setCortexLabels){ window.setCortexLabels(false);
+    clearTimeout(window._lblTimer); window._lblTimer=setTimeout(function(){ if(window.revealCortexRegions) window.revealCortexRegions(); else if(window.setCortexLabels) window.setCortexLabels(true); },5000);
+  }
+}
 function tourStep(d){ if(d>0 && _ti===TOUR.length-1){ closeTour(); return; } _ti=Math.max(0,Math.min(TOUR.length-1,_ti+d)); renderTour(); }
 function renderTour(){
   var s=TOUR[_ti];
@@ -1826,10 +1934,14 @@ var SEC={
       url:"https://www.etsi.org/committee/2624-sai",
       what:"Turns the UK Code into a global technical standard: 13 principles and 72 provisions across five lifecycle phases, addressing threats such as data poisoning, model obfuscation and indirect prompt injection.",
       todo:"Treat it as auditable requirements: map each provision to an owner and evidence it, from secure design through to end-of-life."},
-    {id:"nist", short:"NIST AI RMF", t:"tech", region:"Global", org:"NIST", year:"2023\u201324", name:"AI Risk Management Framework + Generative AI Profile (AI 600-1)",
+    {id:"nist", short:"NIST AI RMF", t:"tech", region:"US/Global", org:"NIST", year:"2023", name:"AI Risk Management Framework (NIST AI 100-1)",
       url:"https://www.nist.gov/itl/ai-risk-management-framework",
-      what:"A voluntary framework built on four functions \u2014 Govern, Map, Measure, Manage. The 2024 Generative AI Profile adds GenAI-specific risks (confabulation, prompt injection, information leakage) with suggested actions.",
+      what:"The voluntary, cross-sector framework built on four functions \u2014 Govern, Map, Measure, Manage \u2014 with the companion Playbook. The backbone most other guidance maps back to.",
       todo:"Stand up governance first, map your context and risks, measure with tests and red-teaming, and manage risk continuously with documented decisions."},
+    {id:"nist600", short:"NIST AI 600-1", t:"tech", region:"US/Global", org:"NIST", year:"2024", name:"Generative AI Profile (NIST AI 600-1)",
+      url:"https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+      what:"A companion profile to the AI RMF for generative AI. It names 12 GenAI-specific risks \u2014 including confabulation, dangerous/CBRN information, data privacy, harmful bias, obscene/abusive content, information security, intellectual property and value-chain risks \u2014 and lists ~200 suggested actions mapped to Govern, Map, Measure and Manage.",
+      todo:"For any generative system, work through the 600-1 action list: red-team for confabulation and unsafe content, apply content provenance, and document data-privacy and IP risk decisions."},
     {id:"owasp", short:"OWASP LLM Top 10", t:"tech", region:"Global", org:"OWASP", year:"2025", name:"Top 10 for LLM Applications + Agentic Security Initiative",
       url:"https://genai.owasp.org/llm-top-10/",
       what:"The practitioner\u2019s list of the most critical LLM risks \u2014 prompt injection, sensitive-information disclosure, supply chain, data/model poisoning, improper output handling, excessive agency and unbounded consumption \u2014 with companion guidance for agentic threats.",
@@ -2044,22 +2156,22 @@ var SEC={
       summary:"Build with a trustworthy supply chain, protect the data and pipeline, and test the model the way an adversary would.",
       controls:[
         {n:"05", name:"Secure the AI supply chain", detail:"Vet and inventory models, datasets, weights and libraries; keep an AI bill of materials; verify provenance and signatures for anything you pull in \u2014 a poisoned base model poisons everything downstream.", tags:["ncsc","aidata","saif"]},
-        {n:"06", name:"Protect training-data integrity", detail:"Guard against poisoning: trusted sources, validation and cleaning, hashed and versioned datasets, and strict control over who \u2014 and what \u2014 can change training data.", tags:["aidata","atlas","nist"]},
+        {n:"06", name:"Protect training-data integrity", detail:"Guard against poisoning: trusted sources, validation and cleaning, hashed and versioned datasets, and strict control over who \u2014 and what \u2014 can change training data.", tags:["aidata","atlas","nist","nist600"]},
         {n:"07", name:"Harden the pipeline &amp; secrets", detail:"Least privilege on training infrastructure; protect API keys, credentials and checkpoints; secure notebooks, artefact stores and model registries as production systems.", tags:["saif","ncsc","iso27001"]},
-        {n:"08", name:"Test, evaluate &amp; red-team", detail:"Adversarial robustness tests, jailbreak and prompt-injection evaluations, bias and safety evals, and structured red-teaming \u2014 with results and residual risk documented before release.", tags:["owasp","atlas","nist","sing","gpai"]}
+        {n:"08", name:"Test, evaluate &amp; red-team", detail:"Adversarial robustness tests, jailbreak and prompt-injection evaluations, bias and safety evals, and structured red-teaming \u2014 with results and residual risk documented before release.", tags:["owasp","atlas","nist","nist600","sing","gpai"]}
       ]},
     {key:"deploy", name:"Deploy", color:"#ffcf5a", tag:"Phase 3 \u00b7 going live",
       summary:"Release safely: protect the model and its infrastructure, wrap it in guardrails, and control who \u2014 and what \u2014 can reach it.",
       controls:[
         {n:"09", name:"Protect the model &amp; infrastructure", detail:"Harden serving infrastructure, restrict access to weights, and defend against model theft and exfiltration \u2014 weights are crown jewels and, once stolen, every safety layer can be removed offline.", tags:["ncsc","saif","atlas"]},
-        {n:"10", name:"Guardrails &amp; secure-by-default", detail:"Filter inputs and outputs, isolate system prompts and credentials from user content, validate retrieval (RAG) sources, and defend explicitly against direct and indirect prompt injection.", tags:["owasp","etsi","nist","china"]},
+        {n:"10", name:"Guardrails &amp; secure-by-default", detail:"Filter inputs and outputs, isolate system prompts and credentials from user content, validate retrieval (RAG) sources, and defend explicitly against direct and indirect prompt injection.", tags:["owasp","etsi","nist","nist600","china"]},
         {n:"11", name:"Access control &amp; rate limits", detail:"Authenticate and authorise every caller (human or machine), apply least privilege, and rate-limit to prevent unbounded consumption, scraping-driven extraction and denial-of-wallet.", tags:["owasp","iso27001"]},
-        {n:"12", name:"Responsible release &amp; incident readiness", detail:"Ship documentation of capabilities and limits (model cards), tell users they are interacting with AI where appropriate, and have an AI incident-response plan before launch \u2014 not after.", tags:["ncsc","nist","dsit","ofgem"]}
+        {n:"12", name:"Responsible release &amp; incident readiness", detail:"Ship documentation of capabilities and limits (model cards), tell users they are interacting with AI where appropriate, and have an AI incident-response plan before launch \u2014 not after.", tags:["ncsc","nist","nist600","dsit","ofgem","euact"]}
       ]},
     {key:"operate", name:"Operate / Run", color:"#ff7a59", tag:"Phase 4 \u00b7 day-to-day and beyond",
       summary:"Watch it in the wild, keep it current, govern any agents it drives, and retire it cleanly at end-of-life.",
       controls:[
-        {n:"13", name:"Monitor behaviour, drift &amp; abuse", detail:"Log inputs, outputs and tool calls; watch for drift, data leakage, jailbreaks and misuse; wire alerts into the SOC and investigate anomalies as security events.", tags:["ncsc","etsi","nist"]},
+        {n:"13", name:"Monitor behaviour, drift &amp; abuse", detail:"Log inputs, outputs and tool calls; watch for drift, data leakage, jailbreaks and misuse; wire alerts into the SOC and investigate anomalies as security events.", tags:["ncsc","etsi","nist","nist600","owasp"]},
         {n:"14", name:"Evaluate &amp; update securely", detail:"Re-test after every model or dependency change, patch promptly, and manage updates under change control so a fix never quietly opens a new hole.", tags:["ncsc","dsit","saif"]},
         {n:"15", name:"Govern the agentic control plane", detail:"For tool-using agents: least-privilege tools, approval gates for consequential actions, sandboxed execution, full audit trails \u2014 and defences against excessive agency and rogue-agent cascade failures.", tags:["owasp","atlas","ncsc"]},
         {n:"16", name:"Protect data in life \u2014 and at end-of-life", detail:"Honour retention, deletion and subject rights in operation; at end-of-life, dispose of weights, data and secrets securely, revoke access, and record the decommissioning.", tags:["ico","dsit","iso42001"]}
@@ -2074,15 +2186,15 @@ var SEC={
       threats:["Adversarial examples","Model theft / extraction","Training-set poisoning"],
       controls:"Adversarial training and robustness evaluation, access control and watermarking of weights, dataset integrity checks, and sensor validation where inputs come from the physical world.",
       stds:["atlas","nist","ncsc"]},
-    {fam:"Generative", k:"generative", ctrls:["04","08","10","12","13","16"], note:"GAN \u00b7 VAE \u00b7 diffusion", color:"#e857a8",
+    {fam:"Generative", k:"generative", ctrls:["04","06","08","10","12","13","16"], note:"GAN \u00b7 VAE \u00b7 diffusion", color:"#e857a8",
       threats:["Deepfakes &amp; harmful output","Training-data memorisation &amp; leakage","IP / provenance disputes"],
       controls:"Safety classifiers on output, content provenance and watermarking (C2PA), human review for sensitive uses, and privacy testing for memorised training data.",
-      stds:["owasp","nist","euact"]},
-    {fam:"Transformer era", k:"transformer", ctrls:["05","07","08","10","11","12","13"], note:"LLMs \u00b7 MoE \u00b7 multimodal", color:"#8b6cff",
+      stds:["owasp","nist600","nist","euact"]},
+    {fam:"Transformer era", k:"transformer", ctrls:["05","07","08","10","11","12","13","15"], note:"LLMs \u00b7 MoE \u00b7 multimodal", color:"#8b6cff",
       threats:["Prompt injection (direct &amp; indirect)","Jailbreaks &amp; unsafe output","Sensitive-information disclosure","Unbounded consumption"],
       controls:"Input/output filtering, isolation of system prompts and credentials, RAG source validation, rate limits \u2014 and red-teaming against the OWASP LLM Top 10 before and after release. Multimodal systems must filter every modality: a jailbreak can arrive as an image.",
-      stds:["owasp","etsi","atlas"]},
-    {fam:"Learning &amp; agents", k:"agents", ctrls:["01","02","08","11","13","15"], note:"RL / RLHF \u00b7 agentic &amp; multi-agent", color:"#4bd19a",
+      stds:["owasp","etsi","atlas","nist600"]},
+    {fam:"Learning &amp; agents", k:"agents", ctrls:["01","02","08","10","11","13","15"], note:"RL / RLHF \u00b7 agentic &amp; multi-agent", color:"#4bd19a",
       threats:["Reward hacking","Excessive agency / tool abuse","Rogue agents &amp; cascading failures","Memory / goal manipulation"],
       controls:"Careful reward design, least-privilege tools, approval gates for consequential actions, sandboxed execution, kill-switches, full audit logging \u2014 the harness is the control plane.",
       stds:["owasp","atlas","ncsc"]},
@@ -2305,16 +2417,6 @@ function buildSecurity(){
   }).join("")+'</div>';
 
   /* ---- risk cards ---- */
-  var risks=SEC.risks.map(function(r){
-    var ths=THREATCATALOG.filter(function(t){return t.fams.indexOf(r.k)>=0;});
-    return '<div class="riskcard" style="--rc:'+r.color+'"><div class="rh"><div class="rfam">'+r.note+'</div><h4>'+r.fam+'</h4></div>'
-      +'<div class="rb"><div class="rblk"><div class="rl">Top threats \u2014 tap for detail</div><div class="rchips">'+ths.map(function(t){return '<button class="rchip tchip" data-thr="'+t.id+'" style="--tcol:'+t.color+'">'+t.name+'</button>';}).join("")+'</div></div>'
-      +'<div class="rblk"><div class="rl">Priority controls</div><div class="rt">'+r.controls+'</div></div>'
-      +'<div class="rblk"><div class="rl">Key standards</div><div class="tagrow">'+r.stds.map(tagFor).join("")+'</div></div></div></div>';
-  }).join("");
-  var tmFam=SEC.risks.map(function(r){return '<button class="cmnode" data-tk="fam:'+r.k+'" style="--nc:'+r.color+'">'+r.fam+'</button>';}).join("");
-  var tmThr=THREATCATALOG.map(function(t){return '<button class="cmnode sm" data-tk="thr:'+t.id+'" style="--nc:'+t.color+'">'+t.name+'</button>';}).join("");
-  var tmCtl=SEC.life.map(function(st){return '<div class="cmstage" style="--nc:'+st.color+'">'+st.name+'</div>'+st.controls.map(function(c){return '<button class="cmnode sm" data-tk="ctl:'+c.n+'" style="--nc:'+st.color+'"><i>'+c.n+'</i>'+c.name+'</button>';}).join("");}).join("");
 
   /* ---- standards library (list + orbital toggle) ---- */
   var ukc=SEC.standards.filter(function(x){return x.region==="UK";}).length;
@@ -2337,99 +2439,55 @@ function buildSecurity(){
            +'<div class="cmgrp">Laws, regulation &amp; policy</div>'+SEC.standards.filter(function(x){return x.t==="law";}).map(sNode).join("");
 
   document.getElementById("secroot").innerHTML=
-    /* HERO compact */
     '<div class="sechero">'
       +'<div class="kick">AI Security &mdash; worldwide</div>'
       +'<div class="herorow"><h2>From <span>design, to developer, to run</span></h2>'
       +'<button class="herobtn" onclick="document.getElementById(\'secdisc\').classList.toggle(\'vis\')">&#9432; About</button></div>'
-      +'<div class="aidisc" id="secdisc">AI-assembled from public primary sources, July 2026 \u2014 a structured reading, not independently verified, and not security or procurement advice. Follow the links and confirm against the originals before relying on anything here. '+ukc+' UK sources and '+(SEC.standards.length-ukc)+' international/global instruments. Standard tags in each section link to the full source sheet.</div>'
+      +'<div class="aidisc" id="secdisc">AI-assembled from public primary sources, July 2026 \u2014 a structured reading, not independently verified, and not security or procurement advice. Follow the links and confirm against the originals before relying on anything here. '+ukc+' UK sources and '+(SEC.standards.length-ukc)+' international/global instruments.</div>'
     +'</div>'
-
-    /* SECTION 1: map */
-    +'<div class="secblk" id="sb1">'
-      +'<div class="secblk-hd" aria-expanded="false" onclick="sbToggle(\'sb1\')">'
-        +'<span class="n" style="background:var(--f3)">1</span><span class="bn">The control map</span><span class="bsub">Architecture \u2192 controls \u2192 standards</span>'
-        +'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>'
-      +'</div>'
-      +'<div class="secblk-body">'
-        +'<p class="secsub" style="margin-top:4px">Architecture families \u2192 lifecycle controls \u2192 standards &amp; laws worldwide. Tap any node to light up its connections.</p>'
-        +'<div class="cmap" id="cmap"><svg id="cmsvg" aria-hidden="true"></svg>'
-          +'<div class="cmcol"><div class="cmhead">Architectures</div>'+famN+'</div>'
-          +'<div class="cmcol"><div class="cmhead">Controls</div>'+ctlN+'</div>'
-          +'<div class="cmcol"><div class="cmhead">Standards &amp; laws</div>'+stdN+'</div>'
-        +'</div>'
-        +'<div class="mapinfo" id="mapinfo"><span class="mi-k">Explore</span><h4>Tap any node</h4>Its connections light up and the full detail appears here.</div>'
-      +'</div>'
-    +'</div>'
-
-    /* SECTION 2: lifecycle */
-    +'<div class="secblk" id="sb2">'
-      +'<div class="secblk-hd" aria-expanded="false" onclick="sbToggle(\'sb2\')">'
-        +'<span class="n" style="background:var(--f4)">2</span><span class="bn">Secure-AI lifecycle</span><span class="bsub">Design \u2192 Develop \u2192 Deploy \u2192 Operate</span>'
-        +'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>'
-      +'</div>'
-      +'<div class="secblk-body">'
-        +'<p class="secsub" style="margin-top:4px">Tap a phase. Aligned to NCSC/CISA four phases, UK Code of Practice and ETSI TS 104 223.</p>'
-        +lcFlow
-        +'<div class="lcback" id="lcback"><div class="lpanel" id="lpanel"></div></div>'
-      +'</div>'
-    +'</div>'
-
-    /* SECTION 3: risk cards */
-    +'<div class="secblk" id="sb3">'
-      +'<div class="secblk-hd" aria-expanded="false" onclick="sbToggle(\'sb3\')">'
-        +'<span class="n" style="background:var(--f2)">3</span><span class="bn">Threats by architecture</span><span class="bsub">Different models fail differently</span>'
-        +'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>'
-      +'</div>'
-      +'<div class="secblk-body">'
-        +'<div class="stab-toggle"><button class="on" id="tcardsBtn" onclick="secThreatView(\'cards\')">&#9635; Cards</button><button id="tmapBtn" onclick="secThreatView(\'map\')">&#9741; Linked map</button></div>'
-        +'<div id="tcardsWrap"><div class="riskgrid">'+risks+'</div></div>'
-        +'<div id="tmapWrap" hidden>'
-          +'<p class="secsub" style="margin:0 2px 10px">Every top threat linked to the <b>models</b> it hits and the <b>controls</b> that mitigate it. Tap a threat, a model or a control to light up its connections; tap a threat chip for full detail.</p>'
-          +'<div class="cmap" id="tmap"><svg id="tmsvg"></svg>'
-            +'<div class="cmcol"><div class="cmhead">Architectures</div>'+tmFam+'</div>'
-            +'<div class="cmcol"><div class="cmhead">Top threats</div>'+tmThr+'</div>'
-            +'<div class="cmcol"><div class="cmhead">Controls</div>'+tmCtl+'</div>'
-          +'</div>'
-          +'<div class="mapinfo" id="tmapinfo"><span class="mi-k">Explore</span><h4>Tap any node</h4>Select a threat to see the models it affects and the controls that mitigate it.</div>'
-        +'</div>'
-      +'</div>'
-    +'</div>'
-
-    /* SECTION 4: standards library */
-    +'<div class="secblk" id="sb4">'
-      +'<div class="secblk-hd" aria-expanded="false" onclick="sbToggle(\'sb4\')">'
-        +'<span class="n" style="background:var(--f0)">4</span><span class="bn">Standards &amp; law library</span><span class="bsub">'+SEC.standards.length+' instruments worldwide</span>'
-        +'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>'
-      +'</div>'
-      +'<div class="secblk-body">'
-        +'<div class="stab-toggle"><button id="slistBtn" onclick="stdView(\'list\')">&#9776; List</button>'
-          +'<button class="on" id="sorbBtn" onclick="stdView(\'orbital\')">&#11835; Orbital</button></div>'
-        +'<div id="slistWrap" hidden><div class="stdgrid">'+stdCards+'</div></div>'
-        +'<div id="sorbWrap"><div class="orb-wrap"><canvas id="orbcanvas"></canvas><div class="orbzoom"><button onclick="orbZoom(1)" aria-label="Zoom in">+</button><button onclick="orbZoom(-1)" aria-label="Zoom out">\u2212</button></div></div>'
-          +'<p style="font-size:12px;color:var(--faint);margin:6px 4px">Tap a node to read the source. Size = influence. Laws in gold, guidance in blue. Drag to rotate.</p></div>'
-      +'</div>'
-    +'</div>'
-    +'<p class="minifoot">AI-assembled \u00b7 no trackers \u00b7 9 Jul 2026 \u00b7 Stuart Okin, personal capacity</p>';
-
-  buildMap(); buildThreatMap(); buildOrbital();
+    +secFrameHTML("sb-life","1","var(--f4)","Secure-AI lifecycle","Design \u2192 Develop \u2192 Deploy \u2192 Operate",
+       '<p class="secsub" style="margin-top:4px">Tap a phase. Aligned to NCSC/CISA four phases, UK Code of Practice and ETSI TS 104 223.</p>'
+       +lcFlow+'<div class="lcback" id="lcback"><div class="lpanel" id="lpanel"></div></div>', false)
+    +secFrameHTML("sb-map","2","var(--f3)","The control map","Architecture \u2192 controls \u2192 standards",
+       '<p class="secsub" style="margin-top:4px">Architecture families \u2192 lifecycle controls \u2192 standards &amp; laws worldwide. Tap any node to light up its connections.</p>'
+       +'<div class="cmap" id="cmap"><svg id="cmsvg" aria-hidden="true"></svg>'
+         +'<div class="cmcol"><div class="cmhead">Architectures</div>'+famN+'</div>'
+         +'<div class="cmcol"><div class="cmhead">Controls</div>'+ctlN+'</div>'
+         +'<div class="cmcol"><div class="cmhead">Standards &amp; laws</div>'+stdN+'</div>'
+       +'</div>'
+       +'<div class="mapinfo" id="mapinfo"><span class="mi-k">Explore</span><h4>Tap any node</h4>Its connections light up and the full detail appears here.</div>', false)
+    +secFrameHTML("sb-std","3","var(--f0)","Standards &amp; law library",SEC.standards.length+" instruments worldwide",
+       '<div class="stab-toggle"><button id="slistBtn" onclick="stdView(\'list\')">&#9776; List</button>'
+         +'<button class="on" id="sorbBtn" onclick="stdView(\'orbital\')">&#11835; Orbital</button></div>'
+       +'<div id="slistWrap" hidden><div class="stdgrid">'+stdCards+'</div></div>'
+       +'<div id="sorbWrap"><div class="orb-wrap"><canvas id="orbcanvas"></canvas><div class="orbzoom"><button onclick="orbZoom(1)" aria-label="Zoom in">+</button><button onclick="orbZoom(-1)" aria-label="Zoom out">\u2212</button></div></div>'
+         +'<p style="font-size:12px;color:var(--faint);margin:6px 4px">Tap a node to read the source. Size = influence. Laws in gold, guidance in blue. Drag to rotate.</p></div>', false);
+  buildMap(); buildOrbital();
   document.getElementById("secroot").addEventListener("click",function(e){
     var mk=e.target.closest("[data-k]"); if(mk){ cmSelect(mk.dataset.k); return; }
-    var tkn=e.target.closest("[data-tk]"); if(tkn){ tmSelect(tkn.dataset.tk); return; }
-    var thc=e.target.closest("[data-thr]"); if(thc){ threatDetail(thc.dataset.thr); return; }
     var st=e.target.closest("[data-stage]"); if(st){ var i=+st.dataset.stage;
       document.querySelectorAll("#secroot .lcstep").forEach(function(b){b.classList.toggle("on",+b.dataset.stage===i);});
       renderStage(i); return; }
     var sd=e.target.closest("[data-std]"); if(sd) openStd(sd.dataset.std);
   });
 }
+function secFrameHTML(id,num,color,title,sub,body,open){
+  return '<div class="secblk" id="'+id+'">'
+    +'<div class="secblk-hd" aria-expanded="'+(open?"true":"false")+'" onclick="sbToggle(\''+id+'\')">'
+    +'<span class="n" style="background:'+color+'">'+num+'</span><span class="bn">'+title+'</span><span class="bsub">'+sub+'</span>'
+    +'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>'
+    +'</div><div class="secblk-body">'+body+'</div></div>';
+}
 function sbToggle(id){
   var blk=document.getElementById(id), hd=blk.querySelector(".secblk-hd");
   var open=hd.getAttribute("aria-expanded")==="true";
   hd.setAttribute("aria-expanded",open?"false":"true");
-  if(!open && id==="sb1"){ setTimeout(function(){buildMap();cmLayout();},50); }
-  if(!open && id==="sb3" && _tmView==="map"){ setTimeout(tmLayout,60); }
-  if(!open && id==="sb4"){ setTimeout(buildOrbital,90); }
+  if(!open){
+    if(id==="sb-map"){ setTimeout(function(){buildMap();cmLayout();},50); }
+    if(id==="sb-std"){ setTimeout(buildOrbital,90); }
+    if(id==="tsb-timeline"){ setTimeout(function(){ if(window.tlRenderRAF) tlRenderRAF(); },70); }
+    if(id==="tsb-arch" && _tmView==="map"){ setTimeout(tmLayout,60); }
+  }
 }
 function lcPick(i){
   document.querySelectorAll(".lcstep").forEach(function(b){b.classList.toggle("on",+b.dataset.stage===i);});
@@ -2688,6 +2746,38 @@ var THREATS={
 var _tFil=null, _obsView="timeline";
 
 
+
+/* ---- OFFENSIVE AI: where AI has been used to attack systems (direct & indirect) ---- */
+var AIATTACKS=[
+  {id:"AI1",name:"Criminal LLMs \u2014 WormGPT & FraudGPT",cat:"aioffense",dnum:2023.5,sev:7.0,date:"2023",kindlabel:"indirect \u2014 AI assists the attacker",
+   desc:"Jailbroken, \u2018uncensored\u2019 large language models sold on criminal forums to write convincing phishing and business-email-compromise lures, and to help generate malware \u2014 lowering the skill needed to attack.",
+   arch:["Transformers / LLMs"],who:"SlashNext / Trend Micro",src:"https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/the-state-of-criminal-ai"},
+  {id:"AI2",name:"Deepfake CFO video-call fraud (Arup, ~$25M)",cat:"aioffense",dnum:2024.12,sev:8.5,date:"Feb 2024",kindlabel:"indirect \u2014 AI-generated deception",
+   desc:"A finance employee was tricked into transferring about US$25M after a video call in which every other \u2018colleague\u2019, including the CFO, was an AI deepfake. One of the largest confirmed deepfake-enabled frauds.",
+   arch:["Multimodal & Vision Transformers","Generative (GAN / VAE / Diffusion)"],who:"reported 2024 (Arup confirmed)",src:"https://www.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk"},
+  {id:"AI3",name:"GhostGPT & criminal AI-as-a-service",cat:"aioffense",dnum:2025.05,sev:6.5,date:"2025",kindlabel:"indirect \u2014 AI-as-a-service for crime",
+   desc:"Subscription \u2018evil\u2019 chatbots marketed to cybercriminals for malware, phishing and BEC with no guardrails and no skill required \u2014 industrialising the WormGPT model.",
+   arch:["Transformers / LLMs"],who:"Abnormal Security / Trend Micro",src:"https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/the-state-of-criminal-ai"},
+  {id:"AI4",name:"PromptLock \u2014 first AI-powered ransomware",cat:"aioffense",dnum:2025.65,sev:7.5,date:"Aug 2025",kindlabel:"direct \u2014 AI runs the attack",
+   desc:"ESET identified the first known AI-powered ransomware: it calls a local LLM at runtime to generate attack scripts on the fly to enumerate, exfiltrate and encrypt files \u2014 shown to be an academic \u2018Ransomware 3.0\u2019 proof-of-concept, but a working one.",
+   arch:["Transformers / LLMs","Agentic & Multi-Agent AI"],who:"ESET Research",src:"https://www.welivesecurity.com/en/ransomware/first-known-ai-powered-ransomware-uncovered-eset-research/"},
+  {id:"AI5",name:"Agentic \u2018vibe-hacking\u2019 extortion of 17 orgs",cat:"aioffense",dnum:2025.66,sev:8.8,date:"Aug 2025",kindlabel:"direct \u2014 AI as active operator",
+   desc:"Anthropic disrupted a criminal who used an agentic coding tool to automate almost every stage of an attack against at least 17 organisations \u2014 reconnaissance, custom malware, data theft, and even the ransom negotiation.",
+   arch:["Agentic & Multi-Agent AI","Transformers / LLMs"],who:"Anthropic threat intelligence, Aug 2025",src:"https://www.anthropic.com/news/detecting-countering-misuse-aug-2025"},
+  {id:"AI6",name:"AI-orchestrated cyber-espionage (GTG-1002)",cat:"aioffense",dnum:2025.87,sev:9.2,date:"Nov 2025",kindlabel:"direct \u2014 largely autonomous",
+   desc:"A state-linked actor manipulated an agentic AI into carrying out the large majority of a cyber-espionage campaign against ~30 global targets with minimal human direction \u2014 the first reported large-scale AI-orchestrated cyberattack.",
+   arch:["Agentic & Multi-Agent AI"],who:"Anthropic threat intelligence, Nov 2025",src:"https://www.anthropic.com/news/disrupting-AI-espionage"},
+  {id:"AI7",name:"Self-writing malware \u2014 PROMPTFLUX / PROMPTSTEAL",cat:"aioffense",dnum:2025.86,sev:8.0,date:"Nov 2025",kindlabel:"direct \u2014 AI regenerates the malware",
+   desc:"Google\u2019s threat team found malware that queries an LLM at runtime to rewrite and obfuscate its own code (PROMPTFLUX) and to generate commands (PROMPTSTEAL, used by a Russian APT) \u2014 \u2018just-in-time\u2019 AI-generated malware.",
+   arch:["Transformers / LLMs"],who:"Google Threat Intelligence Group",src:"https://cloud.google.com/blog/topics/threat-intelligence/"},
+  {id:"AI8",name:"AI-crafted phishing at scale",cat:"aioffense",dnum:2024.5,sev:7.0,date:"2024\u2192",kindlabel:"indirect \u2014 AI generates the lure",
+   desc:"Attackers use LLMs to mass-produce fluent, highly personalised phishing that evades signature and heuristic filters; Microsoft and Darktrace report sharp rises, with most CISOs now seeing AI-driven attacks affecting them.",
+   arch:["Transformers / LLMs"],who:"Microsoft / Darktrace",src:"https://www.microsoft.com/en-us/security/blog/"},
+  {id:"AI9",name:"JadePuffer \u2014 first fully agentic ransomware",cat:"aioffense",dnum:2026.5,sev:9.0,date:"Jul 2026",kindlabel:"direct \u2014 an AI agent runs the whole attack",
+   desc:"Sysdig documented the first ransomware operation driven end-to-end by an LLM agent. It exploited a Langflow flaw (CVE-2025-3248), harvested credentials, pivoted to a production database, established persistence, then encrypted and destroyed 1,342 Nacos config records \u2014 self-narrating its reasoning and turning a failed login into a working fix in 31 seconds, with no human at the keyboard.",
+   arch:["Agentic & Multi-Agent AI","Transformers / LLMs"],who:"Sysdig Threat Research Team, Jul 2026",src:"https://www.sysdig.com/blog/jadepuffer-agentic-ransomware-for-automated-database-extortion"}
+];
+
 /* ---- documented real-world attacks & campaigns (2021\u20132026) ---- */
 var ATTACKS=[
   {id:"A01",name:"PyTorch torchtriton dependency confusion",cat:"supply",dnum:2022.98,sev:8.5,date:"Dec 2022",
@@ -2771,13 +2861,28 @@ function showObs(v){ _obsView=v;
   document.getElementById("obs-tech").hidden=(v!=="tech");
   document.getElementById("obs-cve").hidden=(v!=="cve");
   document.getElementById("obs-trend").hidden=(v!=="trend");
+  document.getElementById("obs-ai").hidden=(v!=="ai");
   if(v==="timeline") buildTimeline();
 }
 function tFil(k){ _tFil=(k===_tFil?null:k); renderTech(); }
-var _tl={layer:"all", cat:null, pxYr:150};
+var _tl={layer:"all", cat:null, ai:false, t0:2021, t1:2026.6}, _tlraf=null;
 function tlFil(k){ _tl.cat=(k===_tl.cat?null:k); buildTimeline(); }
 function tlLayer(L){ _tl.layer=L; buildTimeline(); }
-function tlZoom(d){ _tl.pxYr=Math.max(70,Math.min(340,_tl.pxYr+d*45)); tlRender(); }
+function tlAi(){ _tl.ai=!_tl.ai; buildTimeline(); }
+function tlClampWin(){
+  var span=Math.max(0.8,Math.min(5.9,_tl.t1-_tl.t0)), MIN=2020.8, MAX=2026.7;
+  if(_tl.t1-_tl.t0!==span) _tl.t1=_tl.t0+span;
+  if(_tl.t0<MIN){ _tl.t0=MIN; _tl.t1=MIN+span; }
+  if(_tl.t1>MAX){ _tl.t1=MAX; _tl.t0=MAX-span; }
+  if(_tl.t0<MIN) _tl.t0=MIN;
+}
+function tlRenderRAF(){ if(_tlraf) return; _tlraf=requestAnimationFrame(function(){ _tlraf=null; tlRender(); }); }
+function tlZoomAt(focalT,factor){
+  var span=(_tl.t1-_tl.t0)*factor; span=Math.max(0.8,Math.min(5.9,span));
+  var frac=(focalT-_tl.t0)/(_tl.t1-_tl.t0);
+  _tl.t0=focalT-frac*span; _tl.t1=_tl.t0+span; tlClampWin(); tlRenderRAF();
+}
+function tlZoom(d){ tlZoomAt((_tl.t0+_tl.t1)/2, d>0?0.72:1.4); }
 function tlEvents(){
   var ev=[];
   if(_tl.layer==="all"||_tl.layer==="attack") ATTACKS.forEach(function(a){
@@ -2790,14 +2895,17 @@ function tlEvents(){
     var yv=t.sev==="high"?8.6:t.sev==="med"?6.0:3.2;
     ev.push({kind:"tech",id:t.id,name:t.name,cat:t.cat,x:t.yr+0.5,y:yv,meta:"First documented ~"+t.yr+" \u00b7 "+t.sev.toUpperCase(),desc:t.desc,arch:t.arch,src:t.src,extra:t.ref,miti:t.miti});
   });
-  ev=ev.filter(function(e){return e.x>=2021;});           /* last 5 years */
+  if(_tl.ai) AIATTACKS.forEach(function(a){
+    ev.push({kind:"aiattack",id:a.id,name:a.name,cat:a.cat,x:a.dnum,y:a.sev,meta:a.date+" \u00b7 "+a.kindlabel+" \u00b7 impact "+a.sev,desc:a.desc,arch:a.arch,src:a.src,extra:a.who});
+  });
+  ev=ev.filter(function(e){return e.x>=2021;});
   if(_tl.cat) ev=ev.filter(function(e){return e.cat===_tl.cat;});
   return ev;
 }
 function tlOpen(kind,id){
   var ev=tlEvents(), e=null; ev.forEach(function(x){ if(x.kind===kind&&x.id===id) e=x; }); if(!e) return;
   var cat=THREATS.cats.find(function(c){return c.key===e.cat;});
-  var h='<div class="srcgrp" style="color:'+(cat?cat.color:"#9fb6ff")+'">'+(e.kind==="vuln"?"Disclosed vulnerability":e.kind==="attack"?"Real-world attack":"Attack technique")+' \u00b7 '+(cat?cat.label:"")+'</div>'
+  var h='<div class="srcgrp" style="color:'+(cat?cat.color:"#9fb6ff")+'">'+(e.kind==="vuln"?"Disclosed vulnerability":e.kind==="attack"?"Real-world attack":e.kind==="aiattack"?"AI-assisted attack":"Attack technique")+' \u00b7 '+(cat?cat.label:"")+'</div>'
     +'<h2>'+e.name+'</h2><p style="font-family:var(--mono);font-size:12px;color:var(--faint)">'+e.meta+'</p>'
     +'<p>'+e.desc+'</p>'
     +(e.miti?'<h3>Mitigation</h3><p>'+e.miti+'</p>':'')
@@ -2806,73 +2914,106 @@ function tlOpen(kind,id){
     +'<p><a href="'+e.src+'" target="_blank" rel="noopener"><b>Open the source \u2197</b></a></p>';
   openSheet(h);
 }
+function tlLabel(e){
+  var L={"A01":"torchtriton","A02":"HF malicious models","A03":"ShadowRay","A04":"NullBulge","A05":"PI campaigns 90+","A06":"nullifAI","A07":"LiteLLM breach","A08":"Lightning malware","A09":"npm AI hijack","A10":"HF token exposure","CVE-2025-32711":"EchoLeak","CVE-2025-53773":"Copilot RCE","CVE-2025-54135 / 54136":"CurXecute","CVE-2025-68143/4/5":"Anthropic MCP","Slack AI leak":"Slack AI leak","Now Assist":"Now Assist","Memory poisoning":"Memory poisoning","AI1":"WormGPT/FraudGPT","AI2":"Deepfake $25M fraud","AI3":"GhostGPT AIaaS","AI4":"PromptLock","AI5":"Vibe-hacking (17 orgs)","AI6":"AI espionage GTG-1002","AI7":"Self-writing malware","AI8":"AI phishing at scale"};
+  if(L[e.id]) return L[e.id];
+  var n=e.name||""; return n.length>22?n.slice(0,21)+"\u2026":n;
+}
+function tlHash(id){ var h=0; for(var i=0;i<id.length;i++){ h=(h*31+id.charCodeAt(i))|0; } return h; }
 function tlRender(){
   var host=document.getElementById("tlWrap"); if(!host) return;
   var ev=tlEvents();
-  var xs=ev.map(function(e){return e.x;});
-  var tMin=2021;
-  var tMax=Math.ceil(Math.max.apply(null,xs.concat([2026.5])));
-  var mL=48,mR=22,mT=14,mB=34, plotH=300, H=plotH+mT+mB;
-  var innerW=(tMax-tMin)*_tl.pxYr;
-  var W=mL+mR+innerW;
-  function X(t){ return mL+(t-tMin)*_tl.pxYr; }
+  var mL=48,mR=18,mT=14,mB=34, plotH=300, H=plotH+mT+mB;
+  var W=Math.max(280, host.clientWidth||host.offsetWidth||640);
+  var plotW=W-mL-mR, t0=_tl.t0, t1=_tl.t1, span=t1-t0;
+  function X(t){ return mL+(t-t0)/span*plotW; }
   function Y(v){ return mT+(10-v)/10*plotH; }
   var bands=[["crit",9,10,"#ff4d4d","Critical"],["hi",7,9,"#ff9a3d","High"],["md",4,7,"#ffd23d","Medium"],["lo",0,4,"#7cd992","Low"]];
   var svg='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'">';
-  bands.forEach(function(b){ svg+='<rect class="tlband" x="'+mL+'" y="'+Y(b[2])+'" width="'+(innerW)+'" height="'+(Y(b[1])-Y(b[2]))+'" fill="'+b[3]+'"/>'; 
-    svg+='<text class="tlbandlab" x="4" y="'+((Y(b[1])+Y(b[2]))/2+3)+'">'+b[4]+'</text>'; });
-  /* horizontal severity gridlines */
+  bands.forEach(function(b){ svg+='<rect class="tlband" x="'+mL+'" y="'+Y(b[2])+'" width="'+plotW+'" height="'+(Y(b[1])-Y(b[2]))+'" fill="'+b[3]+'"/>';
+    svg+='<text class="tlbandlab" x="6" y="'+((Y(b[1])+Y(b[2]))/2+3)+'">'+b[4]+'</text>'; });
   [2,4,6,8,10].forEach(function(v){ svg+='<line class="tlgrid" x1="'+mL+'" y1="'+Y(v)+'" x2="'+(W-mR)+'" y2="'+Y(v)+'"/>'; });
-  /* year gridlines + labels */
-  for(var yr=tMin; yr<=tMax; yr++){ var gx=X(yr);
+  /* quarter ticks when zoomed in */
+  if(span<=3){ for(var q=Math.ceil(t0*4)/4; q<=t1; q+=0.25){ if(Math.abs(q-Math.round(q))<0.01) continue; var qx=X(q); svg+='<line class="tlgrid" style="opacity:.4" x1="'+qx+'" y1="'+mT+'" x2="'+qx+'" y2="'+(mT+plotH)+'"/>'; } }
+  for(var yr=Math.ceil(t0); yr<=Math.floor(t1); yr++){ var gx=X(yr);
     svg+='<line class="tlgrid" x1="'+gx+'" y1="'+mT+'" x2="'+gx+'" y2="'+(mT+plotH)+'"/>';
     svg+='<text class="tlaxis" x="'+gx+'" y="'+(mT+plotH+18)+'" text-anchor="middle">'+yr+'</text>';
   }
-  /* points */
-  ev.forEach(function(e,i){
-    var cat=THREATS.cats.find(function(c){return c.key===e.cat;}); var col=cat?cat.color:"#9fb6ff";
-    /* deterministic jitter to declutter */
-    var jx=((i*37)%13-6)*1.1, jy=((i*29)%11-5)*1.3;
-    var cx=X(e.x)+jx, cy=Y(e.y)+jy;
+  var vis=ev.filter(function(e){return e.x>=t0-0.03 && e.x<=t1+0.03;});
+  /* label declutter: greedy two-row placement by x */
+  var sorted=vis.slice().sort(function(a,b){return X(a.x)-X(b.x);});
+  var rowLast=[-1e9,-1e9], minGap=66, labelRow={};
+  sorted.forEach(function(e){ var x=X(e.x); var row=(rowLast[0]<=rowLast[1])?0:1;
+    if(x-rowLast[row]<minGap){ var o=1-row; if(x-rowLast[o]>=minGap){ row=o; } else { return; } }
+    rowLast[row]=x; labelRow[e.id]=row; });
+  vis.forEach(function(e){
+    var cat=THREATS.cats.find(function(c){return c.key===e.cat;}); var col=e.kind==="aiattack"?"#ff4fd8":(cat?cat.color:"#9fb6ff");
+    var jy=((tlHash(e.id)%7)-3)*1.6;
+    var cx=X(e.x), cy=Y(e.y)+jy;
     svg+='<g class="tlpt" onclick="tlOpen(\''+e.kind+'\',\''+e.id.replace(/'/g,"")+'\')">';
-    svg+='<circle cx="'+cx+'" cy="'+cy+'" r="16" fill="transparent"/>';
+    svg+='<circle cx="'+cx+'" cy="'+cy+'" r="15" fill="transparent"/>';
     if(e.kind==="attack"){ var d=7;
       svg+='<path d="M'+cx+' '+(cy-d)+' L'+(cx+d)+' '+cy+' L'+cx+' '+(cy+d)+' L'+(cx-d)+' '+cy+' Z" fill="'+col+'" stroke="#fff" stroke-width="1.4"/>'; }
     else if(e.kind==="vuln"){ var r=6+(e.y>=9?2:0);
       svg+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+col+'" stroke="#fff" stroke-width="1.4"'+(e.est?' stroke-dasharray="2 2"':'')+'/>'; }
+    else if(e.kind==="aiattack"){ var a=8;
+      svg+='<path d="M'+cx+' '+(cy-a)+' L'+(cx+a*0.92)+' '+(cy+a*0.72)+' L'+(cx-a*0.92)+' '+(cy+a*0.72)+' Z" fill="#ff4fd8" stroke="#fff" stroke-width="1.4"/>'; }
     else { svg+='<circle cx="'+cx+'" cy="'+cy+'" r="5" fill="#0a0f22" stroke="'+col+'" stroke-width="2"/>'; }
+    if(e.id in labelRow){ var row=labelRow[e.id];
+      var anchor=(cx>W*0.8)?"end":"start", lx=(anchor==="end")?cx-9:cx+9, ly=(row===0)?cy-10:cy+15;
+      svg+='<text class="tllab '+e.kind+'" x="'+lx+'" y="'+ly+'" text-anchor="'+anchor+'">'+tlLabel(e)+'</text>'; }
     svg+='<title>'+e.name+' ('+e.meta+')</title></g>';
   });
   svg+='</svg>';
   host.innerHTML=svg;
-  /* horizontal drag-to-pan: MOUSE ONLY. Touch uses native scrolling so taps never get hijacked. */
-  if(!host._pan){ host._pan=1;
+  /* pan (1 finger / mouse) + pinch (2 fingers); touch-action:pan-y keeps page scroll */
+  if(!host._ph){ host._ph=1; host._pts=new Map();
+    function dist(){ var a=Array.from(host._pts.values()); return Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y); }
+    function relX(cx){ return cx-host.getBoundingClientRect().left; }
+    function focalT(cx){ var W2=host.clientWidth, pw=W2-66; var f=(relX(cx)-48)/pw; return _tl.t0+Math.max(0,Math.min(1,f))*(_tl.t1-_tl.t0); }
     host.addEventListener("pointerdown",function(e){
-      if(e.pointerType!=="mouse" || e.target.closest(".tlpt")) return;
-      host._d=true; host._sx=e.clientX; host._sl=host.scrollLeft; host.classList.add("grabbing");
-      try{ host.setPointerCapture(e.pointerId); }catch(_){}
+      host._pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(host._pts.size===1){ host._pan=!e.target.closest(".tlpt"); host._px=e.clientX; host._moved=0; host._cap=0; }
+      else if(host._pts.size===2){ host._pan=false; host._pd=dist(); }
     });
-    host.addEventListener("pointermove",function(e){ if(!host._d)return; host.scrollLeft=host._sl-(e.clientX-host._sx); });
-    host.addEventListener("pointerup",function(){ host._d=false; host.classList.remove("grabbing"); });
-    host.addEventListener("pointercancel",function(){ host._d=false; host.classList.remove("grabbing"); });
+    host.addEventListener("pointermove",function(e){
+      if(!host._pts.has(e.pointerId)) return; host._pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(host._pts.size>=2){ var d=dist(); if(host._pd>0 && d>0){ var a=Array.from(host._pts.values()); tlZoomAt(focalT((a[0].x+a[1].x)/2), host._pd/d); } host._pd=d;
+        if(!host._cap){ try{host.setPointerCapture(e.pointerId);}catch(_){}; host._cap=1; } return; }
+      if(host._pan && host._pts.size===1){ var dx=e.clientX-host._px; host._moved+=Math.abs(dx); host._px=e.clientX;
+        if(host._moved>6 && !host._cap){ try{host.setPointerCapture(e.pointerId);}catch(_){}; host._cap=1; host.classList.add("grabbing"); }
+        var W2=host.clientWidth, pw=W2-66, sp=_tl.t1-_tl.t0, shift=-(dx/pw)*sp; _tl.t0+=shift; _tl.t1+=shift; tlClampWin(); tlRenderRAF(); }
+    });
+    function up(e){ host._pts.delete(e.pointerId); if(host._pts.size<2) host._pd=0; if(host._pts.size===0){ host._pan=false; host._cap=0; host.classList.remove("grabbing"); } }
+    host.addEventListener("pointerup",up); host.addEventListener("pointercancel",up);
+    host.addEventListener("wheel",function(e){ e.preventDefault(); tlZoomAt(focalT(e.clientX), e.deltaY<0?0.85:1.18); },{passive:false});
+    if(!window._tlrz){ window._tlrz=1; window.addEventListener("resize",function(){ if(document.getElementById("tlWrap")) tlRenderRAF(); }); }
   }
 }
 function buildTimeline(){
   var host=document.getElementById("obs-timeline"); if(!host) return;
   var cats=THREATS.cats;
-  var filters='<button class="tfil'+(!_tl.cat?" on":"")+'" style="--tc:#8b6cff" onclick="tlFil(null)">All categories</button>'
+  var catChips='<button class="tfil'+(!_tl.cat?" on":"")+'" style="--tc:#8b6cff" onclick="tlFil(null)">All types</button>'
     +cats.map(function(c){return '<button class="tfil'+(_tl.cat===c.key?" on":"")+'" style="--tc:'+c.color+'" onclick="tlFil(\''+c.key+'\')">'+c.label+'</button>';}).join("");
   var layers='<div class="tl-layers">'
-    +[["all","All"],["attack","Attacks"],["vuln","Vulnerabilities"],["tech","Techniques"]].map(function(L){return '<button class="'+(_tl.layer===L[0]?"on":"")+'" onclick="tlLayer(\''+L[0]+'\')">'+L[1]+'</button>';}).join("")
+    +[["all","All"],["attack","Attacks"],["vuln","Vulns"],["tech","Techniques"]].map(function(L){return '<button class="'+(_tl.layer===L[0]?"on":"")+'" onclick="tlLayer(\''+L[0]+'\')">'+L[1]+'</button>';}).join("")
     +'</div>';
-  host.innerHTML='<p class="secsub" style="margin:0 2px 10px">Real-world attacks, disclosed vulnerabilities and attack techniques over the <b>last five years</b>, by <b>time</b> (x) and <b>severity / impact</b> (y). Drag to pan, +/\u2212 to zoom, tap a point for detail. \u25c6 attacks that actually happened \u00b7 \u25cf disclosed CVEs \u00b7 \u25cb techniques.</p>'
-    +'<div class="tl-controls">'+layers+'<div class="tl-zoom"><button onclick="tlZoom(1)" aria-label="Zoom in">+</button><button onclick="tlZoom(-1)" aria-label="Zoom out">\u2212</button></div></div>'
-    +'<div class="tfilters">'+filters+'</div>'
-    +'<div class="tl-legend"><span><i class="ld crit"></i>Critical</span><span><i class="ld hi"></i>High</span><span><i class="ld md"></i>Medium</span><span><i class="ld lo"></i>Low</span><span><i class="ld attackmk"></i>Real-world attack</span><span><i class="ld vulnmk"></i>Disclosed CVE</span><span><i class="ld techmk"></i>Technique</span></div>'
-    +'<div class="tl-wrap" id="tlWrap"></div>'
-    +'<p style="font-size:11px;color:var(--faint);margin:8px 2px 0">Scope: 2021 onward. Attacks and CVEs are real, dated events (impact = CVSS or an assigned estimate). Technique years are approximate \u201cfirst widely documented\u201d dates for orientation. Verify each against its linked source.</p>';
-  tlRender();
+  var aiBtn='<button class="ai-toggle'+(_tl.ai?" on":"")+'" onclick="tlAi()">\u25b2 AI-assisted attacks '+(_tl.ai?"\u2715":"\u2192 off")+'</button>';
+  host.innerHTML=
+     '<div class="tl-bar">'
+       +'<div class="tl-fset"><span class="tl-flab">Show</span>'+layers+'</div>'
+       +'<div class="tl-fset"><span class="tl-flab">Type</span><div class="tl-chips">'+catChips+'</div></div>'
+       +'<div class="tl-fset">'+aiBtn+'</div>'
+       +'<div class="tl-tools"><button class="tl-info" onclick="document.getElementById(\'tlNote\').classList.toggle(\'vis\')" aria-label="About this graph">&#9432;</button>'
+         +'<div class="tl-zoom"><button onclick="tlZoom(1)" aria-label="Zoom in">+</button><button onclick="tlZoom(-1)" aria-label="Zoom out">\u2212</button></div></div>'
+     +'</div>'
+    +'<div class="tl-note" id="tlNote"><p>Real-world attacks, disclosed vulnerabilities and attack techniques over the <b>last five years</b>, by <b>time</b> (x) and <b>severity / impact</b> (y). <b>Drag</b> to pan, <b>pinch</b> or <b>+/\u2212</b> to zoom, tap a point for detail. Labels thin out when zoomed out and fill in as you zoom in.</p>'
+      +'<p style="font-size:11px;color:var(--faint);margin:6px 0 0">Scope: 2021 onward. Attacks and CVEs are real, dated events (impact = CVSS or an assigned estimate). Technique years are approximate \u201cfirst widely documented\u201d dates for orientation. Verify each against its linked source.</p></div>'
+    +'<div class="tl-legend"><b class="lg-h">Severity</b><span><i class="ld crit"></i>Critical</span><span><i class="ld hi"></i>High</span><span><i class="ld md"></i>Medium</span><span><i class="ld lo"></i>Low</span><b class="lg-h">Markers</b><span><i class="ld attackmk"></i>Real-world attack</span><span><i class="ld aimk"></i>AI-assisted attack</span><span><i class="ld vulnmk"></i>Disclosed CVE</span><span><i class="ld estmk"></i>Impact estimated</span><span><i class="ld techmk"></i>Technique</span></div>'
+    +'<div class="tl-wrap" id="tlWrap"></div>';
+  tlRender(); requestAnimationFrame(tlRender);
 }
+
 function renderTech(){
   var wrap=document.getElementById("obs-tech"); if(!wrap) return;
   var cats=THREATS.cats.map(function(c){
@@ -2896,6 +3037,25 @@ function renderTech(){
 }
 function buildThreats(){
   var root=document.getElementById("threatroot"); if(!root) return;
+  var risks=SEC.risks.map(function(r){
+    var ths=THREATCATALOG.filter(function(t){return t.fams.indexOf(r.k)>=0;});
+    return '<div class="riskcard" style="--rc:'+r.color+'"><div class="rh"><div class="rfam">'+r.note+'</div><h4>'+r.fam+'</h4></div>'
+      +'<div class="rb"><div class="rblk"><div class="rl">Top threats \u2014 tap for detail</div><div class="rchips">'+ths.map(function(t){return '<button class="rchip tchip" data-thr="'+t.id+'" style="--tcol:'+t.color+'">'+t.name+'</button>';}).join("")+'</div></div>'
+      +'<div class="rblk"><div class="rl">Priority controls</div><div class="rt">'+r.controls+'</div></div>'
+      +'<div class="rblk"><div class="rl">Key standards</div><div class="tagrow">'+r.stds.map(tagFor).join("")+'</div></div></div></div>';
+  }).join("");
+  var tmFam=SEC.risks.map(function(r){return '<button class="cmnode" data-tk="fam:'+r.k+'" style="--nc:'+r.color+'">'+r.fam+'</button>';}).join("");
+  var tmThr=THREATCATALOG.map(function(t){return '<button class="cmnode sm" data-tk="thr:'+t.id+'" style="--nc:'+t.color+'">'+t.name+'</button>';}).join("");
+  var tmCtl=SEC.life.map(function(st){return '<div class="cmstage" style="--nc:'+st.color+'">'+st.name+'</div>'+st.controls.map(function(c){return '<button class="cmnode sm" data-tk="ctl:'+c.n+'" style="--nc:'+st.color+'"><i>'+c.n+'</i>'+c.name+'</button>';}).join("");}).join("");
+  var aiCards=AIATTACKS.map(function(a){
+    var dir=(a.kindlabel.indexOf("direct")===0)?"direct":"indirect";
+    return '<div class="cvecard" style="--rc:#ff4fd8">'
+      +'<div class="ch"><span class="cid" style="color:#ff9fe4">'+a.id+' \u00b7 '+dir+' use</span><span class="cvss '+(a.sev>=9?"crit":"hi")+'">impact '+a.sev+'</span></div>'
+      +'<h4>'+a.name+'</h4><div class="cdate">'+a.date+' \u00b7 '+a.kindlabel+'</div>'
+      +'<div class="cb"><div class="cdesc">'+a.desc+'</div><div class="cwho">'+a.who+'</div>'
+      +'<div class="carch">'+a.arch.map(function(x){return '<span>'+x+'</span>';}).join("")+'</div>'
+      +'<a class="clink" href="'+a.src+'" target="_blank" rel="noopener">Source \u2197</a></div></div>';
+  }).join("");
   var cveCards=DISCLOSED.map(function(v){
     var cls=(v.cvss==="\u2014")?"na":(parseFloat(v.cvss)>=9?"crit":"hi");
     return '<div class="cvecard">'
@@ -2913,26 +3073,40 @@ function buildThreats(){
     return '<div class="trendcard" style="--tcc:'+t.c+'"><h4>'+t.h+'</h4><p>'+t.p+'</p>'
       +'<div class="tmeta"><a href="'+t.u+'" target="_blank" rel="noopener">'+t.m+' \u2197</a></div></div>';
   }).join("");
+  var archBody=
+     '<div class="stab-toggle"><button class="on" id="tcardsBtn" onclick="secThreatView(\'cards\')">&#9635; Cards</button><button id="tmapBtn" onclick="secThreatView(\'map\')">&#9741; Linked map</button></div>'
+    +'<div id="tcardsWrap"><div class="riskgrid">'+risks+'</div></div>'
+    +'<div id="tmapWrap" hidden>'
+      +'<p class="secsub" style="margin:0 2px 10px">Every top threat linked to the <b>models</b> it hits and the <b>controls</b> that mitigate it. Tap a threat, a model or a control to light up its connections; tap a threat chip for full detail.</p>'
+      +'<div class="cmap" id="tmap"><svg id="tmsvg"></svg>'
+        +'<div class="cmcol"><div class="cmhead">Architectures</div>'+tmFam+'</div>'
+        +'<div class="cmcol"><div class="cmhead">Top threats</div>'+tmThr+'</div>'
+        +'<div class="cmcol"><div class="cmhead">Controls</div>'+tmCtl+'</div>'
+      +'</div>'
+      +'<div class="mapinfo" id="tmapinfo"><span class="mi-k">Explore</span><h4>Tap any node</h4>Select a threat to see the models it affects and the controls that mitigate it.</div>'
+    +'</div>';
+  var cveBody='<p class="secsub" style="margin:0 2px 12px">Real, publicly disclosed AI vulnerabilities and incidents \u2014 CVE identifiers, CVSS where assigned, and the affected architecture families. Links go to the primary advisory or database.</p><div class="cvegrid">'+cveCards+'</div>'
+    +'<p style="font-size:11.5px;color:var(--faint);margin:14px 2px 0">CVE links resolve to NVD, MSRC or CVE.org. Details are summarised from public reporting (Aim Security, PromptArmor, Cyata, CrowdStrike, VentureBeat, NSFOCUS) and should be verified against the primary advisory before action.</p>';
+  var trendBody='<div class="trendstats">'+stats+'</div>'+tcards
+    +'<p style="font-size:11.5px;color:var(--faint);margin:12px 2px 0">Figures are as reported by the cited sources (CrowdStrike 2026 Global Threat Report, Stanford HAI AI Index, OWASP, NCSC, NIST) and are point-in-time \u2014 verify against the originals.</p>';
+  var aiBody='<p class="secsub" style="margin:0 2px 12px">Where AI has been <b>used to attack</b> systems \u2014 <b>directly</b> (AI running the attack) and <b>indirectly</b> (AI assisting the attacker). Turn these on in the timeline with the dashed <span style="color:#ff9fe4">\u25b2 AI-assisted attacks</span> toggle. Real, sourced cases.</p><div class="cvegrid">'+aiCards+'</div>'
+    +'<p style="font-size:11.5px;color:var(--faint);margin:14px 2px 0">Summarised from public reporting (Anthropic, ESET, Google GTIG, Sysdig, Trend Micro, CNN) \u2014 verify against each source. Impact scores are assigned estimates for comparison.</p>';
   root.innerHTML='<div class="threatwrap">'
     +'<div class="thero"><div class="kick">AI Security Observatory \u00b7 for defenders</div>'
     +'<h2>Know the <span>attacks</span>, watch the <span>trends</span></h2>'
-    +'<p>A defender\u2019s view of how AI systems are attacked: the techniques, the vulnerabilities disclosed in the wild, and where the threat is heading \u2014 each mapped back to the architectures on the Cortex tab and the controls on the Security tab.</p></div>'
-    +'<div class="obsnav">'
-      +'<button class="on" data-obs="timeline" onclick="showObs(\'timeline\')">Timeline &amp; impact</button>'
-      +'<button data-obs="tech" onclick="showObs(\'tech\')">Attack techniques <span class="cnt">'+THREATS.items.length+'</span></button>'
-      +'<button data-obs="cve" onclick="showObs(\'cve\')">Disclosed vulnerabilities <span class="cnt">'+DISCLOSED.length+'</span></button>'
-      +'<button data-obs="trend" onclick="showObs(\'trend\')">Attack trends</button>'
-    +'</div>'
-    +'<div id="obs-timeline"></div>'
-    +'<div id="obs-tech" hidden></div>'
-    +'<div id="obs-cve" hidden><p class="secsub" style="margin:0 2px 12px">Real, publicly disclosed AI vulnerabilities and incidents \u2014 CVE identifiers, CVSS where assigned, and the affected architecture families. Links go to the primary advisory or database.</p><div class="cvegrid">'+cveCards+'</div>'
-      +'<p style="font-size:11.5px;color:var(--faint);margin:14px 2px 0">CVE links resolve to NVD, MSRC or CVE.org. Details are summarised from public reporting (Aim Security, PromptArmor, Cyata, CrowdStrike, VentureBeat, NSFOCUS) and should be verified against the primary advisory before action.</p></div>'
-    +'<div id="obs-trend" hidden><div class="trendstats">'+stats+'</div>'+tcards
-      +'<p style="font-size:11.5px;color:var(--faint);margin:12px 2px 0">Figures are as reported by the cited sources (CrowdStrike 2026 Global Threat Report, Stanford HAI AI Index, OWASP, NCSC, NIST) and are point-in-time \u2014 verify against the originals.</p></div>'
-    +'<p class="minifoot">MITRE ATLAS \u00b7 OWASP LLM Top 10 \u00b7 CrowdStrike \u00b7 Stanford HAI \u00b7 NCSC \u00b7 NIST \u00b7 AI-assembled \u00b7 9 Jul 2026 \u00b7 Stuart Okin, personal capacity</p>'
+    +'<p>A defender\u2019s view of how AI systems are attacked: the timeline, the techniques, the vulnerabilities disclosed in the wild, and where the threat is heading \u2014 each mapped back to the architectures on the Cortex tab and the controls on the Security tab.</p></div>'
+    +secFrameHTML("tsb-timeline","1","#ff6b6b","Timeline &amp; impact","Attacks, CVEs &amp; techniques over time",'<div id="obs-timeline"></div>', false)
+    +secFrameHTML("tsb-arch","2","#ff7a59","Threats by architecture","Different models fail differently",archBody, false)
+    +secFrameHTML("tsb-tech","3","#ffb347","Attack techniques",THREATS.items.length+" mapped to architectures",'<div id="obs-tech"></div>', false)
+    +secFrameHTML("tsb-cve","4","#a78bfa","Disclosed vulnerabilities",DISCLOSED.length+" real CVEs &amp; incidents",cveBody, false)
+    +secFrameHTML("tsb-trend","5","#38d6e0","Attack trends","Where the threat is heading",trendBody, false)
+    +secFrameHTML("tsb-ai","6","#ff4fd8","AI misuse",AIATTACKS.length+" cases of AI used to attack",aiBody, false)
     +'</div>';
-  buildTimeline();
-  renderTech();
+  buildTimeline(); renderTech(); buildThreatMap();
+  root.addEventListener("click",function(e){
+    var tkn=e.target.closest("[data-tk]"); if(tkn){ tmSelect(tkn.dataset.tk); return; }
+    var thc=e.target.closest("[data-thr]"); if(thc){ threatDetail(thc.dataset.thr); return; }
+  });
 }
 
 </script>
