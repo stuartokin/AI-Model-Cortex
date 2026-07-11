@@ -10,8 +10,8 @@
 <style>
   :root{
     --void:#0a0b1e; --void2:#12102b; --void3:#1a1436;
-    --star:#e8eaf6; --muted:#9aa0c8; --faint:#5a5f86;
-    --line:rgba(154,160,200,.16);
+    --star:#eef0fb; --muted:#a8aed6; --faint:#848bb8;
+    --line:rgba(154,160,200,.22);
     --f0:#f5b642; --f1:#38d6e0; --f2:#e857a8; --f3:#8b6cff; --f4:#4bd19a; --f5:#ff7a59;
     --disp:'Syne',system-ui,sans-serif;
     --body:'Inter',system-ui,sans-serif;
@@ -201,6 +201,7 @@
   @media(max-width:400px){ .brand h1{font-size:15px} .ibtn{width:34px;height:34px} }
   @media(max-width:430px){ .cmap{grid-template-columns:1fr; gap:6px} .cmap #cmsvg,.cmap #tmsvg{display:none} .cmhead{margin-top:6px} }
   /* large monitors: use the space */
+  @media(min-width:1920px){ .appmain{max-width:1680px} body{font-size:17px} }
   @media(min-width:1600px){
     .hero{height:min(80vh,1000px)}
     .grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:20px}
@@ -214,8 +215,8 @@
   @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
   /* ============ APP SHELL ============ */
   :root[data-theme=light]{
-    --void:#e9edf4; --void2:#e0e6f0; --void3:#f4f7fc; --star:#111e36; --muted:#46536f; --faint:#8790a8;
-    --line:rgba(20,35,70,.15);
+    --void:#e9edf4; --void2:#e0e6f0; --void3:#f4f7fc; --star:#0f1c33; --muted:#3d4864; --faint:#5c6683;
+    --line:rgba(20,35,70,.2);
   }
   :root[data-theme=light] body{background:radial-gradient(1100px 760px at 74% -12%, #dde5f4 0%, #eef2f9 42%, #e8edf6 82%)}
   :root[data-theme=light] .card,:root[data-theme=light] .use,:root[data-theme=light] .chip{background:rgba(20,35,70,.03)}
@@ -247,7 +248,7 @@
   .hmenu button:hover{background:rgba(255,255,255,.06); color:var(--f1)}
   .hmenu button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;color:var(--muted);flex:none}
   @keyframes fade{from{opacity:0;transform:translateY(-6px)}to{opacity:1}}
-  .appmain{max-width:1180px; margin:0 auto; padding-bottom:env(safe-area-inset-bottom,0)}
+  .appmain{max-width:1220px; margin:0 auto; padding-bottom:env(safe-area-inset-bottom,0)}
   .view[hidden]{display:none}
   /* app-feel: safe areas + smooth momentum scroll */
   html{scroll-behavior:smooth}
@@ -276,7 +277,7 @@
   }
   /* comfortable large-monitor layout */
   @media(min-width:1500px){
-    .appmain{max-width:1320px}
+    .appmain{max-width:1460px}
   }
   /* nicer momentum scrolling inside scroll areas */
   .drawer,.sheet,.tl-wrap{-webkit-overflow-scrolling:touch}
@@ -685,6 +686,8 @@
   .cmstage.dim{opacity:.3}
   .mapinfo{margin:12px 0 6px; border:1px solid var(--line); border-left:3px solid var(--f3); border-radius:12px; padding:14px 16px; background:rgba(255,255,255,.03); font-size:13.5px; color:var(--muted)}
   .mapinfo h4{font-family:var(--disp); color:var(--star); font-size:16.5px; margin-bottom:4px}
+  .miflash{animation:miflashk 0.7s ease}
+  @keyframes miflashk{0%{box-shadow:0 0 0 2px var(--f3),0 0 26px -6px var(--f3)}100%{box-shadow:none}}
   .mapinfo .mi-k{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--f1)}
   .mapinfo a{color:#9fb6ff}
   .mapinfo .tagrow,.mapinfo .rchips{margin-top:9px}
@@ -877,7 +880,7 @@
   <div class="wcard">
     <button class="wclose2" onclick="closeTour()" aria-label="Close tour">×</button>
     <div class="kick">Guided tour</div>
-    <h2>Welcome to <span>The Model Cortex</span></h2>
+    <h2>Welcome to <span>The AI Model Cortex</span></h2>
     <div class="wsteps" id="wsteps"></div>
     <div class="wnav">
       <div class="wdots" id="wdots"></div>
@@ -2018,7 +2021,7 @@ function runSearch(q){
   var ths=THREATCATALOG.filter(function(t){return hit(t.name)||hit(t.def)||hit(t.analogy);});
   if(ths.length) groups.push(["Top threats", ths.map(function(t){return '<a class="gsr" onclick="gotoThreat(\''+t.id+'\');return false" href="#threat/'+t.id+'"><b style="color:'+t.color+'">'+esc(t.name)+'</b><span>'+esc(t.def).slice(0,90)+'\u2026</span></a>';}).join("")]);
   var stds=SEC.standards.filter(function(x){return hit(x.name)||hit(x.short)||hit(x.org)||hit(x.what);});
-  if(stds.length) groups.push(["Standards &amp; laws", stds.map(function(x){return '<a class="gsr" onclick="closeSheet();showTab(\'security\');setTimeout(function(){openStd(\''+x.id+'\');},80);return false" href="#std/'+x.id+'"><b>'+esc(x.short)+'</b><span>'+esc(x.name)+'</span></a>';}).join("")]);
+  if(stds.length) groups.push(["Standards &amp; laws", stds.map(function(x){return '<a class="gsr" onclick="var _o=window._curTab;closeSheet(true);window._sheetReturn=(_o&&_o!=\'security\')?_o:null;showTab(\'security\');setTimeout(function(){openStd(\''+x.id+'\');},80);return false" href="#std/'+x.id+'"><b>'+esc(x.short)+'</b><span>'+esc(x.name)+'</span></a>';}).join("")]);
   var incs=[];
   DISCLOSED.forEach(function(v){ if(hit(v.name)||hit(v.desc)||hit(v.id)) incs.push(['cve',v.id,v.name,'Disclosed CVE']); });
   ATTACKS.forEach(function(a){ if(hit(a.name)||hit(a.desc)) incs.push(['attack',a.id,a.name,'Real-world attack']); });
@@ -2075,7 +2078,7 @@ function applyHash(){
 }
 window.addEventListener("hashchange",applyHash);
 window.addEventListener("load",function(){ setTimeout(applyHash,700); });
-function closeSheet(){ document.getElementById("sheetwrap").hidden=true; }
+function closeSheet(noReturn){ document.getElementById("sheetwrap").hidden=true; if(noReturn!==true && window._sheetReturn){ var r=window._sheetReturn; window._sheetReturn=null; if(window._curTab!==r) showTab(r); } }
 document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ closeSheet(); closeTour(); } });
 
 /* ================= GLOSSARY & SOURCES ================= */
@@ -2127,30 +2130,30 @@ function sourcesHTML(){
 
 /* ================= GUIDED TOUR (no video) ================= */
 var TOUR=[
-  {h:"A brain, not a filing cabinet", b:"<p>This app maps <b>23 AI architectures</b> onto the region of the human brain whose job most resembles what each model does. It\u2019s an analogy for learning, not a claim of biological equivalence.</p><ul><li><b>Vision</b> models sit at the occipital lobe; <b>language</b> models at the temporal lobe; the <b>router</b> (Mixture-of-Experts) at the thalamus; <b>reinforcement learning</b> at the basal ganglia.</li></ul>"},
-  {h:"Explore the 3D cortex", b:"<p><b>Drag</b> to rotate the robot skull and brain, <b>pinch</b> or <b>+/\u2212</b> to zoom into the neurons. Each glowing neuron is an architecture \u2014 <b>tap its name</b> to open a full dossier.</p><p>Bottom-left toggles switch the <b>skull</b>, <b>labels</b> and a <b>constellation view</b>; the region filter (with <b>None</b>) lets you spotlight one brain region at a time. When you close this tour, watch: the skull appears clean, then each region\u2019s architectures light up group by group.</p>"},
-  {h:"Every dossier teaches \u2014 and links onward", b:"<p>Each card opens with an <b>analogy</b>, a <b>\u201cplay with it\u201d</b> link, plain-English + technical explanations in fold-out sections, cost &amp; where it runs, sources and a quiz.</p><p>Crucially, every card lists <b>threats to this model</b> \u2014 tap one and you jump straight to the Threats tab; close the card and you\u2019re back here.</p>"},
-  {h:"The Ecosystem tab \u2014 where models come from", b:"<p>Next to the Cortex: the <b>AI supply chain</b>. <b>Six worlds</b> of supply \u2014 frontier commercial, open-weight challengers, fully open, small &amp; on-device, classical repositories, and domain-specific \u2014 each with its licensing, distribution channels and countries of origin.</p><p>Plus <b>power &amp; energy</b> charts (training vs inference, on log scales) and a <b>vendor atlas</b> comparing influence, scale, token cost and licence regime. Architecture chips link back to their Cortex cards.</p>"},
-  {h:"The Security tab", b:"<p>Three frames: the <b>secure-AI lifecycle</b> (design \u2192 develop \u2192 deploy \u2192 operate), an interactive <b>control map</b> linking architecture families \u2192 lifecycle controls \u2192 <b>56 standards and laws worldwide</b> (NCSC to NIST AI 600-1, the EU AI Act to Ofgem\u2019s Ethical AI guidance), and a <b>standards library</b> with a 3D orbital view. Tap any node to light up its connections \u2014 every card links to its primary source.</p>"},
-  {h:"The Threats tab \u2014 an observatory for defenders", b:"<p>Six frames: a pan-and-pinch <b>timeline</b> of real attacks, CVEs and techniques (with an off-by-default <b>\u25b2 AI-assisted attacks</b> layer \u2014 WormGPT to JadePuffer); <b>threats by architecture</b> with a linked map; <b>attack techniques</b>; <b>disclosed vulnerabilities</b>; <b>attack trends</b>; and <b>AI misuse</b>. Threat sheets link to mitigating controls, and controls link back to threats.</p>"},
-  {h:"Search, share &amp; the \u22ee menu", b:"<p>Top-right: <b>Search everything</b> (models, threats, standards, attacks in one box), the <b>glossary</b>, <b>all sources</b>, <b>what\u2019s new</b>, copy-link and save-as-PDF. The URL updates as you navigate \u2014 so you can <b>share a link to any tab, threat, standard or model</b>. The <b>speaker</b> mutes the ambient music; the <b>sun/moon</b> switches theme. Works from phone to large monitor.</p>"},
-  {h:"The Plan tab \u2014 scope a build", b:"<p>The newest tab is an <b>interactive plan builder</b>. Answer a handful of questions as an <b>executive</b> or a <b>technical architect</b>, and it assembles a high-level plan: which <b>architectures</b> to use (alone or combined), a recommended <b>ecosystem &amp; licensing route with pros and cons</b>, the <b>rules, laws and standards</b> in scope, <b>security considerations</b>, and an <b>initial team with matching skills</b> \u2014 every item linking into the other tabs. A clear disclaimer follows each generated plan.</p>"},
-  {h:"Feedback &amp; more from the author", b:"<p>This is a <b>personal-capacity</b> project by <b>Stuart Okin</b>, built to make the AI landscape easier to explore. If it\u2019s useful \u2014 or if you spot something to fix \u2014 <b>feedback is very welcome</b>.</p><p><a href=\"https://www.linkedin.com/in/stuart-okin-b37ab69\" target=\"_blank\" rel=\"noopener\"><b>Send feedback / connect on LinkedIn \u2197</b></a></p><p style=\"margin-top:8px\">Related reading (\u22ee menu \u2192 <b>More from the author</b>):</p><ul><li><a href=\"https://www.linkedin.com/pulse/ai-finding-zero-day-bugs-fast-stuart-okin-khv1e/\" target=\"_blank\" rel=\"noopener\">AI Finding Zero-Day Bugs, Fast \u2197</a></li><li><a href=\"https://www.linkedin.com/pulse/mapping-ai-governance-standards-stuart-okin-w8oqe/\" target=\"_blank\" rel=\"noopener\">Mapping AI Governance &amp; Standards \u2197</a></li><li><a href=\"https://www.linkedin.com/pulse/i-built-q-day-clock-kept-speeding-up-stuart-okin-ku1me\" target=\"_blank\" rel=\"noopener\">I Built a Q-Day Clock. It Kept Speeding Up. \u2197</a></li></ul>"}
-];
-var _ti=0;
+  {h:"Why this matters \u2014 especially for leaders", b:"<p>AI is now a <b>board-level decision</b>, not just a technical one. The choices you make \u2014 which kind of model, built or bought, open or closed, hosted where \u2014 shape your <b>cost, capability, compliance and risk</b> for years.</p><p><b>The AI Model Cortex</b> is built to give executives and architects a shared, honest picture: what the models are, where they come from, how they fail, and how to plan a build responsibly. Consider this a guided journey \u2014 from understanding the technology, to sourcing it, to securing it, to scoping your own application.</p>"},
+  {h:"A brain, not a filing cabinet", b:"<p>The <b>Cortex</b> tab maps <b>23 AI architectures</b> onto the region of the human brain whose job most resembles what each model does \u2014 an analogy for learning, not a claim of biology.</p><p>Vision models sit at the occipital lobe, language models at the temporal lobe, the Mixture-of-Experts router at the thalamus, reinforcement learning at the basal ganglia. It turns an abstract zoo of models into something you can reason about.</p>"},
+  {h:"Explore the 3D cortex", b:"<p><b>Drag</b> to rotate the robot skull and brain, <b>pinch</b> or <b>+/\u2212</b> to zoom, and <b>tap a neuron\u2019s name</b> to open its dossier. Bottom-left toggles switch the <b>skull</b>, <b>labels</b> and a <b>constellation view</b>; the region filter (with <b>None</b>) spotlights one part of the brain at a time.</p><p>When you close this tour, watch: the skull appears clean, then each region\u2019s architectures light up group by group.</p>"},
+  {h:"Every dossier teaches \u2014 and links onward", b:"<p>Each card opens with an <b>analogy</b>, a <b>\u2018play with it\u2019</b> link, plain-English and technical explanations in fold-out sections, cost, sources and a quiz.</p><p>Crucially, each card links <b>outward</b>: to the <b>threats</b> that target that model, and to the <b>supply worlds</b> where you can obtain it. Follow a link and close it, and you\u2019re brought back to where you started.</p>"},
+  {h:"Ecosystem \u2014 where models come from", b:"<p>The <b>Ecosystem</b> tab is the <b>AI supply chain</b>. <b>Six worlds</b> \u2014 frontier commercial, open-weight challengers, fully open, small &amp; on-device, classical repositories and domain-specific \u2014 each with its licensing, distribution and country of origin.</p><p>Plus <b>power &amp; energy</b> charts (training vs inference), a <b>vendor atlas</b> plotting ~50 vendors by influence and token cost, and worked <b>examples</b> of real apps built on one architecture or many (AlphaFold, self-driving, assistants\u2026).</p>"},
+  {h:"Security \u2014 building it safely", b:"<p>The <b>Security</b> tab covers the <b>secure-AI lifecycle</b> (design \u2192 develop \u2192 deploy \u2192 operate), an interactive <b>control map</b> linking architectures \u2192 controls \u2192 <b>56 standards and laws worldwide</b> (NCSC to NIST AI 600-1, the EU AI Act to Ofgem\u2019s Ethical AI guidance), and a <b>standards library</b> with a 3D orbital view. Tap any node to light up its connections.</p>"},
+  {h:"Threats \u2014 how AI gets attacked", b:"<p>The <b>Threats</b> observatory, for defenders: a pan-and-pinch <b>timeline</b> of real attacks, CVEs and techniques \u2014 with an off-by-default <b>\u25b2 AI-assisted attacks</b> layer, from WormGPT to the first fully agentic ransomware. Plus <b>threats by architecture</b>, disclosed <b>vulnerabilities</b>, <b>trends</b>, and <b>AI misuse</b>. Threats link to the controls that mitigate them, and back again.</p>"},
+  {h:"Plan \u2014 scope your own build", b:"<p>The <b>Plan</b> tab turns all of this into action. Answer as an <b>executive</b> (high-level, strategic) or a <b>technical architect</b> (detailed), and it assembles a plan: which <b>architectures</b> to use alone or combined, a recommended <b>ecosystem &amp; licensing route with pros and cons</b>, the <b>rules and standards</b> in scope, <b>security considerations</b>, and a starting <b>team \u2014 business, governance and technical</b>. A <b>\u2018How it works\u2019</b> button shows the transparent logic; a clear disclaimer follows every plan.</p>"},
+  {h:"Search, share &amp; the \u22ee menu", b:"<p>Top-right: <b>Search everything</b> (models, threats, standards, attacks in one box), the <b>glossary</b>, <b>all sources</b>, <b>what\u2019s new</b>, copy-link and save-as-PDF. The URL updates as you go, so you can <b>share a link to any tab, threat, standard or model</b>. The <b>speaker</b> mutes the ambient music; the <b>sun/moon</b> switches theme. Works from phone to large monitor.</p>"},
+  {h:"Feedback &amp; more from the author", b:"<p>This is a <b>personal-capacity</b> project by <b>Stuart Okin</b>, built to make the AI landscape easier to explore and decide upon. If it\u2019s useful \u2014 or you spot something to fix \u2014 <b>feedback is very welcome</b>.</p><p><a href=\"https://www.linkedin.com/in/stuart-okin-b37ab69\" target=\"_blank\" rel=\"noopener\"><b>Send feedback / connect on LinkedIn \u2197</b></a></p><p style=\"margin-top:8px\">Related reading (\u22ee menu \u2192 <b>More from the author</b>):</p><ul><li><a href=\"https://www.linkedin.com/pulse/ai-finding-zero-day-bugs-fast-stuart-okin-khv1e/\" target=\"_blank\" rel=\"noopener\">AI Finding Zero-Day Bugs, Fast \u2197</a></li><li><a href=\"https://www.linkedin.com/pulse/mapping-ai-governance-standards-stuart-okin-w8oqe/\" target=\"_blank\" rel=\"noopener\">Mapping AI Governance &amp; Standards \u2197</a></li><li><a href=\"https://www.linkedin.com/pulse/i-built-q-day-clock-kept-speeding-up-stuart-okin-ku1me\" target=\"_blank\" rel=\"noopener\">I Built a Q-Day Clock. It Kept Speeding Up. \u2197</a></li></ul>"}
+];var _ti=0;
 function showTour(){ _ti=0; renderTour(); document.getElementById("welcome").hidden=false; }
 var _muted=false;
 function toggleMute(){ _muted=!_muted; var b=document.getElementById("muteBtn"); if(b) b.classList.toggle("muted",_muted); if(window.Ambient) window.Ambient.setMuted(_muted); }
 var Ambient=(function(){
-  var ctx,master,playing=false,muted=false,voices=[],stopT=null;
-  function ensure(){ if(ctx) return true; try{ var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; ctx=new AC(); master=ctx.createGain(); master.gain.value=0.0001; master.connect(ctx.destination); }catch(e){ return false; } return true; }
+  var ctx,master,env,playing=false,muted=false,voices=[],stopT=null;
+  function ensure(){ if(ctx) return true; try{ var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false; ctx=new AC(); master=ctx.createGain(); master.gain.value=muted?0.0001:1; env=ctx.createGain(); env.gain.value=0.0001; env.connect(master); master.connect(ctx.destination); }catch(e){ return false; } return true; }
   function start(dur){
     if(!ensure()) return; if(ctx.state==="suspended"){ try{ctx.resume();}catch(e){} }
     if(playing) return; playing=true;
     var now=ctx.currentTime;
-    var filt=ctx.createBiquadFilter(); filt.type="lowpass"; filt.frequency.value=520; filt.Q.value=0.6; filt.connect(master);
+    var filt=ctx.createBiquadFilter(); filt.type="lowpass"; filt.frequency.value=520; filt.Q.value=0.6; filt.connect(env);
     var delay=ctx.createDelay(2.0); delay.delayTime.value=0.5; var fb=ctx.createGain(); fb.gain.value=0.34;
-    delay.connect(fb); fb.connect(delay); filt.connect(delay); delay.connect(master);
+    delay.connect(fb); fb.connect(delay); filt.connect(delay); delay.connect(env);
     var freqs=[110,164.81,220,329.63,440]; /* A minor-ish pad */
     freqs.forEach(function(f,i){
       var o=ctx.createOscillator(); o.type=(i>2?"triangle":"sine"); o.frequency.value=f;
@@ -2163,15 +2166,15 @@ var Ambient=(function(){
       o.start(now); o2.start(now); lfo.start(now); voices.push(o,o2,lfo);
     });
     filt.frequency.setValueAtTime(420,now); filt.frequency.linearRampToValueAtTime(1150,now+9); filt.frequency.linearRampToValueAtTime(650,now+18);
-    var target=muted?0.0001:0.42;
-    master.gain.cancelScheduledValues(now); master.gain.setValueAtTime(0.0001,now); master.gain.linearRampToValueAtTime(target,now+3);
-    if(dur){ master.gain.setValueAtTime(target,now+dur-4); master.gain.linearRampToValueAtTime(0.0001,now+dur);
+    var target=0.42;
+    env.gain.cancelScheduledValues(now); env.gain.setValueAtTime(0.0001,now); env.gain.linearRampToValueAtTime(target,now+3);
+    if(dur){ env.gain.setValueAtTime(target,now+dur-4); env.gain.linearRampToValueAtTime(0.0001,now+dur);
       clearTimeout(stopT); stopT=setTimeout(stop,(dur+0.6)*1000); }
   }
   function stop(){ if(!playing||!ctx) return; playing=false; var now=ctx.currentTime;
-    try{ master.gain.cancelScheduledValues(now); master.gain.linearRampToValueAtTime(0.0001,now+1.4); }catch(e){}
+    try{ env.gain.cancelScheduledValues(now); env.gain.linearRampToValueAtTime(0.0001,now+1.4); }catch(e){}
     setTimeout(function(){ voices.forEach(function(v){ try{v.stop();}catch(e){} }); voices=[]; },1600); }
-  function setMuted(m){ muted=m; if(ctx&&master){ try{ master.gain.linearRampToValueAtTime(m?0.0001:(playing?0.42:0.0001), ctx.currentTime+0.35); }catch(e){} } }
+  function setMuted(m){ muted=m; if(ctx&&master){ try{ var now=ctx.currentTime; master.gain.cancelScheduledValues(now); master.gain.setValueAtTime(master.gain.value,now); master.gain.linearRampToValueAtTime(m?0.0001:1,now+0.25); }catch(e){} } }
   return {start:start,stop:stop,setMuted:setMuted,isMuted:function(){return muted;}};
 })();
 window.Ambient=Ambient;
@@ -2634,8 +2637,8 @@ function threatHTML(t){
     +'<div class="rl" style="margin-top:8px">Mitigating controls</div><div class="rchips">'+ctlChips+'</div>'
     +'<div class="rl" style="margin-top:8px">Sources</div><p style="font-size:12.5px">'+srcs+'</p>'+verLine();
 }
-function gotoThreat(id){ closeSheet(); showTab("threats"); try{history.replaceState(null,"","#threat/"+id);}catch(e){} setTimeout(function(){ if(typeof threatDetail==="function") threatDetail(id); },70); }
-function gotoControl(n){ closeSheet(); showTab("security"); setTimeout(function(){ openSheet(ctlHTML(n)); },70); }
+function gotoThreat(id){ var o=window._curTab; closeSheet(true); window._sheetReturn=(o&&o!=="threats")?o:null; showTab("threats"); try{history.replaceState(null,"","#threat/"+id);}catch(e){} setTimeout(function(){ if(typeof threatDetail==="function") threatDetail(id); },70); }
+function gotoControl(n){ var o=window._curTab; closeSheet(true); window._sheetReturn=(o&&o!=="security")?o:null; showTab("security"); setTimeout(function(){ openSheet(ctlHTML(n)); },70); }
 function gotoEcoGroup(id){ closeSheet(); if(typeof closeDrawer==="function"){} showTab("ecosystem");
   setTimeout(function(){
     var blk=document.getElementById("eco-groups"), hd=blk&&blk.querySelector(".secblk-hd");
@@ -2702,6 +2705,8 @@ function tmInfo(){
     mi.innerHTML='<span class="mi-k" style="color:'+r.color+'">Architecture family \u00b7 '+r.note+'</span><h4>'+r.fam+'</h4><div class="rl">Top threats \u2014 tap for detail</div><div class="rchips">'+ths.map(function(t){return '<button class="rchip tchip" data-thr="'+t.id+'" style="--tcol:'+t.color+'">'+t.name+'</button>';}).join("")+'</div><p style="margin-top:8px">'+r.controls+'</p>'; }
   else { var ci=ctlInfo(id); var ths=THREATCATALOG.filter(function(t){return t.ctrls.indexOf(id)>=0;});
     mi.innerHTML='<span class="mi-k" style="color:'+ci.color+'">'+ci.stage+' \u00b7 control '+id+'</span><h4>'+ci.name+'</h4><p>'+ci.detail+'</p><div class="rl">Mitigates these threats \u2014 tap for detail</div><div class="rchips">'+ths.map(function(t){return '<button class="rchip tchip" data-thr="'+t.id+'" style="--tcol:'+t.color+'">'+t.name+'</button>';}).join("")+'</div>'; }
+  mi.classList.add("miflash"); setTimeout(function(){mi.classList.remove("miflash");},700);
+  requestAnimationFrame(function(){ try{ mi.scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){} });
 }
 
 function stdById(id){ for(var i=0;i<SEC.standards.length;i++) if(SEC.standards[i].id===id) return SEC.standards[i]; return null; }
@@ -2929,6 +2934,8 @@ function cmInfo(){
       '<p><b style="color:var(--star)">What to do:</b> '+sd.todo+'</p>'+
       '<p><a href="'+sd.url+'" target="_blank" rel="noopener"><b>Open the primary source \u2197</b></a></p>';
   }
+  mi.classList.add("miflash"); setTimeout(function(){mi.classList.remove("miflash");},700);
+  requestAnimationFrame(function(){ try{ mi.scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){} });
 }
 
 /* ====== ORBITAL STANDARDS VIEW ====== */
@@ -3205,6 +3212,7 @@ function tlEvents(){
   if(_tl.cat) ev=ev.filter(function(e){return e.cat===_tl.cat;});
   return ev;
 }
+function hostLabel(u){ try{ return u.replace(/^https?:\/\//,"").replace(/^www\./,"").split("/")[0]; }catch(e){ return "link"; } }
 function archLink(a){ return (window.MODEL_NAMES&&window.MODEL_NAMES.indexOf(a)>=0)?'<a class="tchip-arch lnk" onclick="openModel(\''+a.replace(/'/g,"")+'\');return false" href="#">'+a+' \u2192</a>':'<span class="tchip-arch">'+a+'</span>'; }
 function tlOpen(kind,id){
   var ev=tlEvents(), e=null; ev.forEach(function(x){ if(x.kind===kind&&x.id===id) e=x; }); if(!e) return;
@@ -3494,7 +3502,7 @@ function ecoVendorCard(v,color){
     +'<div class="vrow"><span class="vk">Token cost</span><span>'+v.cost+'</span></div>'
     +'<div class="vrow"><span class="vk">Licence</span><span class="vlic">'+v.lic+'</span></div>'
     +'<p class="vnote">'+v.note+'</p>'
-    +(v.src?'<a class="clink" style="margin-top:7px" href="'+v.src+'" target="_blank" rel="noopener">Source \u2197</a>':'')+'</div>';
+    +(v.src?'<a class="clink" style="margin-top:7px" href="'+v.src+'" target="_blank" rel="noopener">'+hostLabel(v.src)+' \u2197</a>':'')+'</div>';
 }
 function ecoGroupCard(g){
   var archChips=g.arch.map(function(a){ return (window.MODEL_NAMES&&window.MODEL_NAMES.indexOf(a)>=0)?'<a class="use lnk" onclick="openModel(\''+a.replace(/'/g,"")+'\');return false" href="#">'+a+' \u2192</a>':'<span class="use">'+a+'</span>'; }).join("");
@@ -3608,7 +3616,7 @@ function appSingleCard(a){
     +'<div class="archline"><span class="onelab">one architecture</span>'+ecoArchChip(a.arch)+'</div>'
     +'<p class="apphow">'+a.how+'</p>'
     +'<div class="appimpact">'+a.impact+'</div>'
-    +'<a class="clink" href="'+a.src+'" target="_blank" rel="noopener">Source \u2197</a></div>';
+    +'<a class="clink" href="'+a.src+'" target="_blank" rel="noopener">'+hostLabel(a.src)+' \u2197</a></div>';
 }
 function appMultiCard(a){
   var flow=a.archs.map(ecoArchChip).join('<span class="flowarr">+</span>');
@@ -3617,7 +3625,7 @@ function appMultiCard(a){
     +'<div class="archflow">'+flow+'</div>'
     +'<p class="apphow">'+a.how+'</p>'
     +'<div class="appimpact">'+a.impact+'</div>'
-    +'<a class="clink" href="'+a.src+'" target="_blank" rel="noopener">Source \u2197</a></div>';
+    +'<a class="clink" href="'+a.src+'" target="_blank" rel="noopener">'+hostLabel(a.src)+' \u2197</a></div>';
 }
 function ecoVendorChart(){
   var W=680,H=430,mL=54,mR=16,mT=16,mB=42, gutter=susCount()>0?70:0;
@@ -3943,7 +3951,7 @@ function buildThreats(){
       +'<h4>'+a.name+'</h4><div class="cdate">'+a.date+' \u00b7 '+a.kindlabel+'</div>'
       +'<div class="cb"><div class="cdesc">'+a.desc+'</div><div class="cwho">'+a.who+'</div>'
       +'<div class="carch">'+a.arch.map(function(x){return '<span>'+x+'</span>';}).join("")+'</div>'
-      +'<a class="clink" href="'+a.src+'" target="_blank" rel="noopener">Source \u2197</a></div></div>';
+      +'<a class="clink" href="'+a.src+'" target="_blank" rel="noopener">'+hostLabel(a.src)+' \u2197</a></div></div>';
   }).join("");
   var cveCards=DISCLOSED.map(function(v){
     var cls=(v.cvss==="\u2014")?"na":(parseFloat(v.cvss)>=9?"crit":"hi");
@@ -3952,7 +3960,7 @@ function buildThreats(){
       +'<h4>'+v.name+'</h4><div class="cdate">'+v.date+'</div>'
       +'<div class="cb"><div class="cdesc">'+v.desc+'</div><div class="cwho">'+v.who+'</div>'
       +'<div class="carch">'+v.arch.map(function(a){return '<span>'+a+'</span>';}).join("")+'</div>'
-      +'<a class="clink" href="'+v.src+'" target="_blank" rel="noopener">Source \u2197</a></div></div>';
+      +'<a class="clink" href="'+v.src+'" target="_blank" rel="noopener">'+hostLabel(v.src)+' \u2197</a></div></div>';
   }).join("");
   var stats=TRENDSTATS.map(function(t){
     return '<div class="tstat"><div class="big">'+t.big+'</div><div class="tlab">'+t.lab+'</div>'
