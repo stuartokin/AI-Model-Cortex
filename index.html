@@ -323,6 +323,8 @@
   .wstep ul{margin:0 0 6px; padding-left:20px; color:var(--muted); font-size:14px}
   .wstep li{margin:5px 0}
   .wstep b{color:var(--star)}
+  .wstep a{color:#8fbcff; text-decoration:underline; text-underline-offset:2px}
+  .wstep a:hover{color:#b8d4ff}
   .wnav{display:flex; align-items:center; justify-content:space-between; margin-top:22px; gap:12px}
   .wdots{display:flex; gap:6px}
   .wdots i{width:7px; height:7px; border-radius:50%; background:var(--line); transition:.2s}
@@ -403,7 +405,10 @@
   .planwrap{max-width:100%}
   .planform{display:grid; gap:14px; margin-top:4px}
   .planq{border:1px solid var(--line); border-radius:14px; padding:13px 14px; background:rgba(255,255,255,.015)}
-  .planpq{font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin:14px 0 8px}
+  .planstep{display:flex; align-items:center; gap:11px; margin:6px 0 10px}
+  .planstep .stepn{width:28px; height:28px; flex:none; border-radius:9px; display:inline-flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:14px; font-weight:700; background:color-mix(in srgb, var(--f3) 22%, transparent); color:var(--f3); border:1px solid color-mix(in srgb, var(--f3) 55%, transparent)}
+  .planstep b{font-family:var(--disp); font-size:15.5px; color:var(--star); display:block}
+  .planstep .stephint{font-size:12px; color:var(--faint); display:block; margin-top:1px}
   .personasel{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); gap:9px}
   .personabtn{display:flex; flex-direction:column; gap:2px; text-align:left; padding:12px 14px; border-radius:13px; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--muted); cursor:pointer; transition:.15s}
   .personabtn b{font-family:var(--disp); font-size:15px; color:var(--star)}
@@ -430,7 +435,7 @@
   .psummary{font-size:13px; color:var(--muted); margin:0 0 8px; line-height:1.5}
   .plansec{border-top:1px solid var(--line); padding:15px 0}
   .psh{display:flex; align-items:center; gap:10px; font-family:var(--disp); font-weight:700; font-size:16px; margin-bottom:10px; color:var(--star); flex-wrap:wrap}
-  .psn{width:24px; height:24px; border-radius:7px; display:inline-flex; align-items:center; justify-content:center; font-size:13px; color:#fff; flex:none}
+  .psn{width:26px; height:26px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:13px; font-weight:700; flex:none; background:color-mix(in srgb, var(--nc) 20%, transparent); color:var(--nc); border:1px solid color-mix(in srgb, var(--nc) 55%, transparent)}
   .pstag{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); border:1px solid var(--line); border-radius:999px; padding:3px 9px}
   .plist{margin:4px 0 0; padding-left:18px} .plist li{font-size:13px; color:var(--muted); line-height:1.55; margin:4px 0}
   .pmini{font-size:12px; color:var(--faint); margin:8px 0 0}
@@ -684,8 +689,20 @@
   .cmstage{position:relative; z-index:1; font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--nc); margin:13px 0 3px; cursor:pointer}
   .cmstage:first-child{margin-top:0}
   .cmstage.dim{opacity:.3}
-  .mapinfo{margin:12px 0 6px; border:1px solid var(--line); border-left:3px solid var(--f3); border-radius:12px; padding:14px 16px; background:rgba(255,255,255,.03); font-size:13.5px; color:var(--muted)}
+  .mapinfo,.tmapinfo{position:fixed; left:50%; transform:translateX(-50%); bottom:24px; width:min(560px,94vw); max-height:52vh; overflow:auto; z-index:58; border:1px solid var(--f5); border-radius:16px; padding:16px 18px 15px; background:var(--void2); box-shadow:0 22px 60px -14px rgba(0,0,0,.75); font-size:13.5px; color:var(--muted); display:none; -webkit-overflow-scrolling:touch}
+  .mapinfo.active,.tmapinfo.active{display:block; animation:mapup .2s ease}
+  @keyframes mapup{from{opacity:0; transform:translate(-50%,14px)}to{opacity:1; transform:translateX(-50%)}}
+  .mapclose{position:sticky; top:-4px; float:right; margin:-6px -8px 0 8px; width:30px; height:30px; border-radius:9px; border:1px solid var(--line); background:var(--void3); color:var(--star); font-size:18px; line-height:1; cursor:pointer; z-index:2}
+  .mapclose:hover{border-color:var(--f5)}
+  @media(max-width:720px){ .mapinfo,.tmapinfo{bottom:calc(80px + env(safe-area-inset-bottom,0)); max-height:46vh} }
   .mapinfo h4{font-family:var(--disp); color:var(--star); font-size:16.5px; margin-bottom:4px}
+  .backpill{position:fixed; top:calc(58px + env(safe-area-inset-top,0)); left:50%; transform:translateX(-50%); z-index:66; display:flex; align-items:stretch; gap:0; border-radius:999px; overflow:hidden; box-shadow:0 12px 34px -8px rgba(0,0,0,.6); border:1px solid var(--f3); background:var(--void2); animation:mapup .22s ease}
+  .backpill[hidden]{display:none}
+  .backpill .bp-go{font-family:var(--disp); font-weight:600; font-size:13.5px; padding:9px 15px; border:0; background:transparent; color:var(--star); cursor:pointer; max-width:70vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .backpill .bp-go span{color:var(--f1)}
+  .backpill .bp-go:hover{background:rgba(139,108,255,.16)}
+  .backpill .bp-x{border:0; border-left:1px solid var(--line); background:transparent; color:var(--faint); font-size:16px; padding:0 12px; cursor:pointer}
+  .backpill .bp-x:hover{color:var(--star)}
   .miflash{animation:miflashk 0.7s ease}
   @keyframes miflashk{0%{box-shadow:0 0 0 2px var(--f3),0 0 26px -6px var(--f3)}100%{box-shadow:none}}
   .mapinfo .mi-k{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--f1)}
@@ -697,6 +714,7 @@
   .secblk{border:1px solid var(--line); border-radius:16px; margin-bottom:14px; overflow:hidden; background:rgba(255,255,255,.02)}
   .secblk-hd{display:flex; align-items:center; gap:12px; padding:15px 18px; cursor:pointer; user-select:none; transition:.16s}
   .secblk-hd:hover{background:rgba(255,255,255,.04)}
+  .secblk-hd .n{width:26px; height:26px; flex:none; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:13px; font-weight:700; background:color-mix(in srgb, var(--nc) 20%, transparent); color:var(--nc); border:1px solid color-mix(in srgb, var(--nc) 55%, transparent)}
   .secblk-hd .bn{font-family:var(--disp); font-weight:800; font-size:16.5px; flex:1}
   .secblk-hd .bsub{font-family:var(--mono); font-size:10.5px; color:var(--faint); letter-spacing:.1em}
   .secblk-hd .chev{color:var(--muted); transition:transform .25s; flex:none}
@@ -875,6 +893,7 @@
   <div class="shade" onclick="closeSheet()"></div>
   <div class="sheet" id="sheet"><button class="wclose" onclick="closeSheet()" aria-label="Close">×</button><div id="sheetbody"></div></div>
 </div>
+<div class="backpill" id="backpill" hidden><button class="bp-go" onclick="backReturn()">&#8592; Back to <span id="bpname"></span></button><button class="bp-x" onclick="hideBackPill()" aria-label="Dismiss">×</button></div>
 
 <div class="welcome" id="welcome" hidden>
   <div class="wcard">
@@ -1395,7 +1414,7 @@ window.addEventListener("error",function(ev){
     m.brainWhy=BWHY[m.name]||"";
   });
   var MODELBYNAME={}; MODELS.forEach(function(m){ MODELBYNAME[m.name]=m; });
-  window.openModel=function(name){ var m=MODELBYNAME[name]; if(!m) return; showTab("cortex"); try{history.replaceState(null,"","#model/"+encodeURIComponent(name));}catch(e){} setTimeout(function(){ try{ focusNode(m); }catch(e){} openDrawer(m); },70); };
+  window.openModel=function(name){ var m=MODELBYNAME[name]; if(!m) return; window._pendingReturn=window._curTab||"cortex"; showTab("cortex"); try{history.replaceState(null,"","#model/"+encodeURIComponent(name));}catch(e){} setTimeout(function(){ try{ focusNode(m); }catch(e){} openDrawer(m); },70); };
   window.MODEL_NAMES=Object.keys(MODELBYNAME);
   window.MODEL_INDEX=MODELS.map(function(m){ return {name:m.name, type:m.type, one:m.one||"", fam:m.famName}; });
   window.MODEL_COLOR={}; MODELS.forEach(function(m){ window.MODEL_COLOR[m.name]=m.color; });
@@ -1546,6 +1565,8 @@ window.addEventListener("error",function(ev){
   function sec(icon,label,text,cls){ return '<div class="sec '+(cls||"")+'"><div class="h">'+icon+label+'</div><p>'+text+'</p></div>'; }
   function acc(icon,label,html){ return '<div class="acc"><div class="acc-hd" aria-expanded="false"><span class="acc-ic">'+icon+'</span><span class="acc-l">'+label+'</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div><div class="acc-bd">'+html+'</div></div>'; }
   function openDrawer(m){
+    window._drawerReturn=window._pendingReturn||(window._curTab||"cortex"); window._pendingReturn=null;
+    window._curDrawerModel=m.name; if(typeof hideBackPill==="function") hideBackPill();
     drawer.style.setProperty("--accent",m.color);
     var fam=document.getElementById("d-fam"); fam.textContent=m.regionName+" \u00b7 "+m.famName; fam.style.color=m.color;
     document.getElementById("d-name").textContent=m.name;
@@ -1597,7 +1618,8 @@ window.addEventListener("error",function(ev){
     scrim.classList.add("open"); drawer.classList.add("open"); drawer.setAttribute("aria-hidden","false");
     if(active!==m) focusNode(m);
   }
-  function closeDrawer(){ scrim.classList.remove("open"); drawer.classList.remove("open"); drawer.setAttribute("aria-hidden","true"); active=null; dim3D(); if(window._curTab && window._curTab!=="cortex"){ try{ showTab("cortex"); }catch(e){} } }
+  function closeDrawer(){ scrim.classList.remove("open"); drawer.classList.remove("open"); drawer.setAttribute("aria-hidden","true"); active=null; window._curDrawerModel=null; dim3D(); if(window._drawerReturn){ var r=window._drawerReturn; window._drawerReturn=null; if(window._curTab!==r){ try{ showTab(r); }catch(e){} } } }
+  window.closeCortexDrawer=function(){ window._drawerReturn=null; if(drawer.classList.contains("open")){ scrim.classList.remove("open"); drawer.classList.remove("open"); drawer.setAttribute("aria-hidden","true"); active=null; dim3D(); } };
   document.getElementById("close").addEventListener("click",closeDrawer);
   scrim.addEventListener("click",closeDrawer);
   document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeDrawer(); });
@@ -1973,6 +1995,7 @@ window.addEventListener("error",function(ev){
 
 function showTab(name){
   window._curTab=name;
+  ["mapinfo","tmapinfo"].forEach(function(id){ var e=document.getElementById(id); if(e) e.classList.remove("active"); });
   document.querySelectorAll(".tabbar button").forEach(function(b){ b.classList.toggle("on", b.dataset.tab===name); });
   document.getElementById("view-cortex").hidden = (name!=="cortex");
   document.getElementById("view-ecosystem").hidden = (name!=="ecosystem");
@@ -2637,9 +2660,13 @@ function threatHTML(t){
     +'<div class="rl" style="margin-top:8px">Mitigating controls</div><div class="rchips">'+ctlChips+'</div>'
     +'<div class="rl" style="margin-top:8px">Sources</div><p style="font-size:12.5px">'+srcs+'</p>'+verLine();
 }
-function gotoThreat(id){ var o=window._curTab; closeSheet(true); window._sheetReturn=(o&&o!=="threats")?o:null; showTab("threats"); try{history.replaceState(null,"","#threat/"+id);}catch(e){} setTimeout(function(){ if(typeof threatDetail==="function") threatDetail(id); },70); }
-function gotoControl(n){ var o=window._curTab; closeSheet(true); window._sheetReturn=(o&&o!=="security")?o:null; showTab("security"); setTimeout(function(){ openSheet(ctlHTML(n)); },70); }
-function gotoEcoGroup(id){ closeSheet(); if(typeof closeDrawer==="function"){} showTab("ecosystem");
+function showBackPill(name){ var el=document.getElementById("backpill"); if(!el) return; document.getElementById("bpname").textContent=name; window._backTo=name; el.hidden=false; }
+function hideBackPill(){ var el=document.getElementById("backpill"); if(el) el.hidden=true; window._backTo=null; }
+function backReturn(){ var n=window._backTo; hideBackPill(); if(n && window.openModel) window.openModel(n); }
+function _fromCard(){ var d=document.getElementById("drawer"); return (d&&d.classList.contains("open"))?window._curDrawerModel:null; }
+function gotoThreat(id){ var _dm=_fromCard(); var o=window._curTab; if(window.closeCortexDrawer) window.closeCortexDrawer(); closeSheet(true); window._sheetReturn=null; showTab("threats"); if(_dm) showBackPill(_dm); else window._sheetReturn=(o&&o!=="threats")?o:null; try{history.replaceState(null,"","#threat/"+id);}catch(e){} setTimeout(function(){ if(typeof threatDetail==="function") threatDetail(id); },70); }
+function gotoControl(n){ var _dm=_fromCard(); var o=window._curTab; if(window.closeCortexDrawer) window.closeCortexDrawer(); closeSheet(true); window._sheetReturn=(o&&o!=="security"&&!_dm)?o:null; showTab("security"); if(_dm) showBackPill(_dm); setTimeout(function(){ openSheet(ctlHTML(n)); },70); }
+function gotoEcoGroup(id){ var _dm=_fromCard(); closeSheet(true); if(window.closeCortexDrawer) window.closeCortexDrawer(); showTab("ecosystem"); if(_dm) showBackPill(_dm);
   setTimeout(function(){
     var blk=document.getElementById("eco-groups"), hd=blk&&blk.querySelector(".secblk-hd");
     if(hd && hd.getAttribute("aria-expanded")!=="true") sbToggle("eco-groups");
@@ -2698,15 +2725,15 @@ function tmSelect(k){
 }
 function tmInfo(){
   var mi=document.getElementById("tmapinfo"); if(!mi) return;
-  if(!tmSel){ mi.innerHTML='<span class="mi-k">Explore</span><h4>Tap any node</h4>Select a threat to see the models it affects and the controls that mitigate it. Select a model or a control to see the threats it touches.'; return; }
+  if(!tmSel){ mi.classList.remove("active"); return; }
+  mi.classList.add("active");
+  var _cl='<button class="mapclose" onclick="tmSelect(tmSel)" aria-label="Close">\u00d7</button>';
   var kind=tmSel.split(":")[0], id=tmSel.split(":")[1];
-  if(kind==="thr"){ mi.innerHTML=threatHTML(thrById(id)); }
+  if(kind==="thr"){ mi.innerHTML=_cl+threatHTML(thrById(id)); }
   else if(kind==="fam"){ var r=famInfo(id); var ths=THREATCATALOG.filter(function(t){return t.fams.indexOf(id)>=0;});
-    mi.innerHTML='<span class="mi-k" style="color:'+r.color+'">Architecture family \u00b7 '+r.note+'</span><h4>'+r.fam+'</h4><div class="rl">Top threats \u2014 tap for detail</div><div class="rchips">'+ths.map(function(t){return '<button class="rchip tchip" data-thr="'+t.id+'" style="--tcol:'+t.color+'">'+t.name+'</button>';}).join("")+'</div><p style="margin-top:8px">'+r.controls+'</p>'; }
+    mi.innerHTML=_cl+'<span class="mi-k" style="color:'+r.color+'">Architecture family \u00b7 '+r.note+'</span><h4>'+r.fam+'</h4><div class="rl">Top threats \u2014 tap for detail</div><div class="rchips">'+ths.map(function(t){return '<button class="rchip tchip" data-thr="'+t.id+'" style="--tcol:'+t.color+'">'+t.name+'</button>';}).join("")+'</div><p style="margin-top:8px">'+r.controls+'</p>'; }
   else { var ci=ctlInfo(id); var ths=THREATCATALOG.filter(function(t){return t.ctrls.indexOf(id)>=0;});
-    mi.innerHTML='<span class="mi-k" style="color:'+ci.color+'">'+ci.stage+' \u00b7 control '+id+'</span><h4>'+ci.name+'</h4><p>'+ci.detail+'</p><div class="rl">Mitigates these threats \u2014 tap for detail</div><div class="rchips">'+ths.map(function(t){return '<button class="rchip tchip" data-thr="'+t.id+'" style="--tcol:'+t.color+'">'+t.name+'</button>';}).join("")+'</div>'; }
-  mi.classList.add("miflash"); setTimeout(function(){mi.classList.remove("miflash");},700);
-  requestAnimationFrame(function(){ try{ mi.scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){} });
+    mi.innerHTML=_cl+'<span class="mi-k" style="color:'+ci.color+'">'+ci.stage+' \u00b7 control '+id+'</span><h4>'+ci.name+'</h4><p>'+ci.detail+'</p><div class="rl">Mitigates these threats \u2014 tap for detail</div><div class="rchips">'+ths.map(function(t){return '<button class="rchip tchip" data-thr="'+t.id+'" style="--tcol:'+t.color+'">'+t.name+'</button>';}).join("")+'</div>'; }
 }
 
 function stdById(id){ for(var i=0;i<SEC.standards.length;i++) if(SEC.standards[i].id===id) return SEC.standards[i]; return null; }
@@ -2780,7 +2807,7 @@ function buildSecurity(){
 function secFrameHTML(id,num,color,title,sub,body,open){
   return '<div class="secblk" id="'+id+'">'
     +'<div class="secblk-hd" aria-expanded="'+(open?"true":"false")+'" onclick="sbToggle(\''+id+'\')">'
-    +'<span class="n" style="background:'+color+'">'+num+'</span><span class="bn">'+title+'</span><span class="bsub">'+sub+'</span>'
+    +'<span class="n" style="--nc:'+color+'">'+num+'</span><span class="bn">'+title+'</span><span class="bsub">'+sub+'</span>'
     +'<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>'
     +'</div><div class="secblk-body">'+body+'</div></div>';
 }
@@ -2914,28 +2941,28 @@ function cmSelect(k){
 }
 function cmInfo(){
   var mi=document.getElementById("mapinfo"); if(!mi) return;
-  if(!cmSel){ mi.innerHTML='<span class="mi-k">Explore</span><h4>Tap any node</h4>Pick an architecture family, a control, a lifecycle stage, or a standard \u2014 its connections light up and the full detail appears here.'; return; }
+  if(!cmSel){ mi.classList.remove("active"); return; }
+  mi.classList.add("active");
+  var _cl='<button class="mapclose" onclick="cmSelect(cmSel)" aria-label="Close">\u00d7</button>';
   var kind=cmSel.split(":")[0], id=cmSel.split(":")[1];
   if(kind==="fam"){
     var r=null; SEC.risks.forEach(function(x){ if(x.k===id) r=x; });
-    mi.innerHTML='<span class="mi-k">Architecture family \u00b7 '+r.note+'</span><h4>'+r.fam+'</h4>'+
+    mi.innerHTML=_cl+'<span class="mi-k">Architecture family \u00b7 '+r.note+'</span><h4>'+r.fam+'</h4>'+
       '<div class="rl" style="margin-top:8px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Top threats</div><div class="rchips">'+r.threats.map(function(t){return '<span class="rchip">'+t+'</span>';}).join("")+'</div>'+
       '<p style="margin-top:10px">'+r.controls+'</p>'+
       '<div class="tagrow">'+r.stds.map(tagFor).join("")+'</div>';
   } else if(kind==="ctl"){
     var c=null,stg=null; SEC.life.forEach(function(st){ st.controls.forEach(function(x){ if(x.n===id){ c=x; stg=st; } }); });
-    mi.innerHTML='<span class="mi-k">'+stg.name+' \u00b7 control '+c.n+'</span><h4>'+c.name+'</h4><p>'+c.detail+'</p><div class="tagrow">'+c.tags.map(tagFor).join("")+'</div>';
+    mi.innerHTML=_cl+'<span class="mi-k">'+stg.name+' \u00b7 control '+c.n+'</span><h4>'+c.name+'</h4><p>'+c.detail+'</p><div class="tagrow">'+c.tags.map(tagFor).join("")+'</div>';
   } else if(kind==="stage"){
     var st=SEC.life[+id];
-    mi.innerHTML='<span class="mi-k">Lifecycle \u00b7 '+st.tag+'</span><h4>'+st.name+'</h4><p>'+st.summary+'</p><p style="color:var(--faint);font-size:12.5px">Controls '+st.controls.map(function(c){return c.n;}).join(", ")+' \u2014 all lit on the map, detailed in section 2 below.</p>';
+    mi.innerHTML=_cl+'<span class="mi-k">Lifecycle \u00b7 '+st.tag+'</span><h4>'+st.name+'</h4><p>'+st.summary+'</p><p style="color:var(--faint);font-size:12.5px">Controls '+st.controls.map(function(c){return c.n;}).join(", ")+' \u2014 all lit on the map, detailed in section 2 below.</p>';
   } else {
     var sd=stdById(id);
-    mi.innerHTML='<span class="mi-k">'+sd.org+' \u00b7 '+sd.year+' \u00b7 '+sd.region+' \u00b7 '+(sd.t==="law"?"Law &amp; policy":"Standard / guidance")+'</span><h4>'+sd.name+'</h4><p>'+sd.what+'</p>'+
+    mi.innerHTML=_cl+'<span class="mi-k">'+sd.org+' \u00b7 '+sd.year+' \u00b7 '+sd.region+' \u00b7 '+(sd.t==="law"?"Law &amp; policy":"Standard / guidance")+'</span><h4>'+sd.name+'</h4><p>'+sd.what+'</p>'+
       '<p><b style="color:var(--star)">What to do:</b> '+sd.todo+'</p>'+
       '<p><a href="'+sd.url+'" target="_blank" rel="noopener"><b>Open the primary source \u2197</b></a></p>';
   }
-  mi.classList.add("miflash"); setTimeout(function(){mi.classList.remove("miflash");},700);
-  requestAnimationFrame(function(){ try{ mi.scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){} });
 }
 
 /* ====== ORBITAL STANDARDS VIEW ====== */
@@ -3762,6 +3789,7 @@ function buildPlan(){
   if(!window._plan) window._plan={persona:"both",ans:{}};
   var P=window._plan;
   var personas=[["exec","Executive","Strategic &amp; outcome-led"],["arch","Technical architect","Detailed &amp; technical"],["both","A bit of both","Blended"]];
+  var pStep='<div class="planstep"><span class="stepn">1</span><div><b>Choose your perspective</b><span class="stephint">This sets whether you get high-level strategic questions or detailed technical ones — start here.</span></div></div>';
   var pSel='<div class="personasel">'+personas.map(function(x){return '<button class="personabtn'+(P.persona===x[0]?" on":"")+'" data-persona="'+x[0]+'"><b>'+x[1]+'</b><span>'+x[2]+'</span></button>';}).join("")+'</div>';
   var qs=PLANSETS[P.persona].map(function(q){
     var opts=q.opts.map(function(o){
@@ -3772,8 +3800,9 @@ function buildPlan(){
   }).join("");
   root.innerHTML='<div class="planwrap">'
     +'<div class="thero" style="background:radial-gradient(120% 160% at 85% -20%,rgba(106,168,255,.14),transparent 55%)"><div class="kick">Plan builder \u00b7 interactive</div><div class="herorow"><h2>Scope an <span>AI build</span></h2><button class="herobtn" onclick="openSheet(planMethodHTML())">&#9432; How it works</button></div><p>Choose your perspective, then answer a few questions. The tool assembles a high-level plan \u2014 architectures, ecosystem &amp; licensing with pros and cons, the rules and standards in scope, security considerations and a starting team (business <b>and</b> technical) \u2014 with links into every other tab. A starting point for a strategic conversation, not advice.</p></div>'
-    +'<div class="planpq">Plan as\u2026</div>'+pSel
+    +pStep+pSel
     +'<div class="personablurb">'+PERSONA_BLURB[P.persona]+'</div>'
+    +'<div class="planstep" style="margin-top:16px"><span class="stepn">2</span><div><b>Answer the questions</b><span class="stephint">Tap the options that fit — defaults are sensible, so you can generate at any point.</span></div></div>'
     +'<div class="planform">'+qs+'</div>'
     +'<div class="planbtns"><button class="planbtn go" onclick="planGenerate()">Generate the plan &#8595;</button><button class="planbtn ghost" onclick="planReset()">Reset</button></div>'
     +'<div id="planresult"></div>'
@@ -3921,11 +3950,11 @@ function planGenerate(){
   var personaNote=M.persona==="exec"?"Executive framing \u2014 the emphasis is on the sourcing trade-offs, regulatory exposure and the investment in people.":M.persona==="arch"?"Architect framing \u2014 the emphasis is on the architecture combination, the security controls and the build team.":"A blended sponsor-and-architect view.";
   var out='<div class="planout">'
     +'<div class="planouth"><span class="kick" style="color:#6aa8ff">Generated plan</span><h2>High-level AI build plan</h2><p class="psummary">'+personaNote+' Primary functions: <b>'+M.tasks.map(function(t){return TL[t]||t;}).join(", ")+'</b>; data <b>'+M.data+'</b>; deployment <b>'+M.residency+'</b>; scale <b>'+M.scale+'</b>.</p></div>'
-    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#8b6cff">1</span>Recommended architectures'+(multiArch?' <span class="pstag">multi-architecture build</span>':' <span class="pstag">single architecture</span>')+'</div><div class="uses" style="margin:2px 0 10px">'+archs.map(planChip).join("")+'</div><ul class="plist">'+notes.join("")+'</ul>'+(multiArch?'<p class="pmini">Several models working together \u2014 see <a class="lnk" onclick="showTab(\'ecosystem\');return false" href="#ecosystem">how real products combine architectures</a>.</p>':'')+'</div>'
-    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#3ad6a0">2</span>Ecosystem &amp; licensing route</div><div class="proute">Recommended route: <b>'+R.name+'</b></div><div class="pcols"><div class="pcol pros"><div class="pcolh">Pros</div><ul>'+R.pros.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div><div class="pcol cons"><div class="pcolh">Cons / watch-outs</div><ul>'+R.cons.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div></div><div style="margin-top:8px">'+ecoLinkBtn+'</div></div>'
-    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#ffd23d;color:#111">3</span>Rules, laws &amp; standards in scope</div><div class="rchips" style="margin:2px 0 8px">'+std.join("")+'</div>'+(stdNotes.length?'<ul class="plist">'+stdNotes.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>':'')+'<p class="pmini">Tap any standard for its primary source, or open the full <a class="lnk" onclick="showTab(\'security\');return false" href="#security">standards &amp; law library</a>.</p></div>'
-    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#ff6b6b">4</span>Security considerations</div><div class="pssub">Priority threats to design against</div><div class="rchips" style="margin:2px 0 9px">'+thr.join("")+'</div><div class="pssub">Priority controls to put in place</div><div class="rchips" style="margin:2px 0 8px">'+ctl.join("")+'</div><p class="pmini">Explore these on the <a class="lnk" onclick="showTab(\'threats\');return false" href="#threats">Threats</a> and <a class="lnk" onclick="showTab(\'security\');return false" href="#security">Security</a> tabs.</p></div>'
-    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#38d6e0;color:#111">5</span>Initial team &amp; skills</div><p class="pmini" style="margin:0 0 10px">The hardest parts of an AI build are usually <b>not</b> the modelling \u2014 note how many roles are business and governance, not engineering.</p><div class="teamtbl"><div class="teamrow teamhd"><div>Role</div><div>Key skills</div><div>Why</div></div>'+teamHTML+'</div></div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="--nc:#8b6cff">1</span>Recommended architectures'+(multiArch?' <span class="pstag">multi-architecture build</span>':' <span class="pstag">single architecture</span>')+'</div><div class="uses" style="margin:2px 0 10px">'+archs.map(planChip).join("")+'</div><ul class="plist">'+notes.join("")+'</ul>'+(multiArch?'<p class="pmini">Several models working together \u2014 see <a class="lnk" onclick="showTab(\'ecosystem\');return false" href="#ecosystem">how real products combine architectures</a>.</p>':'')+'</div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="--nc:#3ad6a0">2</span>Ecosystem &amp; licensing route</div><div class="proute">Recommended route: <b>'+R.name+'</b></div><div class="pcols"><div class="pcol pros"><div class="pcolh">Pros</div><ul>'+R.pros.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div><div class="pcol cons"><div class="pcolh">Cons / watch-outs</div><ul>'+R.cons.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div></div><div style="margin-top:8px">'+ecoLinkBtn+'</div></div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="--nc:#ffd23d">3</span>Rules, laws &amp; standards in scope</div><div class="rchips" style="margin:2px 0 8px">'+std.join("")+'</div>'+(stdNotes.length?'<ul class="plist">'+stdNotes.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>':'')+'<p class="pmini">Tap any standard for its primary source, or open the full <a class="lnk" onclick="showTab(\'security\');return false" href="#security">standards &amp; law library</a>.</p></div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="--nc:#ff6b6b">4</span>Security considerations</div><div class="pssub">Priority threats to design against</div><div class="rchips" style="margin:2px 0 9px">'+thr.join("")+'</div><div class="pssub">Priority controls to put in place</div><div class="rchips" style="margin:2px 0 8px">'+ctl.join("")+'</div><p class="pmini">Explore these on the <a class="lnk" onclick="showTab(\'threats\');return false" href="#threats">Threats</a> and <a class="lnk" onclick="showTab(\'security\');return false" href="#security">Security</a> tabs.</p></div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="--nc:#38d6e0">5</span>Initial team &amp; skills</div><p class="pmini" style="margin:0 0 10px">The hardest parts of an AI build are usually <b>not</b> the modelling \u2014 note how many roles are business and governance, not engineering.</p><div class="teamtbl"><div class="teamrow teamhd"><div>Role</div><div>Key skills</div><div>Why</div></div>'+teamHTML+'</div></div>'
     +'<div class="plandisc"><b>\u26a0 Important \u2014 read before relying on this plan.</b> This plan was <b>auto-generated from your selections by a simple, deterministic rules-based tool</b> (see \u2018How it works\u2019). It is a <b>starting point for discussion, not professional, legal, security, financial or procurement advice</b>. It was assembled by an AI system as part of a <b>personal-capacity</b> project by Stuart Okin and does <b>not</b> represent the position of Ofgem or any other organisation. Architecture, ecosystem, licensing, regulatory and team suggestions are indicative and generalised; model names, prices, laws and standards change frequently. <b>Validate every recommendation against primary sources and qualified professional, legal and security advisors before acting.</b></div>'
     +'<div class="planbtns"><button class="planbtn" onclick="window.print()">Save / print this plan</button><button class="planbtn ghost" onclick="document.getElementById(\'planresult\').innerHTML=\'\';window.scrollTo({top:0,behavior:\'smooth\'})">Clear</button></div>'
     +'</div>';
