@@ -130,12 +130,31 @@
   .body{overflow-y:auto; padding:0 clamp(20px,4vw,34px) 44px; flex:1}
   .body::-webkit-scrollbar{width:9px}
   .body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12); border-radius:9px}
-  .schematic{margin:18px 0 4px; padding:20px; border:1px solid var(--line); border-radius:16px; color:var(--accent);
+  .glance{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 4px}
+  .gl-pill{display:inline-flex; align-items:center; gap:7px; padding:7px 13px; border:1px solid var(--line); border-radius:999px; font-size:12.5px; color:var(--star); background:rgba(255,255,255,.03)}
+  .gl-pill .dot{width:9px; height:9px; border-radius:50%; box-shadow:0 0 8px currentColor}
+  .acc{border:1px solid var(--line); border-radius:12px; margin:9px 0; overflow:hidden; background:rgba(255,255,255,.015)}
+  .acc-hd{display:flex; align-items:center; gap:11px; padding:13px 15px; cursor:pointer; user-select:none; transition:.15s}
+  .acc-hd:hover{background:rgba(255,255,255,.035)}
+  .acc-ic{color:var(--accent); display:inline-flex; flex:none}
+  .acc-ic svg{width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:2}
+  .acc-l{font-family:var(--disp); font-weight:600; font-size:14.5px; flex:1; line-height:1.3}
+  .acc-hd .chev{color:var(--muted); transition:transform .25s; flex:none}
+  .acc-hd[aria-expanded=true] .chev{transform:rotate(180deg)}
+  .acc-hd[aria-expanded=true]{background:rgba(255,255,255,.025)}
+  .acc-bd{display:none; padding:2px 15px 15px}
+  .acc-hd[aria-expanded=true]+.acc-bd{display:block; animation:fade .18s ease}
+  .acc-bd p{color:var(--muted); font-size:14px; line-height:1.6; margin:0}
+  .acc-bd .metarow{margin:0}
+    .schematic{margin:18px 0 4px; padding:20px; border:1px solid var(--line); border-radius:16px; color:var(--accent);
     background:radial-gradient(130% 120% at 50% 0%, color-mix(in srgb, var(--accent) 18%, transparent), rgba(255,255,255,.02) 62%)}
   .schematic svg{width:100%; height:150px; margin:auto}
   .sec{padding:18px 0; border-bottom:1px solid var(--line)}
   .sec .h{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:9px}
-  .sec .h .ic{width:15px; height:15px; color:var(--accent); flex:none}
+  .ic{width:15px; height:15px; flex:none}
+  .sec .h .ic{color:var(--accent)}
+  .acc-bd .h{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+  .acc-bd .h .ic{color:var(--accent)}
   .sec p{font-size:14.5px; color:#d8dbf1}
   .analogy{background:linear-gradient(100deg, color-mix(in srgb, var(--accent) 15%, transparent), transparent); border:1px solid color-mix(in srgb, var(--accent) 30%, var(--line)); border-radius:13px; padding:14px 16px}
   .analogy .h{color:var(--accent)} .analogy p{font-style:italic; color:#e9ebff}
@@ -350,6 +369,77 @@
   .tchip:hover{border-color:var(--tcol); background:color-mix(in srgb, var(--tcol) 28%, transparent)}
   .miul{margin:4px 0 8px; padding-left:18px}
   .miul li{font-size:13px; color:var(--muted); margin:3px 0; line-height:1.45}
+  .use.lnk{cursor:pointer; text-decoration:none}
+  .use.lnk:hover{border-color:currentColor; background:rgba(255,255,255,.06)}
+  .sec.xlink .uses{margin-top:4px}
+  .tchip-arch{font-family:var(--mono); font-size:10px; padding:3px 8px; border-radius:6px; border:1px solid var(--line); color:#9fb6ff; display:inline-block}
+  a.tchip-arch.lnk{cursor:pointer; text-decoration:none; border-color:#3a4a7a}
+  a.tchip-arch.lnk:hover{background:rgba(106,168,255,.12); border-color:#6aa8ff; color:#cfe0ff}
+  .rchip[onclick]{cursor:pointer}
+  .rchip[onclick]:hover{filter:brightness(1.25)}
+  .gsi{width:100%; box-sizing:border-box; margin:6px 0 14px; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--star); font-size:15px; font-family:inherit}
+  .gsi:focus{outline:none; border-color:var(--f3)}
+  .gsres{display:flex; flex-direction:column; gap:14px}
+  .gsg{}
+  .gsgh{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin-bottom:6px}
+  .gsr{display:flex; flex-direction:column; gap:1px; padding:9px 11px; border:1px solid var(--line); border-radius:10px; margin-bottom:6px; cursor:pointer; text-decoration:none; transition:.15s}
+  .gsr:hover{border-color:var(--f3); background:rgba(255,255,255,.04)}
+  .gsr b{font-size:14px; color:var(--star)}
+  .gsr span{font-size:12px; color:var(--muted)}
+  .clog{border-left:2px solid var(--f3); padding:2px 0 2px 14px; margin-bottom:14px}
+  .clogd{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--f1); margin-bottom:3px}
+  .clog p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.5}
+  /* ---- ecosystem tab ---- */
+  .ecogrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr)); gap:14px}
+  .ecocard{border:1px solid var(--line); border-left:3px solid var(--ec); border-radius:16px; padding:16px 17px; background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 60%)}
+  .ecocard .eh{display:flex; gap:12px; align-items:center; margin-bottom:9px}
+  .ecocard .eflag{font-size:26px; line-height:1}
+  .ecocard h3{font-family:var(--disp); font-size:17px; margin:0}
+  .ecocard .etag{font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--ec); margin-top:2px}
+  .ecocard .ewhat{font-size:13.5px; color:var(--muted); line-height:1.55; margin:0 0 10px}
+  .ecocard .erow{margin:8px 0}
+  .ecocard .ek{font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); display:block; margin-bottom:2px}
+  .ecocard .erow p{font-size:12.5px; color:var(--muted); margin:0; line-height:1.5}
+  .ecocard.pulse{box-shadow:0 0 0 2px var(--ec), 0 0 30px -6px var(--ec); transition:box-shadow .4s}
+  .evdot{cursor:pointer} .evdot:hover{fill-opacity:1}
+  .echart{border:1px solid var(--line); border-radius:14px; padding:14px 12px 8px; background:#070a18; overflow:hidden}
+  .vgrp{margin-bottom:18px}
+  .vgh{display:flex; align-items:center; gap:9px; font-family:var(--disp); font-weight:700; font-size:15px; margin:0 2px 10px; color:var(--star)}
+  .vgh .dot{width:10px; height:10px; border-radius:50%; box-shadow:0 0 10px currentColor}
+  .vgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr)); gap:11px}
+  .vcard{border:1px solid var(--line); border-top:2px solid var(--vc); border-radius:13px; padding:13px 14px; background:rgba(255,255,255,.015)}
+  .vcard .vh{display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+  .vcard h4{font-family:var(--disp); font-size:14.5px; margin:0}
+  .vflag{font-family:var(--mono); font-size:10.5px; color:var(--faint); white-space:nowrap}
+  .vinf{display:flex; align-items:center; gap:8px; margin:8px 0 9px}
+  .vinfl{font-family:var(--mono); font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint)}
+  .vbar{flex:1; height:5px; border-radius:99px; background:rgba(255,255,255,.07); overflow:hidden}
+  .vbar i{display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--vc),#fff3); box-shadow:0 0 8px var(--vc)}
+  .vrow{display:flex; gap:8px; font-size:11.5px; color:var(--muted); margin:3px 0; line-height:1.45}
+  .vrow .vk{flex:0 0 74px; font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); padding-top:2px}
+  .vlic{font-family:var(--mono); font-size:10.5px; color:#bfe8d2}
+  .vnote{font-size:11.5px; color:var(--faint); line-height:1.5; margin:8px 0 0; border-top:1px dashed var(--line); padding-top:7px}
+  /* ---- applications ---- */
+  .appgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr)); gap:14px}
+  .appcard{position:relative; border:1px solid var(--line); border-radius:18px; padding:16px 17px 15px; background:linear-gradient(180deg,rgba(255,255,255,.028),transparent 70%); overflow:hidden}
+  .appcard.single{border-left:3px solid var(--ac)}
+  .appcard.multi{border-top:2px solid #8b6cff; background:linear-gradient(180deg,rgba(139,108,255,.07),transparent 60%)}
+  .appcard .apphead{display:flex; align-items:center; gap:12px; margin-bottom:11px}
+  .appcard .appicon{font-size:30px; line-height:1; filter:drop-shadow(0 3px 8px rgba(0,0,0,.4))}
+  .appcard h4{font-family:var(--disp); font-size:16px; margin:0; line-height:1.2}
+  .appcard .apporg{font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:var(--faint); margin-top:2px}
+  .appcard .ncount{margin-left:auto; font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:#b9a8ff; border:1px solid rgba(139,108,255,.4); border-radius:999px; padding:4px 9px; white-space:nowrap}
+  .archline{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:10px}
+  .archline .onelab{font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint)}
+  .archflow{display:flex; align-items:center; flex-wrap:wrap; gap:7px; margin-bottom:11px; padding:11px; border:1px solid var(--line); border-radius:12px; background:rgba(0,0,0,.18)}
+  .archpill{display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:11px; padding:6px 11px; border-radius:999px; border:1px solid var(--pc); color:#e7ebff; background:color-mix(in srgb, var(--pc) 14%, transparent); text-decoration:none; white-space:nowrap}
+  .archpill .dot{width:8px; height:8px; border-radius:50%; box-shadow:0 0 7px currentColor; flex:none}
+  a.archpill.lnk{cursor:pointer; transition:.15s}
+  a.archpill.lnk:hover{background:color-mix(in srgb, var(--pc) 30%, transparent); box-shadow:0 0 0 1px var(--pc)}
+  .flowarr{color:var(--faint); font-weight:700; font-size:14px; padding:0 1px}
+  .appcard .apphow{font-size:13.5px; color:var(--muted); line-height:1.6; margin:0 0 11px}
+  .appcard .appimpact{font-size:12.5px; color:var(--star); background:rgba(255,255,255,.04); border-left:2px solid var(--ac,#8b6cff); border-radius:0 8px 8px 0; padding:8px 12px; margin-bottom:11px; line-height:1.45}
+  .appcard.multi .appimpact{border-left-color:#8b6cff}
   .riskcard{border:1px solid var(--line); border-radius:16px; padding:0; overflow:hidden; background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.01))}
   .riskcard .rh{padding:15px 17px 12px; border-bottom:1px solid var(--line); position:relative}
   .riskcard .rh::before{content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--rc)}
@@ -645,16 +735,19 @@
 </div>
 <nav class="tabbar" role="tablist">
   <button data-tab="cortex" class="on" onclick="showTab('cortex')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 3a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 1 4 3 3 0 0 0 4 2h1V3z"/><path d="M15 3a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-1 4 3 3 0 0 1-4 2h-1V3z"/></svg>Cortex</button>
+  <button data-tab="ecosystem" onclick="showTab('ecosystem')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><path d="M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18"/></svg>Ecosystem</button>
   <button data-tab="security" onclick="showTab('security')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>Security</button>
   <button data-tab="threats" onclick="showTab('threats')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>Threats</button>
 </nav>
 
 <div class="hmenu" id="hmenu" hidden role="menu">
+  <button role="menuitem" onclick="hmenuAct('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>Search everything</button>
   <button role="menuitem" onclick="hmenuAct('tour')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z"/></svg>Take the tour</button>
   <button role="menuitem" onclick="hmenuAct('gloss')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Glossary</button>
   <button role="menuitem" onclick="hmenuAct('sources')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.6" r=".7" fill="currentColor" stroke="none"/></svg>All sources</button>
   <button role="menuitem" onclick="hmenuAct('copy')"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span id="copyLbl">Copy link</span></button>
   <button role="menuitem" onclick="hmenuAct('print')"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4v-6h16v6h-2M8 14h8v7H8z"/></svg>Save as PDF</button>
+  <button role="menuitem" onclick="hmenuAct('changelog')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>What’s new</button>
 </div>
 
 <main class="appmain">
@@ -678,6 +771,10 @@
       <div class="count" id="count"></div>
       <div class="grid" id="grid"></div>
     </div>
+  </section>
+
+  <section class="view" id="view-ecosystem" role="tabpanel" hidden>
+    <div class="secwrap" id="ecoroot"></div>
   </section>
 
   <section class="view" id="view-security" role="tabpanel" hidden>
@@ -1226,6 +1323,11 @@ window.addEventListener("error",function(ev){
     var r=RBYKEY[m.region]; m.regionName=r.name; m.regionShort=r.short; m.color=r.color;
     m.brainWhy=BWHY[m.name]||"";
   });
+  var MODELBYNAME={}; MODELS.forEach(function(m){ MODELBYNAME[m.name]=m; });
+  window.openModel=function(name){ var m=MODELBYNAME[name]; if(!m) return; showTab("cortex"); try{history.replaceState(null,"","#model/"+encodeURIComponent(name));}catch(e){} setTimeout(function(){ try{ focusNode(m); }catch(e){} openDrawer(m); },70); };
+  window.MODEL_NAMES=Object.keys(MODELBYNAME);
+  window.MODEL_INDEX=MODELS.map(function(m){ return {name:m.name, type:m.type, one:m.one||"", fam:m.famName}; });
+  window.MODEL_COLOR={}; MODELS.forEach(function(m){ window.MODEL_COLOR[m.name]=m.color; });
 
   function ic(p){ return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'; }
   var ICON={
@@ -1371,31 +1473,45 @@ window.addEventListener("error",function(ev){
 
   var scrim=document.getElementById("scrim"), drawer=document.getElementById("drawer");
   function sec(icon,label,text,cls){ return '<div class="sec '+(cls||"")+'"><div class="h">'+icon+label+'</div><p>'+text+'</p></div>'; }
+  function acc(icon,label,html){ return '<div class="acc"><div class="acc-hd" aria-expanded="false"><span class="acc-ic">'+icon+'</span><span class="acc-l">'+label+'</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div><div class="acc-bd">'+html+'</div></div>'; }
   function openDrawer(m){
     drawer.style.setProperty("--accent",m.color);
-    var fam=document.getElementById("d-fam"); fam.textContent=m.regionName+" · "+m.famName; fam.style.color=m.color;
+    var fam=document.getElementById("d-fam"); fam.textContent=m.regionName+" \u00b7 "+m.famName; fam.style.color=m.color;
     document.getElementById("d-name").textContent=m.name;
     document.getElementById("d-type").textContent=m.type;
     document.getElementById("d-one").textContent=m.one;
+    var rs=RES[m.name];
     var h="";
     h+='<div class="schematic">'+animSvg(svgFor(m.viz,m.color))+'</div>';
-    h+='<div class="sec brainc"><div class="h">'+ICON.brain+'Why this part of the brain</div><p>'+m.brainWhy+'</p></div>';
-    h+='<div class="sec analogy"><div class="h">'+ICON.how+'Start here — the analogy</div><p>'+m.analogy+'</p></div>';
-    var rs=RES[m.name];
+    /* at-a-glance orientation pills */
+    h+='<div class="glance">'
+      +'<span class="gl-pill"><span class="dot" style="background:'+m.color+'"></span>'+m.regionName+'</span>'
+      +'<span class="gl-pill">'+m.famName+'</span>'
+      +'</div>';
+    /* the hook — kept visible */
+    h+='<div class="sec analogy"><div class="h">'+ICON.how+'Start here \u2014 the analogy</div><p>'+m.analogy+'</p></div>';
     if(rs && rs.play){
-      h+='<div class="sec playc"><div class="h">'+ICON.play+'Play with it — learn by doing</div><p><a class="playlink" target="_blank" rel="noopener" href="'+rs.play.u+'">'+rs.play.t+' ↗</a> — '+rs.play.d+'</p></div>';
+      h+='<div class="sec playc"><div class="h">'+ICON.play+'Play with it \u2014 learn by doing</div><p><a class="playlink" target="_blank" rel="noopener" href="'+rs.play.u+'">'+rs.play.t+' \u2197</a> \u2014 '+rs.play.d+'</p></div>';
     }
-    h+='<div class="sec"><div class="h">'+ICON.how+'How it works</div><p>'+m.lay+'</p><div class="alt"><div class="h">Under the hood — technical</div><p>'+m.tech+'</p></div></div>';
-    h+=sec(ICON.trained,"How it's trained",m.trained);
-    h+=sec(ICON.harness,"Safety at the learning stage",m.harness);
-    h+=sec(ICON.secured,"Secured from misuse — in deployment",m.secured);
-    h+=sec(ICON.todo,"What you need to do",m.youdo,"todo");
-    h+=sec(ICON.learns,"How it learns & is maintained",m.learns);
-    h+='<div class="sec"><div class="metarow"><div><div class="h">'+ICON.charged+"How it's charged</div><p style=\"font-size:14px\">"+m.charged+'</p></div><div><div class="h">'+ICON.runs+'Where it runs</div><p style="font-size:14px">'+m.runs+'</p></div></div></div>';
+    /* how it works — plain visible, everything deeper folds away */
+    h+='<div class="sec"><div class="h">'+ICON.how+'How it works</div><p>'+m.lay+'</p></div>';
+    h+=acc(ICON.how,"Under the hood \u2014 technical",'<p>'+m.tech+'</p>');
+    h+=acc(ICON.brain,"Why this part of the brain",'<p>'+m.brainWhy+'</p>');
+    h+=acc(ICON.trained,"How it\u2019s trained",'<p>'+m.trained+'</p>');
+    h+=acc(ICON.harness,"Safety at the learning stage",'<p>'+m.harness+'</p>');
+    h+=acc(ICON.secured,"Secured from misuse \u2014 in deployment",'<p>'+m.secured+'</p>');
+    h+=acc(ICON.todo,"What you need to do",'<p>'+m.youdo+'</p>');
+    h+=acc(ICON.learns,"How it learns &amp; is maintained",'<p>'+m.learns+'</p>');
+    h+=acc(ICON.charged,"Cost &amp; where it runs",'<div class="metarow"><div><div class="h" style="margin-bottom:4px">'+ICON.charged+'How it\u2019s charged</div><p style="font-size:14px">'+m.charged+'</p></div><div><div class="h" style="margin-bottom:4px">'+ICON.runs+'Where it runs</div><p style="font-size:14px">'+m.runs+'</p></div></div>');
+    if(typeof ECO!=="undefined"){ var egs=ECO.groups.filter(function(g){return g.arch.indexOf(m.name)>=0;}); if(egs.length){ h+='<div class="sec xlink"><div class="h">'+ICON.runs+'Where to obtain it \u2014 supply worlds</div><div class="uses">'+egs.map(function(g){return '<a class="use lnk" onclick="gotoEcoGroup(\''+g.id+'\');return false" href="#ecosystem" style="border-color:'+g.color+'">'+g.flag+' '+g.name+' \u2192</a>';}).join("")+'</div><p style="font-size:12px;color:var(--faint);margin-top:8px">Opens the Ecosystem tab: licensing, distribution, origin, energy and vendors for this class of model.</p></div>'; } }
+    /* cross-links: threats to this model */
+    if(typeof THREATCATALOG!=="undefined"){ var mfk=(m.fam==="gen")?"generative":m.fam; var mts=THREATCATALOG.filter(function(t){return t.fams.indexOf(mfk)>=0;}); if(mts.length){ h+='<div class="sec xlink"><div class="h">'+ICON.harness+'Threats to this model \u2014 tap to explore</div><div class="uses">'+mts.map(function(t){return '<a class="use lnk" onclick="gotoThreat(\''+t.id+'\');return false" href="#threat/'+t.id+'" style="border-color:'+t.color+'">'+t.name+' \u2192</a>';}).join("")+'</div></div>'; } }
+    /* uses */
     h+='<div class="sec"><div class="h">'+ICON.uses+'Typical use cases</div><div class="uses">'+m.uses.map(function(u){return '<span class="use">'+u+'</span>';}).join("")+'</div></div>';
+    /* sources */
     if(rs && rs.learn){
-      h+='<div class="sec"><div class="h">'+ICON.book+'Learn more — best sources</div><div class="uses">'+
-         rs.learn.map(function(a){ return '<a class="use lnk" target="_blank" rel="noopener" href="'+a.u+'">'+a.t+' ↗</a>'; }).join("")+
+      h+='<div class="sec"><div class="h">'+ICON.book+'Learn more \u2014 best sources</div><div class="uses">'+
+         rs.learn.map(function(a){ return '<a class="use lnk" target="_blank" rel="noopener" href="'+a.u+'">'+a.t+' \u2197</a>'; }).join("")+
          '</div></div>';
     }
     var qz=QUIZ[m.name];
@@ -1410,11 +1526,12 @@ window.addEventListener("error",function(ev){
     scrim.classList.add("open"); drawer.classList.add("open"); drawer.setAttribute("aria-hidden","false");
     if(active!==m) focusNode(m);
   }
-  function closeDrawer(){ scrim.classList.remove("open"); drawer.classList.remove("open"); drawer.setAttribute("aria-hidden","true"); active=null; dim3D(); }
+  function closeDrawer(){ scrim.classList.remove("open"); drawer.classList.remove("open"); drawer.setAttribute("aria-hidden","true"); active=null; dim3D(); if(window._curTab && window._curTab!=="cortex"){ try{ showTab("cortex"); }catch(e){} } }
   document.getElementById("close").addEventListener("click",closeDrawer);
   scrim.addEventListener("click",closeDrawer);
   document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeDrawer(); });
   document.getElementById("d-body").addEventListener("click",function(e){
+    var ah=e.target.closest(".acc-hd"); if(ah){ ah.setAttribute("aria-expanded", ah.getAttribute("aria-expanded")==="true"?"false":"true"); return; }
     var b=e.target.closest(".qopt"); if(!b) return;
     var q=b.closest(".quiz"); if(!q||q.classList.contains("done")) return;
     if(b.dataset.i===q.dataset.a){
@@ -1735,6 +1852,7 @@ window.addEventListener("error",function(ev){
   var pv=new THREE.Vector3();
   function animate(){
     requestAnimationFrame(animate);
+    var _cv=document.getElementById("view-cortex"); if(_cv && _cv.hidden) return; /* pause when off-screen */
     var t=(Date.now()-clock0)/1000;
     rotY+=(tRotY-rotY)*0.08; rotX+=(tRotX-rotX)*0.08;
     if(!drag&&!reduce){ autoIdle++; if(autoIdle>80) tRotY+=0.0016; }
@@ -1783,13 +1901,17 @@ window.addEventListener("error",function(ev){
 })();
 
 function showTab(name){
+  window._curTab=name;
   document.querySelectorAll(".tabbar button").forEach(function(b){ b.classList.toggle("on", b.dataset.tab===name); });
   document.getElementById("view-cortex").hidden = (name!=="cortex");
+  document.getElementById("view-ecosystem").hidden = (name!=="ecosystem");
   document.getElementById("view-security").hidden = (name!=="security");
   document.getElementById("view-threats").hidden = (name!=="threats");
+  if(name==="ecosystem" && !window._ecoBuilt){ buildEcosystem(); window._ecoBuilt=true; }
   if(name==="security" && !window._secBuilt){ buildSecurity(); window._secBuilt=true; }
   if(name==="threats" && !window._threatBuilt){ buildThreats(); window._threatBuilt=true; }
   if(name==="cortex"){ setTimeout(function(){ window.dispatchEvent(new Event("resize")); },40); }
+  try{ history.replaceState(null,"","#"+name); }catch(e){}
   window.scrollTo({top:0,behavior:"smooth"});
 }
 function toggleHmenu(e){ if(e) e.stopPropagation(); var m=document.getElementById("hmenu"), b=document.getElementById("menuBtn");
@@ -1802,8 +1924,71 @@ function hmenuAct(a){ document.getElementById("hmenu").hidden=true; document.get
   else if(a==="sources") openSheet(sourcesHTML());
   else if(a==="copy"){ var t=location.href; if(navigator.clipboard) navigator.clipboard.writeText(t); var l=document.getElementById("copyLbl"); if(l){ var o=l.textContent; l.textContent="Copied \u2713"; setTimeout(function(){ l.textContent=o; },1400); } }
   else if(a==="print") window.print();
+  else if(a==="search") openSearch();
+  else if(a==="changelog") openSheet(changelogHTML());
 }
 function openSheet(html){ document.getElementById("sheetbody").innerHTML=html; document.getElementById("sheetwrap").hidden=false; }
+var VERIFIED="11 Jul 2026";
+function verLine(){ return '<p style="font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:10px;border-top:1px solid var(--line);padding-top:8px">Entry last checked '+VERIFIED+' \u00b7 always confirm against the linked primary source</p>'; }
+function esc(x){ return (x||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function openSearch(){
+  openSheet('<h2>Search everything</h2><input id="gsearch" class="gsi" placeholder="models, threats, standards, CVEs, attacks\u2026" oninput="runSearch(this.value)" autocomplete="off"><div id="gsres" class="gsres"><p style="color:var(--faint);font-size:13px">Type to search across every tab.</p></div>');
+  setTimeout(function(){ var i=document.getElementById("gsearch"); if(i) i.focus(); },80);
+}
+function runSearch(q){
+  var box=document.getElementById("gsres"); if(!box) return;
+  q=(q||"").trim().toLowerCase();
+  if(q.length<2){ box.innerHTML='<p style="color:var(--faint);font-size:13px">Type at least two characters\u2026</p>'; return; }
+  function hit(txt){ return (txt||"").toLowerCase().indexOf(q)>=0; }
+  var out="", groups=[];
+  var mods=(window.MODEL_INDEX||[]).filter(function(m){return hit(m.name)||hit(m.type)||hit(m.one)||hit(m.fam);});
+  if(mods.length) groups.push(["Models / architectures", mods.map(function(m){return '<a class="gsr" onclick="openModel(\''+m.name.replace(/'/g,"")+'\');return false" href="#"><b>'+esc(m.name)+'</b><span>'+esc(m.type)+'</span></a>';}).join("")]);
+  var ths=THREATCATALOG.filter(function(t){return hit(t.name)||hit(t.def)||hit(t.analogy);});
+  if(ths.length) groups.push(["Top threats", ths.map(function(t){return '<a class="gsr" onclick="gotoThreat(\''+t.id+'\');return false" href="#threat/'+t.id+'"><b style="color:'+t.color+'">'+esc(t.name)+'</b><span>'+esc(t.def).slice(0,90)+'\u2026</span></a>';}).join("")]);
+  var stds=SEC.standards.filter(function(x){return hit(x.name)||hit(x.short)||hit(x.org)||hit(x.what);});
+  if(stds.length) groups.push(["Standards &amp; laws", stds.map(function(x){return '<a class="gsr" onclick="closeSheet();showTab(\'security\');setTimeout(function(){openStd(\''+x.id+'\');},80);return false" href="#std/'+x.id+'"><b>'+esc(x.short)+'</b><span>'+esc(x.name)+'</span></a>';}).join("")]);
+  var incs=[];
+  DISCLOSED.forEach(function(v){ if(hit(v.name)||hit(v.desc)||hit(v.id)) incs.push(['cve',v.id,v.name,'Disclosed CVE']); });
+  ATTACKS.forEach(function(a){ if(hit(a.name)||hit(a.desc)) incs.push(['attack',a.id,a.name,'Real-world attack']); });
+  AIATTACKS.forEach(function(a){ if(hit(a.name)||hit(a.desc)) incs.push(['aiattack',a.id,a.name,'AI-assisted attack']); });
+  if(incs.length) groups.push(["Attacks &amp; vulnerabilities", incs.map(function(r){return '<a class="gsr" onclick="gotoIncident(\''+r[0]+'\',\''+r[1]+'\');return false" href="#"><b>'+esc(r[2])+'</b><span>'+r[3]+'</span></a>';}).join("")]);
+  if(!groups.length){ box.innerHTML='<p style="color:var(--faint);font-size:13px">No matches for \u201c'+esc(q)+'\u201d.</p>'; return; }
+  groups.forEach(function(g){ out+='<div class="gsg"><div class="gsgh">'+g[0]+'</div>'+g[1]+'</div>'; });
+  box.innerHTML=out;
+}
+function gotoIncident(kind,id){
+  closeSheet(); showTab("threats");
+  setTimeout(function(){
+    if(kind==="aiattack" && typeof _tl!=="undefined"){ _tl.ai=true; }
+    var frame=(kind==="cve")?"tsb-cve":"tsb-ai";
+    if(kind==="attack") frame="tsb-timeline";
+    var blk=document.getElementById(frame), hd=blk&&blk.querySelector(".secblk-hd");
+    if(hd && hd.getAttribute("aria-expanded")!=="true") sbToggle(frame);
+    if(blk) blk.scrollIntoView({behavior:"smooth",block:"start"});
+    if(kind!=="attack" && typeof buildTimeline==="function"){ buildTimeline(); }
+  },90);
+}
+function changelogHTML(){
+  var items=[
+    ["11 Jul 2026","New <b>Ecosystem</b> tab: the six worlds of AI supply (licensing, distribution, origin), training vs inference energy charts, and a vendor atlas with July-2026 token prices — all linked to the Cortex cards. Tour rewritten to cover every feature."],
+    ["11 Jul 2026","Accuracy pass: corrected CVE-2025-53773 to CVSS 7.8; re-sourced the LiteLLM / PyTorch Lightning / Bitwarden supply-chain items to the TeamPCP \u2018Mini Shai-Hulud\u2019 campaign. Added cross-tab links, global search, deep links, and small-screen fixes."],
+    ["10 Jul 2026","Added JadePuffer (first fully agentic ransomware). Reorganised Security &amp; Threats into collapsible frames; combined timeline filters; multi-lane timeline labels."],
+    ["9 Jul 2026","Added the AI Security Observatory: attack timeline, disclosed CVEs, trends and offensive-AI (AI-misuse) cases. Added NIST AI 600-1 and the threat\u2194control map."],
+    ["Earlier","Built the 3D robotic-skull cortex of 23 architectures across 9 brain regions, the secure-AI lifecycle, control map and standards/law library."]
+  ];
+  return '<h2>What\u2019s new</h2>'+items.map(function(it){return '<div class="clog"><div class="clogd">'+it[0]+'</div><p>'+it[1]+'</p></div>';}).join("")+'<p style="font-size:11.5px;color:var(--faint);margin-top:10px">Personal-capacity project \u00b7 AI-assembled \u00b7 verify against primary sources.</p>';
+}
+/* ---- URL hash deep-linking ---- */
+function applyHash(){
+  var h=(location.hash||"").replace(/^#/,""); if(!h) return;
+  var parts=h.split("/");
+  if(parts[0]==="threat"&&parts[1]) gotoThreat(parts[1]);
+  else if(parts[0]==="std"&&parts[1]){ showTab("security"); setTimeout(function(){ if(typeof openStd==="function") openStd(parts[1]); },90); }
+  else if(parts[0]==="model"&&parts[1]&&window.openModel) window.openModel(decodeURIComponent(parts[1]));
+  else if(["cortex","ecosystem","security","threats"].indexOf(parts[0])>=0) showTab(parts[0]);
+}
+window.addEventListener("hashchange",applyHash);
+window.addEventListener("load",function(){ setTimeout(applyHash,700); });
 function closeSheet(){ document.getElementById("sheetwrap").hidden=true; }
 document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ closeSheet(); closeTour(); } });
 
@@ -1857,10 +2042,12 @@ function sourcesHTML(){
 /* ================= GUIDED TOUR (no video) ================= */
 var TOUR=[
   {h:"A brain, not a filing cabinet", b:"<p>This app maps <b>23 AI architectures</b> onto the region of the human brain whose job most resembles what each model does. It\u2019s an analogy for learning, not a claim of biological equivalence.</p><ul><li><b>Vision</b> models sit at the occipital lobe; <b>language</b> models at the temporal lobe; the <b>router</b> (Mixture-of-Experts) at the thalamus; <b>reinforcement learning</b> at the basal ganglia.</li></ul>"},
-  {h:"Explore the 3D brain", b:"<p><b>Drag</b> to rotate the wireframe brain, <b>pinch</b> or use <b>+/\u2212</b> to zoom into the neurons. Each glowing neuron is an architecture \u2014 <b>tap its name</b> to open a full dossier.</p><p>Bottom-left toggles: hide the <b>labels</b> to admire the robot skull and brain, hide the <b>skull</b>, or switch to a <b>constellation view</b>.</p><p>No connection? The brain quietly steps aside and the same 23 architectures appear as cards below.</p>"},
-  {h:"Every dossier teaches", b:"<p>Each card opens with an <b>analogy</b>, a hands-on <b>\u201cplay with it\u201d</b> link, a combined <b>plain-English + technical</b> explanation, how it\u2019s <b>trained</b> and <b>secured</b>, <b>why that brain region</b> was chosen, the <b>best sources</b> to learn more, and a quick <b>quiz</b>.</p>"},
-  {h:"The Security tab", b:"<p>The second tab opens with an <b>interactive control map</b>: architecture families \u2192 lifecycle controls \u2192 standards and laws from around the world \u2014 NCSC to NIST, the EU AI Act to Korea\u2019s Basic Act, and <b>Ofgem\u2019s Ethical AI guidance</b> for the energy sector. Tap any node to light up its connections, <b>from design, through development, to run</b>; every card links to its primary source.</p>"},
-  {h:"The \u22ee menu", b:"<p>Top-right you\u2019ll find the <b>glossary</b> of every acronym, <b>all sources</b>, a <b>copy-link</b> and <b>save-as-PDF</b>, and this tour again. The <b>sun/moon</b> toggles light and dark. It works on phones, tablets and large monitors.</p>"}
+  {h:"Explore the 3D cortex", b:"<p><b>Drag</b> to rotate the robot skull and brain, <b>pinch</b> or <b>+/\u2212</b> to zoom into the neurons. Each glowing neuron is an architecture \u2014 <b>tap its name</b> to open a full dossier.</p><p>Bottom-left toggles switch the <b>skull</b>, <b>labels</b> and a <b>constellation view</b>; the region filter (with <b>None</b>) lets you spotlight one brain region at a time. When you close this tour, watch: the skull appears clean, then each region\u2019s architectures light up group by group.</p>"},
+  {h:"Every dossier teaches \u2014 and links onward", b:"<p>Each card opens with an <b>analogy</b>, a <b>\u201cplay with it\u201d</b> link, plain-English + technical explanations in fold-out sections, cost &amp; where it runs, sources and a quiz.</p><p>Crucially, every card lists <b>threats to this model</b> \u2014 tap one and you jump straight to the Threats tab; close the card and you\u2019re back here.</p>"},
+  {h:"The Ecosystem tab \u2014 where models come from", b:"<p>Next to the Cortex: the <b>AI supply chain</b>. <b>Six worlds</b> of supply \u2014 frontier commercial, open-weight challengers, fully open, small &amp; on-device, classical repositories, and domain-specific \u2014 each with its licensing, distribution channels and countries of origin.</p><p>Plus <b>power &amp; energy</b> charts (training vs inference, on log scales) and a <b>vendor atlas</b> comparing influence, scale, token cost and licence regime. Architecture chips link back to their Cortex cards.</p>"},
+  {h:"The Security tab", b:"<p>Three frames: the <b>secure-AI lifecycle</b> (design \u2192 develop \u2192 deploy \u2192 operate), an interactive <b>control map</b> linking architecture families \u2192 lifecycle controls \u2192 <b>56 standards and laws worldwide</b> (NCSC to NIST AI 600-1, the EU AI Act to Ofgem\u2019s Ethical AI guidance), and a <b>standards library</b> with a 3D orbital view. Tap any node to light up its connections \u2014 every card links to its primary source.</p>"},
+  {h:"The Threats tab \u2014 an observatory for defenders", b:"<p>Six frames: a pan-and-pinch <b>timeline</b> of real attacks, CVEs and techniques (with an off-by-default <b>\u25b2 AI-assisted attacks</b> layer \u2014 WormGPT to JadePuffer); <b>threats by architecture</b> with a linked map; <b>attack techniques</b>; <b>disclosed vulnerabilities</b>; <b>attack trends</b>; and <b>AI misuse</b>. Threat sheets link to mitigating controls, and controls link back to threats.</p>"},
+  {h:"Search, share &amp; the \u22ee menu", b:"<p>Top-right: <b>Search everything</b> (models, threats, standards, attacks in one box), the <b>glossary</b>, <b>all sources</b>, <b>what\u2019s new</b>, copy-link and save-as-PDF. The URL updates as you navigate \u2014 so you can <b>share a link to any tab, threat, standard or model</b>. The <b>speaker</b> mutes the ambient music; the <b>sun/moon</b> switches theme. Works from phone to large monitor.</p>"}
 ];
 var _ti=0;
 function showTour(){ _ti=0; renderTour(); document.getElementById("welcome").hidden=false; }
@@ -2347,7 +2534,8 @@ function threatHTML(t){
   if(!t) return "";
   var li=function(x){return '<li>'+x+'</li>';};
   var famChips=t.fams.map(function(f){var fm=famInfo(f);return '<span class="rchip" style="border-color:'+(fm?fm.color:"#888")+';background:transparent;color:#dfe3ff">'+(fm?fm.fam:f)+'</span>';}).join("");
-  var ctlChips=t.ctrls.map(function(n){var ci=ctlInfo(n);return '<span class="rchip" style="border-color:'+(ci?ci.color:"#888")+';background:transparent;color:#dfe3ff"><b style="font-family:var(--mono);font-size:10px">'+n+'</b>&nbsp;'+(ci?ci.name:"")+'</span>';}).join("");
+  var mlink=function(a){ return (window.MODEL_NAMES&&window.MODEL_NAMES.indexOf(a)>=0)?'<a class="use lnk" onclick="openModel(\''+a.replace(/'/g,"")+'\');return false" href="#">'+a+' \u2192</a>':'<span class="use">'+a+'</span>'; };
+  var ctlChips=t.ctrls.map(function(n){var ci=ctlInfo(n);return '<button class="rchip" onclick="gotoControl(\''+n+'\')" style="cursor:pointer;border-color:'+(ci?ci.color:"#888")+';background:transparent;color:#dfe3ff"><b style="font-family:var(--mono);font-size:10px">'+n+'</b>&nbsp;'+(ci?ci.name:"")+' \u2192</button>';}).join("");
   var srcs=t.sources.map(function(sx){return '<a href="'+sx.u+'" target="_blank" rel="noopener">'+sx.t+' \u2197</a>';}).join(" \u00b7 ");
   return '<span class="mi-k" style="color:'+t.color+'">Top threat</span><h4>'+t.name+'</h4>'
     +'<p><b style="color:var(--star)">Definition. </b>'+t.def+'</p>'
@@ -2356,7 +2544,25 @@ function threatHTML(t){
     +'<div class="rl">Mitigations</div><ul class="miul">'+t.mitigations.map(li).join("")+'</ul>'
     +'<div class="rl">Affected models</div><div class="rchips">'+famChips+'</div>'
     +'<div class="rl" style="margin-top:8px">Mitigating controls</div><div class="rchips">'+ctlChips+'</div>'
-    +'<div class="rl" style="margin-top:8px">Sources</div><p style="font-size:12.5px">'+srcs+'</p>';
+    +'<div class="rl" style="margin-top:8px">Sources</div><p style="font-size:12.5px">'+srcs+'</p>'+verLine();
+}
+function gotoThreat(id){ closeSheet(); showTab("threats"); try{history.replaceState(null,"","#threat/"+id);}catch(e){} setTimeout(function(){ if(typeof threatDetail==="function") threatDetail(id); },70); }
+function gotoControl(n){ closeSheet(); showTab("security"); setTimeout(function(){ openSheet(ctlHTML(n)); },70); }
+function gotoEcoGroup(id){ closeSheet(); if(typeof closeDrawer==="function"){} showTab("ecosystem");
+  setTimeout(function(){
+    var blk=document.getElementById("eco-groups"), hd=blk&&blk.querySelector(".secblk-hd");
+    if(hd && hd.getAttribute("aria-expanded")!=="true") sbToggle("eco-groups");
+    setTimeout(function(){ var card=document.getElementById("eco-"+id); if(card){ card.scrollIntoView({behavior:"smooth",block:"start"}); card.classList.add("pulse"); setTimeout(function(){card.classList.remove("pulse");},1800); } },160);
+  },90);
+}
+function ctlHTML(n){
+  var ci=(typeof ctlInfo==="function")?ctlInfo(n):null; if(!ci) return "";
+  var ths=THREATCATALOG.filter(function(t){return t.ctrls.indexOf(n)>=0;});
+  return '<span class="mi-k" style="color:'+ci.color+'">'+ci.stage+' \u00b7 control '+n+'</span><h2>'+ci.name+'</h2>'
+    +'<p>'+ci.detail+'</p>'
+    +'<div class="rl" style="margin-top:6px">Mitigates these threats \u2014 tap to explore</div><div class="rchips">'
+    +ths.map(function(t){return '<button class="rchip tchip" onclick="gotoThreat(\''+t.id+'\')" style="--tcol:'+t.color+'">'+t.name+'</button>';}).join("")
+    +'</div><p style="font-size:12px;color:var(--faint);margin-top:10px">See the full lifecycle and control map on the Security tab (Secure-AI lifecycle \u00b7 The control map).</p>';
 }
 function threatDetail(id){ openSheet(threatHTML(thrById(id))); }
 var TME=[], tmSel=null, _tmView="map";
@@ -2704,12 +2910,13 @@ function buildOrbital(){
       n.sx=cx + x*R; n.sy=cy + y*R; n.z=z2; n.sr=Math.max(3.5, ((z2+1)/2)*9+3.5);
     });
     var pr=_orb.nodes.slice().sort(function(a,b){return a.z-b.z;});
+    var drawn=[];
     pr.forEach(function(n){
       var c=n.isLaw?"#ffcf5a":"#6aa8ff", a=0.30+0.70*((n.z+1)/2);
       var g=ctx.createRadialGradient(n.sx,n.sy,0,n.sx,n.sy,n.sr*1.7);
       g.addColorStop(0,c); g.addColorStop(0.55,c+"aa"); g.addColorStop(1,c+"00");
       ctx.globalAlpha=a; ctx.beginPath(); ctx.arc(n.sx,n.sy,n.sr,0,6.283); ctx.fillStyle=g; ctx.fill();
-      if(n.z>-0.05){ ctx.globalAlpha=Math.min(1,a+0.25); ctx.fillStyle=n.isLaw?"#fff3cf":"#dbe6ff"; ctx.font="9.5px ui-monospace,monospace"; ctx.fillText(n.label,n.sx,n.sy+n.sr+10); }
+      if(n.z>0.12){ var ly=n.sy+n.sr+10, ok=true; for(var di=0;di<drawn.length;di++){ if(Math.abs(drawn[di][0]-n.sx)<40 && Math.abs(drawn[di][1]-ly)<11){ ok=false; break; } } if(ok){ drawn.push([n.sx,ly]); ctx.globalAlpha=Math.min(1,a+0.25); ctx.fillStyle=n.isLaw?"#fff3cf":"#dbe6ff"; ctx.font="9.5px ui-monospace,monospace"; ctx.fillText(n.label,n.sx,ly); } }
       ctx.globalAlpha=1;
     });
   }
@@ -2899,7 +3106,8 @@ function tlEvents(){
     ev.push({kind:"vuln",id:v.id,name:v.name,cat:v.cat,x:v.dnum,y:v.cvssNum,est:(v.cvss==="\u2014"),meta:v.date+(v.cvss==="\u2014"?" \u00b7 impact est.":" \u00b7 CVSS "+v.cvss),desc:v.desc,arch:v.arch,src:v.src,extra:v.who});
   });
   if(_tl.layer==="all"||_tl.layer==="tech") THREATS.items.forEach(function(t){
-    var yv=t.sev==="high"?8.6:t.sev==="med"?6.0:3.2;
+    var yb=t.sev==="high"?8.1:t.sev==="med"?5.5:3.0, yv=yb+((tlHash(t.id)%9)-4)*0.2;
+    yv=Math.max(0.5,Math.min(9.8,yv));
     ev.push({kind:"tech",id:t.id,name:t.name,cat:t.cat,x:t.yr+0.5,y:yv,meta:"First documented ~"+t.yr+" \u00b7 "+t.sev.toUpperCase(),desc:t.desc,arch:t.arch,src:t.src,extra:t.ref,miti:t.miti});
   });
   if(_tl.ai) AIATTACKS.forEach(function(a){
@@ -2909,6 +3117,7 @@ function tlEvents(){
   if(_tl.cat) ev=ev.filter(function(e){return e.cat===_tl.cat;});
   return ev;
 }
+function archLink(a){ return (window.MODEL_NAMES&&window.MODEL_NAMES.indexOf(a)>=0)?'<a class="tchip-arch lnk" onclick="openModel(\''+a.replace(/'/g,"")+'\');return false" href="#">'+a+' \u2192</a>':'<span class="tchip-arch">'+a+'</span>'; }
 function tlOpen(kind,id){
   var ev=tlEvents(), e=null; ev.forEach(function(x){ if(x.kind===kind&&x.id===id) e=x; }); if(!e) return;
   var cat=THREATS.cats.find(function(c){return c.key===e.cat;});
@@ -2917,8 +3126,8 @@ function tlOpen(kind,id){
     +'<p>'+e.desc+'</p>'
     +(e.miti?'<h3>Mitigation</h3><p>'+e.miti+'</p>':'')
     +'<p style="font-family:var(--mono);font-size:11px;color:var(--f1)">'+(e.extra||"")+'</p>'
-    +'<div class="tarch" style="display:flex;flex-wrap:wrap;gap:5px;margin:8px 0">'+e.arch.map(function(a){return '<span style="font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:6px;border:1px solid var(--line);color:#9fb6ff">'+a+'</span>';}).join("")+'</div>'
-    +'<p><a href="'+e.src+'" target="_blank" rel="noopener"><b>Open the source \u2197</b></a></p>';
+    +'<div class="tarch" style="display:flex;flex-wrap:wrap;gap:5px;margin:8px 0">'+e.arch.map(archLink).join("")+'</div>'
+    +'<p><a href="'+e.src+'" target="_blank" rel="noopener"><b>Open the source \u2197</b></a></p>'+verLine();
   openSheet(h);
 }
 function tlLabel(e){
@@ -3062,6 +3271,348 @@ function renderTech(){
     +'<div class="tfilters"><button class="tfil'+(!_tFil?" on":"")+'" style="--tc:#8b6cff" onclick="tFil(null)">All techniques</button>'+cats+'</div>'
     +'<div class="tgrid">'+items+'</div>';
 }
+
+/* ================= ECOSYSTEM TAB ================= */
+var ECO={
+ groups:[
+  {id:"frontier",name:"Frontier commercial",color:"#8b6cff",flag:"\ud83c\uddfa\ud83c\uddf8",
+   tag:"Closed weights \u00b7 API access \u00b7 pay per token",
+   what:"The most capable general models. You never receive the weights \u2014 you rent intelligence through an API or app, under a commercial licence and acceptable-use policy. The provider handles hosting, safety systems and updates.",
+   get:"Vendor APIs and clouds: OpenAI platform, Anthropic Claude Platform, Google AI Studio / Vertex, xAI API \u2014 plus resale via AWS Bedrock and Azure AI Foundry.",
+   licence:"Proprietary \u2014 commercial terms of service + usage policies. No redistribution; data-use terms vary by plan.",
+   origin:"United States (all four leaders)",
+   arch:["Transformers / LLMs","Mixture-of-Experts (MoE)","Multimodal & Vision Transformers","Agentic & Multi-Agent AI"],
+   vendors:[
+    {n:"OpenAI",c:"🇺🇸 US",inf:98,size:"~$500bn val · ~3,000 staff",cost:"GPT-5.5 $5 / $30 · mini from $0.25",cv:30,lic:"Proprietary API",src:"https://openai.com/api/pricing/",note:"Largest consumer reach (ChatGPT ~800m weekly users); deep Microsoft ties."},
+    {n:"Anthropic",c:"🇺🇸 US",inf:92,size:"~$350bn val · ~2,500 staff",cost:"Opus 4.8 $5 / $25 · Sonnet $3 / $15 · Haiku $1 / $5",cv:25,lic:"Proprietary API",src:"https://www.anthropic.com/pricing",note:"Safety-led frontier lab; Claude family leads many coding benchmarks."},
+    {n:"Google DeepMind",c:"🇺🇸 US",inf:95,size:"Alphabet (~$2tn)",cost:"Gemini 3.1 Pro $2 / $12 · Flash-Lite from $0.10",cv:12,lic:"Proprietary API",src:"https://ai.google.dev/pricing",note:"Deepest research bench + TPU hardware advantage; Gemini across Google products."},
+    {n:"xAI",c:"🇺🇸 US",inf:72,size:"~$200bn val (merged with X)",cost:"Grok 4.3 mid-tier",cv:15,lic:"Proprietary API",src:"https://x.ai/api",note:"Fast-scaling compute (Colossus); Grok integrated into X."},
+    {n:"Amazon (Nova)",c:"🇺🇸 US",inf:60,size:"Amazon (~$2tn)",cost:"Nova tiers from ~$0.06",cv:3,lic:"Proprietary (Bedrock)",src:"https://aws.amazon.com/bedrock/pricing/",note:"Nova family sold through Bedrock; strength is distribution into AWS estates."},
+    {n:"Microsoft (MAI)",c:"🇺🇸 US",inf:62,size:"Microsoft (~$4tn)",cost:"Bundled via Copilot / Azure",cv:null,lic:"Proprietary",src:"https://microsoft.ai/",note:"In-house MAI models now backing parts of Copilot alongside OpenAI’s."},
+    {n:"Cohere",c:"🇨🇦 CA",inf:45,size:"~$7bn val",cost:"Command from ~$2.5 / $10",cv:10,lic:"Proprietary API",src:"https://cohere.com/pricing",note:"Enterprise/RAG focus, private-deployment options; Canada’s flagship lab."},
+    {n:"AI21 Labs",c:"🇮🇱 IL",inf:35,size:"~$1.4bn val",cost:"Jamba from ~$2 / $8",cv:8,lic:"Proprietary + open Jamba",src:"https://www.ai21.com/pricing/",note:"Israel’s frontier lab; Jamba hybrids of Transformer + state-space (Mamba)."}
+   ]},
+  {id:"openweights",name:"Open-weight challengers",color:"#3ad6a0",flag:"\ud83c\udf10",
+   tag:"Downloadable weights \u00b7 licences vary \u00b7 self-host or rent",
+   what:"You can download the trained weights and run them anywhere \u2014 but training data and full recipes stay private, and licences range from truly permissive (MIT, Apache-2.0) to community licences with restrictions (Llama, Gemma).",
+   get:"Hugging Face Hub is the de-facto distribution channel; also ModelScope (China), vendor sites, and hosted inference via Together, Fireworks, Groq, DeepInfra, OpenRouter.",
+   licence:"MIT (DeepSeek) \u00b7 Apache-2.0 (Qwen, Mistral most) \u00b7 Llama Community License \u00b7 Gemma Terms \u2014 read each: some restrict fields of use or big-company usage.",
+   origin:"China now leads volume (DeepSeek, Qwen, GLM, Kimi, MiniMax); US (Meta, Google, NVIDIA); France (Mistral)",
+   arch:["Transformers / LLMs","Mixture-of-Experts (MoE)","State-Space Models (Mamba)"],
+   vendors:[
+    {n:"DeepSeek",c:"🇨🇳 CN",inf:88,size:"High-Flyer–backed lab",cost:"V4 Flash $0.14 / $0.28 · weights free",cv:0.28,lic:"MIT",src:"https://api-docs.deepseek.com/quick_start/pricing",note:"Reset the price floor; V4 Pro Max open weights rival frontier coding scores."},
+    {n:"Alibaba Qwen",c:"🇨🇳 CN",inf:85,size:"Alibaba Cloud",cost:"Weights free · hosted from ~$0.2",cv:1.2,lic:"Apache-2.0 (most)",src:"https://huggingface.co/Qwen",note:"The most-forked family on Hugging Face; huge range 0.5B→Max."},
+    {n:"Meta Llama",c:"🇺🇸 US",inf:80,size:"Meta (~$1.5tn)",cost:"Weights free · hosted ~$0.18 / $0.59 (Scout)",cv:0.59,lic:"Llama Community License",src:"https://www.llama.com/",note:"Made open weights mainstream; licence restricts >700m-MAU companies."},
+    {n:"Mistral AI",c:"🇫🇷 FR",inf:70,size:"~€12bn val",cost:"Weights free (many) · API from $0.2",cv:6,lic:"Apache-2.0 + commercial",src:"https://mistral.ai/pricing",note:"Europe’s flagship lab; strong small models and EU-sovereignty positioning."},
+    {n:"Z.ai (GLM)",c:"🇨🇳 CN",inf:66,size:"Tsinghua spin-out",cost:"GLM-5.2 $1.40 / $4.40 · weights open",cv:4.4,lic:"MIT (recent)",src:"https://z.ai/",note:"GLM-5 series near-frontier at aggressive prices."},
+    {n:"Moonshot (Kimi)",c:"🇨🇳 CN",inf:62,size:"Alibaba-backed",cost:"K2.6 low-cost · open weights",cv:2.5,lic:"Modified MIT",src:"https://www.moonshot.ai/",note:"Trillion-parameter MoE agentic models."},
+    {n:"MiniMax",c:"🇨🇳 CN",inf:58,size:"~$4bn val",cost:"M3 $0.60 / $2.40",cv:2.4,lic:"Open weights (M-series)",src:"https://www.minimax.io/",note:"M3 — cheapest model above 80% on SWE-bench Verified (Jun 2026)."},
+    {n:"Tencent Hunyuan",c:"🇨🇳 CN",inf:55,size:"Tencent (~$600bn)",cost:"Weights open (several) · cloud API",cv:2,lic:"Tencent community licence",src:"https://huggingface.co/tencent",note:"Strong multimodal/3D open releases riding Tencent’s platform reach."},
+    {n:"Baidu ERNIE",c:"🇨🇳 CN",inf:50,size:"Baidu (~$40bn)",cost:"ERNIE 4.5+ opened 2025 · cloud API",cv:1,lic:"Apache-2.0 (opened line)",src:"https://yiyan.baidu.com/",note:"Pivoted from closed to open weights mid-2025 as China’s price war escalated."},
+    {n:"NVIDIA Nemotron",c:"🇺🇸 US",inf:64,size:"NVIDIA (~$4tn)",cost:"Weights free",cv:null,lic:"NVIDIA Open Model Licence",src:"https://huggingface.co/nvidia",note:"Chip-maker’s open models, tuned to showcase its own hardware stack."},
+    {n:"Google Gemma",c:"🇺🇸 US",inf:63,size:"—",cost:"Weights free",cv:null,lic:"Gemma Terms of Use",src:"https://ai.google.dev/gemma",note:"Open-weight sibling of Gemini; terms include use restrictions."},
+    {n:"TII Falcon",c:"🇦🇪 UAE",inf:40,size:"State research institute",cost:"Weights free",cv:null,lic:"TII Falcon Licence (Apache-based)",src:"https://falconllm.tii.ae/",note:"The Gulf’s sovereign-AI play — open weights from Abu Dhabi."},
+    {n:"IBM Granite",c:"🇺🇸 US",inf:42,size:"IBM (~$250bn)",cost:"Weights free · watsonx hosting",cv:0.6,lic:"Apache-2.0",src:"https://www.ibm.com/granite",note:"Enterprise-focused, indemnified open models with clean data provenance."}
+   ]},
+  {id:"fullopen",name:"Fully open (weights + data + code)",color:"#6aa8ff",flag:"\ud83c\udf0d",
+   tag:"Everything published \u00b7 reproducible \u00b7 research-grade",
+   what:"The scientific gold standard: weights, training data, code and logs all published, so anyone can reproduce, audit or study the model end-to-end. Smaller than frontier, but fully transparent \u2014 this is where you can genuinely verify claims.",
+   get:"Hugging Face + GitHub, direct from the institutes (Allen Institute, EleutherAI, BigScience/BigCode).",
+   licence:"Apache-2.0 almost throughout (OLMo, Pythia); OpenRAIL for BLOOM.",
+   origin:"United States (AI2, EleutherAI) \u00b7 international collaborations (BigScience, France-hosted)",
+   arch:["Transformers / LLMs","Feedforward Networks (MLP)"],
+   vendors:[
+    {n:"Allen Institute (AI2)",c:"🇺🇸 US",inf:55,size:"Non-profit institute",cost:"Free (Apache-2.0)",cv:null,lic:"Apache-2.0",src:"https://allenai.org/olmo",note:"OLMo ships weights, data (Dolma) and full training logs — the most complete openness."},
+    {n:"EleutherAI",c:"🌐 Intl",inf:45,size:"Non-profit collective",cost:"Free",cv:null,lic:"Apache-2.0",src:"https://www.eleuther.ai/",note:"Pythia suite — the standard scientific tool for studying how LLMs learn."},
+    {n:"BigScience / BigCode",c:"🇫🇷 FR-led",inf:40,size:"1,000+ researchers",cost:"Free",cv:null,lic:"OpenRAIL",src:"https://bigscience.huggingface.co/",note:"BLOOM and StarCoder — landmark open collaborations with responsible-use licences."},
+    {n:"Hugging Face (SmolLM)",c:"🇺🇸/🇫🇷 US/FR",inf:48,size:"~$4.5bn val",cost:"Free",cv:null,lic:"Apache-2.0",src:"https://huggingface.co/HuggingFaceTB",note:"SmolLM series: fully open small models with published data recipes."},
+    {n:"LLM360",c:"🇺🇸/🇦🇪 US/UAE",inf:30,size:"Academic consortium (MBZUAI)",cost:"Free",cv:null,lic:"Apache-2.0",src:"https://www.llm360.ai/",note:"Publishes full checkpoints and training curves — radical transparency."}
+   ]},
+  {id:"ondevice",name:"Small & on-device",color:"#ffb347",flag:"\ud83d\udcf1",
+   tag:"Runs on your phone / laptop \u00b7 milliwatt-hours \u00b7 private by design",
+   what:"Compact models (\u22480.3B\u201312B parameters) engineered to run locally on phones, laptops and edge hardware \u2014 no cloud, no per-token cost, and data never leaves the device. Capability is lower, but privacy, latency and energy economics are transformed.",
+   get:"Hugging Face + runtimes: Ollama, llama.cpp, LM Studio, Apple Core ML / Foundation Models framework, Google AI Edge, ONNX Runtime.",
+   licence:"MIT (Phi) \u00b7 Gemma Terms \u00b7 Apache-2.0 (SmolLM, Qwen small) \u00b7 Apple platform terms.",
+   origin:"United States (Microsoft, Google, Apple, Meta) \u00b7 China (Qwen small) \u00b7 France (Mistral small)",
+   arch:["Transformers / LLMs","State-Space Models (Mamba)","Liquid Neural Networks","Spiking / Neuromorphic"],
+   vendors:[
+    {n:"Microsoft Phi",c:"🇺🇸 US",inf:60,size:"Microsoft (~$4tn)",cost:"Free weights (MIT)",cv:null,lic:"MIT",src:"https://huggingface.co/microsoft",note:"Textbook-quality data recipe — small models punching far above their size."},
+    {n:"Google Gemma 3n",c:"🇺🇸 US",inf:58,size:"—",cost:"Free weights",cv:null,lic:"Gemma Terms",src:"https://ai.google.dev/gemma",note:"Built for phones with Android/Chrome integration paths."},
+    {n:"Apple Foundation Models",c:"🇺🇸 US",inf:55,size:"Apple (~$3.5tn)",cost:"Free on-device to developers",cv:null,lic:"Apple platform terms",src:"https://developer.apple.com/apple-intelligence/",note:"~3B on-device model behind Apple Intelligence — the biggest private-inference deployment."},
+    {n:"Meta Llama (small)",c:"🇺🇸 US",inf:50,size:"Meta",cost:"Free weights (1B–3B)",cv:null,lic:"Llama Community License",src:"https://www.llama.com/",note:"Llama 3.2 1B/3B remain default edge baselines across toolchains."},
+    {n:"Mistral (Ministral)",c:"🇫🇷 FR",inf:44,size:"—",cost:"Free weights + edge API",cv:null,lic:"Apache-2.0 / commercial mix",src:"https://mistral.ai/news/ministraux",note:"Les Ministraux 3B/8B — Europe’s strongest edge line."},
+    {n:"Alibaba Qwen (edge)",c:"🇨🇳 CN",inf:48,size:"—",cost:"Free weights (0.5B–4B)",cv:null,lic:"Apache-2.0",src:"https://huggingface.co/Qwen",note:"The most-downloaded small weights on Hugging Face."},
+    {n:"Liquid AI",c:"🇺🇸 US",inf:35,size:"MIT spin-out",cost:"LFM open weights (some)",cv:null,lic:"Custom open",src:"https://www.liquid.ai/",note:"Liquid/continuous-time nets — tiny, efficient edge models (see the Liquid card on the Cortex)."},
+    {n:"Samsung Gauss",c:"🇰🇷 KR",inf:30,size:"Samsung (~$350bn)",cost:"On-device in Galaxy line",cv:null,lic:"Proprietary on-device",src:"https://research.samsung.com/",note:"Korea’s on-device play, shipping inside Galaxy AI features."}
+   ]},
+  {id:"repos",name:"Classical ML & general repositories",color:"#ff8fb3",flag:"\ud83d\udee0\ufe0f",
+   tag:"The workhorse layer \u00b7 permissive open source \u00b7 free",
+   what:"The classical architectures \u2014 regression, trees, boosting, SVMs, clustering \u2014 don\u2019t ship as \u2018weights\u2019 at all: they live as open-source libraries you train yourself on your own data, in minutes, on a laptop. Still what most production ML quietly runs on.",
+   get:"PyPI / conda (scikit-learn, XGBoost, LightGBM, statsmodels), GitHub, plus general hubs: Hugging Face, Kaggle Models, PyTorch Hub, ONNX Model Zoo.",
+   licence:"BSD-3 (scikit-learn) \u00b7 Apache-2.0 (XGBoost, TensorFlow) \u00b7 BSD-style (PyTorch, Linux Foundation).",
+   origin:"Genuinely international open-source \u2014 US, EU, global contributor bases",
+   arch:["Linear & Logistic Regression","Decision Trees & Random Forests","Gradient Boosting (XGBoost)","Support Vector Machines","Clustering & k-NN","Bayesian & Probabilistic Models","Feedforward Networks (MLP)"],
+   vendors:[
+    {n:"scikit-learn",c:"🇫🇷 FR-rooted",inf:75,size:"Community + Inria",cost:"Free",cv:null,lic:"BSD-3",src:"https://scikit-learn.org/",note:"The default classical-ML toolkit for two decades."},
+    {n:"PyTorch (Linux Fdn)",c:"🇺🇸 US",inf:85,size:"Meta-originated, foundation-run",cost:"Free",cv:null,lic:"BSD-style",src:"https://pytorch.org/",note:"The dominant research + production deep-learning framework."},
+    {n:"TensorFlow / Keras",c:"🇺🇸 US",inf:60,size:"Google-originated",cost:"Free",cv:null,lic:"Apache-2.0",src:"https://www.tensorflow.org/",note:"Still huge in production and mobile (LiteRT), if no longer the research default."},
+    {n:"Hugging Face Hub",c:"🇺🇸/🇫🇷 US/FR",inf:82,size:"~$4.5bn val",cost:"Free hub · paid inference",cv:null,lic:"Platform · models vary",src:"https://huggingface.co/models",note:"2m+ public models — the app store of open AI (and a supply-chain attack surface: see Threats)."},
+    {n:"XGBoost / LightGBM",c:"🌐 Intl",inf:65,size:"Community / Microsoft",cost:"Free",cv:null,lic:"Apache-2.0 / MIT",src:"https://xgboost.readthedocs.io/",note:"Still the tabular-data champions in industry and competitions."},
+    {n:"ONNX / Kaggle Models",c:"🇺🇸 US",inf:45,size:"Linux Fdn / Google",cost:"Free",cv:null,lic:"Apache-2.0 / platform",src:"https://onnx.ai/",note:"Interchange format + Google’s model hub — the plumbing of model distribution."}
+   ]},
+  {id:"domain",name:"Domain-specific & scientific",color:"#38d6e0",flag:"\ud83e\uddec",
+   tag:"Purpose-built \u00b7 mixed licences \u00b7 science, health, finance, robotics",
+   what:"Models built for one field \u2014 protein folding, medical imaging, weather, finance, robotics. Access varies wildly: some are fully open science, some free-for-research only, some locked inside one company.",
+   get:"GitHub + institutional releases (AlphaFold, GraphCast, ESM), Hugging Face (MedGemma, BioNeMo), vendor platforms (Bloomberg terminal, NVIDIA NGC).",
+   licence:"From Apache-2.0 (GraphCast) and open-for-research (AlphaFold 3 weights on request) to fully proprietary (BloombergGPT).",
+   origin:"US and UK (DeepMind London for AlphaFold/GraphCast) \u00b7 US (NVIDIA, Bloomberg, Meta ESM)",
+   arch:["Graph Neural Networks (GNN)","Convolutional Networks (CNN)","Recurrent Networks (RNN/LSTM)","World Models (JEPA)","Neurosymbolic AI","Multimodal & Vision Transformers"],
+   vendors:[
+    {n:"DeepMind Science",c:"🇬🇧 UK",inf:78,size:"Alphabet",cost:"Free for research (terms)",cv:null,lic:"Research / Apache-2.0 mixed",src:"https://deepmind.google/science/",note:"AlphaFold (Nobel-recognised) + GraphCast weather — open science with guarded weights."},
+    {n:"Isomorphic Labs",c:"🇬🇧 UK",inf:45,size:"Alphabet spin-out, ~$3bn raise",cost:"Partnership model",cv:null,lic:"Proprietary",src:"https://www.isomorphiclabs.com/",note:"AlphaFold lineage industrialised for drug discovery (Lilly, Novartis deals)."},
+    {n:"EvolutionaryScale (ESM)",c:"🇺🇸 US",inf:40,size:"~$1bn+ val",cost:"ESM open weights (research)",cv:null,lic:"Non-commercial community licence",src:"https://www.evolutionaryscale.ai/",note:"ESM3 protein language models — Meta’s bio team spun out."},
+    {n:"NVIDIA (BioNeMo / GR00T)",c:"🇺🇸 US",inf:70,size:"~$4tn",cost:"Free tiers + platform",cv:null,lic:"NVIDIA Open + commercial",src:"https://www.nvidia.com/en-us/clara/bionemo/",note:"Domain foundation models for biology and robotics, tied to its hardware."},
+    {n:"Google Health (MedGemma)",c:"🇺🇸 US",inf:55,size:"—",cost:"Free weights (Health AI terms)",cv:null,lic:"Gemma / Health AI terms",src:"https://developers.google.com/health-ai-developer-foundations",note:"Open medical imaging + text models for clinical research."},
+    {n:"Microsoft Aurora",c:"🇺🇸 US",inf:42,size:"MSR",cost:"Open weights + paper",cv:null,lic:"MIT (code) / open weights",src:"https://www.microsoft.com/en-us/research/project/aurora-forecasting/",note:"Atmosphere foundation model — forecasts rivalling numerical weather prediction."},
+    {n:"BloombergGPT",c:"🇺🇸 US",inf:35,size:"Bloomberg LP",cost:"Terminal subscription only",cv:null,lic:"Fully proprietary",src:"https://www.bloomberg.com/company/press/bloomberggpt-50-billion-parameter-llm-tuned-finance/",note:"The template for closed, single-domain corporate models."},
+    {n:"Harvey",c:"🇺🇸 US",inf:38,size:"~$8bn val",cost:"Enterprise subscription",cv:null,lic:"Proprietary (built on frontier APIs)",src:"https://www.harvey.ai/",note:"Legal-domain AI — shows the ‘wrapper-to-platform’ vendor pattern."}
+   ]}
+ ],
+ /* training energy, GWh (log scale). Sources: model papers, Epoch AI, dataku compilation */
+ train:[
+  {n:"Classical model (laptop)",v:0.000002,note:"seconds\u2013minutes of one machine"},
+  {n:"Small on-device LLM (\u22643B)",v:0.05,note:"fine-tune / small pretrain, est."},
+  {n:"GPT-3 (2020)",v:1.3,note:"~1.3 GWh \u00b7 UMass/paper"},
+  {n:"DeepSeek V3 (2024)",v:3,note:"~3 GWh \u00b7 efficiency landmark"},
+  {n:"Llama 3.1 405B (2024)",v:20,note:"~20 GWh est."},
+  {n:"Llama 4 405B (2025)",v:25,note:"~25 GWh est."},
+  {n:"GPT-4-class frontier",v:50,note:"~50+ GWh est. \u00b7 undisclosed"}
+ ],
+ /* inference energy per request, Wh (log scale ranges) */
+ infer:[
+  {n:"Classical prediction",lo:0.00001,hi:0.001,note:"tabular scoring \u2014 negligible"},
+  {n:"On-device small LLM",lo:0.01,hi:0.3,note:"phone/laptop NPU"},
+  {n:"Chatbot short query",lo:0.2,hi:0.5,note:"\u22480.3 Wh typical (Epoch AI / OpenAI)"},
+  {n:"Long-context / reasoning",lo:2,hi:45,note:"large prompts, thinking models"},
+  {n:"Image generation",lo:1,hi:5,note:"per image, diffusion"},
+  {n:"Video generation (\u22485s)",lo:20,hi:115,note:"highest per-request cost"}
+ ]
+};
+function ecoVendorCard(v,color){
+  return '<div class="vcard" style="--vc:'+color+'">'
+    +'<div class="vh"><h4>'+v.n+'</h4><span class="vflag">'+v.c+'</span></div>'
+    +'<div class="vinf"><span class="vinfl">Influence</span><span class="vbar"><i style="width:'+v.inf+'%"></i></span></div>'
+    +'<div class="vrow"><span class="vk">Scale</span><span>'+v.size+'</span></div>'
+    +'<div class="vrow"><span class="vk">Token cost</span><span>'+v.cost+'</span></div>'
+    +'<div class="vrow"><span class="vk">Licence</span><span class="vlic">'+v.lic+'</span></div>'
+    +'<p class="vnote">'+v.note+'</p>'
+    +(v.src?'<a class="clink" style="margin-top:7px" href="'+v.src+'" target="_blank" rel="noopener">Source \u2197</a>':'')+'</div>';
+}
+function ecoGroupCard(g){
+  var archChips=g.arch.map(function(a){ return (window.MODEL_NAMES&&window.MODEL_NAMES.indexOf(a)>=0)?'<a class="use lnk" onclick="openModel(\''+a.replace(/'/g,"")+'\');return false" href="#">'+a+' \u2192</a>':'<span class="use">'+a+'</span>'; }).join("");
+  return '<div class="ecocard" id="eco-'+g.id+'" style="--ec:'+g.color+'">'
+    +'<div class="eh"><span class="eflag">'+g.flag+'</span><div><h3>'+g.name+'</h3><div class="etag">'+g.tag+'</div></div></div>'
+    +'<p class="ewhat">'+g.what+'</p>'
+    +'<div class="erow"><span class="ek">Where to get it</span><p>'+g.get+'</p></div>'
+    +'<div class="erow"><span class="ek">Licensing</span><p>'+g.licence+'</p></div>'
+    +'<div class="erow"><span class="ek">Typical origin</span><p>'+g.origin+'</p></div>'
+    +'<div class="erow"><span class="ek">Architectures on the Cortex</span><div class="uses" style="margin-top:5px">'+archChips+'</div></div>'
+    +'</div>';
+}
+function ecoTrainChart(){
+  var W=640,rowH=34,mL=10,mR=64,mT=8,H=ECO.train.length*rowH+mT+26;
+  var lo=Math.log10(0.000001),hi=Math.log10(80);
+  function X(v){ return mL+(Math.log10(v)-lo)/(hi-lo)*(W-mL-mR); }
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto" role="img" aria-label="Training energy by model class">';
+  [0.00001,0.001,0.1,1,10,50].forEach(function(t){ var x=X(t);
+    svg+='<line x1="'+x+'" y1="'+mT+'" x2="'+x+'" y2="'+(H-22)+'" stroke="rgba(255,255,255,.07)"/>';
+    svg+='<text x="'+x+'" y="'+(H-8)+'" text-anchor="middle" style="font:9.5px ui-monospace,monospace" fill="#8b93b8">'+(t>=1?t+" GWh":(t*1000>=1?t*1000+" MWh":t*1000000+" kWh"))+'</text>'; });
+  ECO.train.forEach(function(d,i){ var y=mT+i*rowH, x=X(d.v);
+    var hue=200+ (Math.log10(d.v)-lo)/(hi-lo)*140;
+    svg+='<rect x="'+mL+'" y="'+(y+7)+'" width="'+(x-mL)+'" height="13" rx="6" fill="hsl('+(280-((Math.log10(d.v)-lo)/(hi-lo))*160)+',75%,62%)" opacity=".85"/>';
+    svg+='<text x="'+mL+'" y="'+(y+3)+'" style="font:10.5px ui-monospace,monospace" fill="#cfd6ee">'+d.n+' \u2014 <tspan fill="#8b93b8">'+d.note+'</tspan></text>';
+  });
+  svg+='</svg>';
+  return svg;
+}
+function ecoInferChart(){
+  var W=640,rowH=36,mL=10,mR=20,mT=8,H=ECO.infer.length*rowH+mT+26;
+  var lo=Math.log10(0.000005),hi=Math.log10(200);
+  function X(v){ return mL+(Math.log10(v)-lo)/(hi-lo)*(W-mL-mR); }
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto" role="img" aria-label="Inference energy per request">';
+  [0.0001,0.01,0.3,1,10,100].forEach(function(t){ var x=X(t);
+    svg+='<line x1="'+x+'" y1="'+mT+'" x2="'+x+'" y2="'+(H-22)+'" stroke="rgba(255,255,255,.07)"/>';
+    svg+='<text x="'+x+'" y="'+(H-8)+'" text-anchor="middle" style="font:9.5px ui-monospace,monospace" fill="#8b93b8">'+(t>=1?t+" Wh":t*1000+" mWh")+'</text>'; });
+  ECO.infer.forEach(function(d,i){ var y=mT+i*rowH, x1=X(d.lo), x2=X(d.hi);
+    svg+='<line x1="'+x1+'" y1="'+(y+15)+'" x2="'+x2+'" y2="'+(y+15)+'" stroke="#38d6e0" stroke-width="7" stroke-linecap="round" opacity=".8"/>';
+    svg+='<circle cx="'+x1+'" cy="'+(y+15)+'" r="4.5" fill="#0a0f22" stroke="#38d6e0" stroke-width="2"/><circle cx="'+x2+'" cy="'+(y+15)+'" r="4.5" fill="#38d6e0"/>';
+    svg+='<text x="'+mL+'" y="'+(y+5)+'" style="font:10.5px ui-monospace,monospace" fill="#cfd6ee">'+d.n+' \u2014 <tspan fill="#8b93b8">'+d.note+'</tspan></text>';
+  });
+  svg+='</svg>';
+  return svg;
+}
+
+/* ---- APPLICATIONS: single- and multi-architecture ---- */
+var APPS_SINGLE=[
+ {app:"Card-fraud detection",org:"Visa \u00b7 Mastercard \u00b7 banks",icon:"\ud83d\udcb3",arch:"Gradient Boosting (XGBoost)",
+  how:"Every swipe is scored in milliseconds by an ensemble of decision trees. Each tree asks a chain of yes/no questions \u2014 amount, location, time since last use, merchant type \u2014 and hundreds of trees vote. Gradient boosting trains each new tree specifically to fix the errors of the ones before it, producing a sharp fraud probability.",
+  impact:"Runs on essentially every card network \u2014 billions of transactions a day, the quiet workhorse of finance.",src:"https://xgboost.readthedocs.io/en/stable/"},
+ {app:"Spam &amp; phishing filters",org:"Email providers",icon:"\u2709\ufe0f",arch:"Bayesian & Probabilistic Models",
+  how:"The classic filter learns the probability a message is spam from the words it contains, using Bayes\u2019 theorem \u2014 \u2018given the word appears, how likely is spam?\u2019 \u2014 multiplied across every token. Fast, interpretable, and still a first line of defence in many gateways two decades on.",
+  impact:"Paul Graham\u2019s 2002 \u2018A Plan for Spam\u2019 reshaped every inbox on earth.",src:"https://www.paulgraham.com/spam.html"},
+ {app:"GraphCast weather forecasting",org:"Google DeepMind",icon:"\ud83c\udf29\ufe0f",arch:"Graph Neural Networks (GNN)",
+  how:"The globe becomes a graph: each grid point is a node wired to its neighbours. Message-passing lets nodes exchange atmospheric state, and the network predicts the next six hours; roll it forward for a 10-day forecast in under a minute \u2014 beating traditional supercomputer simulation on most measures.",
+  impact:"A single GNN, outperforming physics-based models that need whole HPC clusters.",src:"https://deepmind.google/science/graphcast/"},
+ {app:"Whisper speech-to-text",org:"OpenAI",icon:"\ud83c\udf99\ufe0f",arch:"Transformers / LLMs",
+  how:"Audio becomes a spectrogram; a Transformer encoder attends across the whole clip while a decoder writes the text token by token. One architecture, trained on 680,000 hours, transcribes 99 languages and shrugs off real-world noise.",
+  impact:"Open-weight \u2014 it put near-human transcription into everyone\u2019s hands.",src:"https://openai.com/index/whisper/"},
+ {app:"Diabetic-retinopathy screening",org:"Google Health",icon:"\ud83d\udc41\ufe0f",arch:"Convolutional Networks (CNN)",
+  how:"Convolutional filters scan retinal photographs the way the visual cortex scans a scene \u2014 edges first, then lesions, then disease patterns. Trained on graded images, the network flags sight-threatening disease at specialist level.",
+  impact:"Deployed in clinics in India and Thailand to screen for preventable blindness.",src:"https://health.google/health-research/"},
+ {app:"\u2018Customers also bought\u2026\u2019 recommendation",org:"Amazon (classic)",icon:"\ud83d\udecd\ufe0f",arch:"Clustering & k-NN",
+  how:"The original recommender: find the items nearest to this one in \u2018who-bought-what\u2019 space (k-nearest-neighbours) and surface them. No deep learning \u2014 just similarity at massive scale \u2014 yet it defined e-commerce for a decade.",
+  impact:"Amazon\u2019s item-to-item collaborative filtering drove a third of its sales.",src:"https://www.amazon.science/publications/two-decades-of-recommender-systems-at-amazon-com"}
+];
+var APPS_MULTI=[
+ {app:"AI assistants (ChatGPT, Claude, Gemini)",org:"OpenAI \u00b7 Anthropic \u00b7 Google",icon:"\ud83e\udd16",
+  archs:["Transformers / LLMs","Mixture-of-Experts (MoE)","Reinforcement Learning (RL / RLHF)","Multimodal & Vision Transformers"],
+  how:"A Transformer \u2014 often a Mixture-of-Experts for efficiency \u2014 predicts text; RLHF fine-tunes it to be helpful and safe; a vision Transformer lets it see images; retrieval and tools extend its reach. Several architectures stacked into one product.",
+  impact:"The fastest-adopted consumer technology in history.",src:"https://www.anthropic.com/claude"},
+ {app:"AlphaFold 2 &amp; 3 \u2014 protein structure",org:"Google DeepMind",icon:"\ud83e\uddec",
+  archs:["Transformers / LLMs","Graph Neural Networks (GNN)","Diffusion Models"],
+  how:"This is exactly why AlphaFold isn\u2019t a single-architecture app. An attention-based Evoformer/Pairformer reasons over evolutionary sequence alignments; triangular, graph-like attention enforces 3D geometric consistency; and in AlphaFold 3 a diffusion model generates the final atomic coordinates from noise \u2014 the same idea as image diffusion, applied to molecules.",
+  impact:"Nobel-recognised; structures for 200M+ proteins, transforming biology.",src:"https://deepmind.google/science/alphafold/"},
+ {app:"Text-to-image (Stable Diffusion, Midjourney)",org:"Stability AI \u00b7 Midjourney",icon:"\ud83c\udfa8",
+  archs:["Diffusion Models","Variational Autoencoders (VAE)","Transformers / LLMs"],
+  how:"A Transformer text encoder turns your prompt into meaning; a diffusion model iteratively denoises pure noise toward an image that matches it; a VAE compresses and decompresses so the whole thing runs efficiently in a small \u2018latent\u2019 space.",
+  impact:"Put photorealistic image generation on any laptop.",src:"https://stability.ai/stable-image"},
+ {app:"Self-driving (Waymo)",org:"Waymo",icon:"\ud83d\ude97",
+  archs:["Convolutional Networks (CNN)","Multimodal & Vision Transformers","Recurrent Networks (RNN/LSTM)","Reinforcement Learning (RL / RLHF)"],
+  how:"Convolutional and Transformer perception fuse camera, lidar and radar into a bird\u2019s-eye view of the world; temporal models track objects over time; a planner \u2014 increasingly learned, sometimes with reinforcement learning \u2014 chooses the trajectory. No single network drives the car.",
+  impact:"Millions of paid, fully driverless rides across US cities.",src:"https://waymo.com/"},
+ {app:"Text-to-video (Sora, Veo)",org:"OpenAI \u00b7 Google",icon:"\ud83c\udfac",
+  archs:["Diffusion Models","Transformers / LLMs","Variational Autoencoders (VAE)"],
+  how:"A \u2018diffusion Transformer\u2019 denoises video inside a compressed latent space (the VAE), guided by a language model that expands your short prompt into rich, frame-by-frame captions. Diffusion + Transformer + VAE + language, combined.",
+  impact:"Minute-long, coherent generated video from a sentence.",src:"https://openai.com/sora/"},
+ {app:"Recommendation feeds (TikTok, YouTube)",org:"ByteDance \u00b7 Google",icon:"\ud83d\udcf2",
+  archs:["Graph Neural Networks (GNN)","Feedforward Networks (MLP)","Reinforcement Learning (RL / RLHF)"],
+  how:"Graph networks model the web of users, videos and interactions; deep ranking networks (MLPs) score thousands of candidates; reinforcement-learning-style objectives optimise for long-term engagement rather than the next click. The \u2018algorithm\u2019 is really a pipeline of architectures.",
+  impact:"The engine behind how billions of hours are watched daily.",src:"https://blog.youtube/inside-youtube/on-youtubes-recommendation-system/"},
+ {app:"AlphaGo",org:"Google DeepMind",icon:"\u26ab",
+  archs:["Convolutional Networks (CNN)","Reinforcement Learning (RL / RLHF)"],
+  how:"The system that beat the world champion read the board like an image with convolutional networks, learned strategy through millions of reinforcement-learning self-play games, and planned moves with Monte-Carlo tree search wrapped around those networks.",
+  impact:"The \u20182016 Sputnik moment\u2019 that made the world take deep RL seriously.",src:"https://deepmind.google/research/breakthroughs/alphago/"},
+ {app:"Robot foundation models (GR00T, RT-2)",org:"NVIDIA \u00b7 Google",icon:"\ud83e\uddbe",
+  archs:["Multimodal & Vision Transformers","Transformers / LLMs","Reinforcement Learning (RL / RLHF)"],
+  how:"Vision-language-action models: a vision Transformer sees the scene, a language model reasons about the instruction, and reinforcement-learned control turns that into motor commands \u2014 one system spanning perception, reasoning and action.",
+  impact:"The template for general-purpose humanoid and manipulation robots.",src:"https://developer.nvidia.com/isaac/gr00t"}
+];
+function ecoArchChip(name){
+  var col=(window.MODEL_COLOR&&window.MODEL_COLOR[name])||"#8b6cff";
+  var known=window.MODEL_NAMES&&window.MODEL_NAMES.indexOf(name)>=0;
+  return known
+   ? '<a class="archpill lnk" onclick="openModel(\''+name.replace(/'/g,"")+'\');return false" href="#" style="--pc:'+col+'"><span class="dot" style="background:'+col+'"></span>'+name+'</a>'
+   : '<span class="archpill" style="--pc:'+col+'"><span class="dot" style="background:'+col+'"></span>'+name+'</span>';
+}
+function appSingleCard(a){
+  return '<div class="appcard single" style="--ac:'+((window.MODEL_COLOR&&window.MODEL_COLOR[a.arch])||"#8b6cff")+'">'
+    +'<div class="apphead"><span class="appicon">'+a.icon+'</span><div><h4>'+a.app+'</h4><div class="apporg">'+a.org+'</div></div></div>'
+    +'<div class="archline"><span class="onelab">one architecture</span>'+ecoArchChip(a.arch)+'</div>'
+    +'<p class="apphow">'+a.how+'</p>'
+    +'<div class="appimpact">'+a.impact+'</div>'
+    +'<a class="clink" href="'+a.src+'" target="_blank" rel="noopener">Source \u2197</a></div>';
+}
+function appMultiCard(a){
+  var flow=a.archs.map(ecoArchChip).join('<span class="flowarr">+</span>');
+  return '<div class="appcard multi">'
+    +'<div class="apphead"><span class="appicon">'+a.icon+'</span><div><h4>'+a.app+'</h4><div class="apporg">'+a.org+'</div></div><span class="ncount">'+a.archs.length+' architectures</span></div>'
+    +'<div class="archflow">'+flow+'</div>'
+    +'<p class="apphow">'+a.how+'</p>'
+    +'<div class="appimpact">'+a.impact+'</div>'
+    +'<a class="clink" href="'+a.src+'" target="_blank" rel="noopener">Source \u2197</a></div>';
+}
+function ecoVendorChart(){
+  var W=680,H=430,mL=54,mR=16,mT=16,mB=42, gutter=susCount()>0?70:0;
+  function susCount(){ var c=0; ECO.groups.forEach(function(g){g.vendors.forEach(function(v){ if(v.cv==null) c++; });}); return c; }
+  var lo=Math.log10(0.2), hi=Math.log10(40);
+  function X(cv){ if(cv==null) return mL+gutter/2; var v=Math.max(0.21,Math.min(39,cv)); return mL+gutter+(Math.log10(v)-lo)/(hi-lo)*(W-mL-mR-gutter); }
+  function Y(inf){ return mT+(100-inf)/100*(H-mT-mB); }
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto" role="img" aria-label="Vendors: influence vs token cost">';
+  /* free gutter */
+  svg+='<rect x="'+mL+'" y="'+mT+'" width="'+gutter+'" height="'+(H-mT-mB)+'" fill="rgba(58,214,160,.05)"/>';
+  svg+='<text x="'+(mL+gutter/2)+'" y="'+(H-mB+16)+'" text-anchor="middle" style="font:9px ui-monospace,monospace" fill="#3ad6a0">free / bundled</text>';
+  [0.28,1,5,25].forEach(function(t){ var x=X(t);
+    svg+='<line x1="'+x+'" y1="'+mT+'" x2="'+x+'" y2="'+(H-mB)+'" stroke="rgba(255,255,255,.07)"/>';
+    svg+='<text x="'+x+'" y="'+(H-mB+16)+'" text-anchor="middle" style="font:9.5px ui-monospace,monospace" fill="#8b93b8">$'+t+'</text>'; });
+  [25,50,75,100].forEach(function(t){ var y=Y(t);
+    svg+='<line x1="'+mL+'" y1="'+y+'" x2="'+(W-mR)+'" y2="'+y+'" stroke="rgba(255,255,255,.06)"/>';
+    svg+='<text x="'+(mL-8)+'" y="'+(y+3)+'" text-anchor="end" style="font:9.5px ui-monospace,monospace" fill="#8b93b8">'+t+'</text>'; });
+  svg+='<text x="'+((mL+W-mR)/2)+'" y="'+(H-6)+'" text-anchor="middle" style="font:10px ui-monospace,monospace" fill="#8b93b8">output token price, $ / million (log) \u2014 free-weight vendors in the green band</text>';
+  svg+='<text x="14" y="'+((mT+H-mB)/2)+'" text-anchor="middle" transform="rotate(-90 14 '+((mT+H-mB)/2)+')" style="font:10px ui-monospace,monospace" fill="#8b93b8">influence (judgement, 0\u2013100)</text>';
+  /* points with simple label declutter */
+  var placed=[];
+  var freeIdx=0, freeTotal=0; ECO.groups.forEach(function(g){g.vendors.forEach(function(v){ if(v.cv==null) freeTotal++; });});
+  ECO.groups.forEach(function(g){
+    g.vendors.forEach(function(v,gvIdx){
+      var x=X(v.cv), y=Y(v.inf);
+      if(v.cv==null){ x=mL+10+(freeIdx%3)*(gutter-20)/2; freeIdx++; }
+      var r=3.5+Math.pow(v.inf/100,1.6)*14;
+      svg+='<circle class="evdot" onclick="ecoVendorOpen(\''+g.id+'\','+gvIdx+')" cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+g.color+'" fill-opacity=".7" stroke="'+g.color+'" stroke-width="1.5"><title>'+v.n+' \u2014 '+g.name+' \u00b7 influence '+v.inf+(v.cv!=null?' \u00b7 ~$'+v.cv+'/M output':' \u00b7 free / bundled')+' \u00b7 tap for card</title></circle>';
+      var ok=true; for(var i2=0;i2<placed.length;i2++){ if(Math.abs(placed[i2][0]-x)<58 && Math.abs(placed[i2][1]-y)<12){ ok=false; break; } }
+      if(ok){ placed.push([x,y]); var anch=(x>W-110)?"end":"start", lx=(anch==="end")?x-r-4:x+r+4;
+        svg+='<text x="'+lx+'" y="'+(y+3)+'" text-anchor="'+anch+'" style="font:9px ui-monospace,monospace" fill="#cfd6ee">'+v.n+'</text>'; }
+    });
+  });
+  svg+='</svg>';
+  var legend='<div class="tl-legend" style="margin-top:8px">'+ECO.groups.map(function(g){return '<span><i class="ld" style="background:'+g.color+';border-radius:50%"></i>'+g.name+'</span>';}).join("")+'</div>';
+  return '<div class="echart">'+svg+'</div>'+legend;
+}
+function ecoVendorOpen(gid,idx){
+  var g=null; ECO.groups.forEach(function(x){ if(x.id===gid) g=x; }); if(!g) return;
+  var v=g.vendors[idx]; if(!v) return;
+  openSheet('<span class="mi-k" style="color:'+g.color+'">'+g.flag+' '+g.name+'</span>'+ecoVendorCard(v,g.color)
+    +'<p style="font-size:12px;color:var(--faint);margin-top:10px">Influence is the author\u2019s judgement (0\u2013100); prices are July 2026 list rates \u2014 confirm on the vendor\u2019s own page above.</p>');
+}
+function ecoVendorView(v){
+  var c=document.getElementById("evCards"), ch=document.getElementById("evChart");
+  document.getElementById("evCardsBtn").classList.toggle("on",v==="cards");
+  document.getElementById("evChartBtn").classList.toggle("on",v==="chart");
+  if(c) c.hidden=(v!=="cards"); if(ch) ch.hidden=(v!=="chart");
+}
+function buildEcosystem(){
+  var root=document.getElementById("ecoroot"); if(!root) return;
+  var groupCards=ECO.groups.map(ecoGroupCard).join("");
+  var vendorSecs=ECO.groups.map(function(g){
+    return '<div class="vgrp"><div class="vgh" style="--ec:'+g.color+'"><span class="dot" style="background:'+g.color+'"></span>'+g.name+'</div><div class="vgrid">'+g.vendors.map(function(v){return ecoVendorCard(v,g.color);}).join("")+'</div></div>';
+  }).join("");
+  var powerBody=
+    '<p class="secsub" style="margin:0 2px 8px"><b>Training</b> is a one-off cost that scales brutally with model class \u2014 note the <b>log scale</b>: each gridline is a big jump. A classical model trains for less energy than boiling a kettle; a frontier LLM consumes tens of gigawatt-hours.</p>'
+    +'<div class="echart">'+ecoTrainChart()+'</div>'
+    +'<p class="secsub" style="margin:14px 2px 8px"><b>Inference</b> is the ongoing cost \u2014 per request it looks tiny, but at billions of queries a day it overtakes training within months. Ranges below are per single request, again on a log scale.</p>'
+    +'<div class="echart">'+ecoInferChart()+'</div>'
+    +'<p style="font-size:11.5px;color:var(--faint);margin:10px 2px 0">Figures are published estimates (model papers, Epoch AI, IEEE Spectrum, arXiv:2505.09598, Stanford AI Index) \u2014 vendors rarely disclose exact numbers; treat as order-of-magnitude. Verified '+ (typeof VERIFIED!=="undefined"?VERIFIED:"Jul 2026") +'.</p>';
+  root.innerHTML=
+    '<div class="sechero" style="background:radial-gradient(120% 160% at 85% -20%,rgba(58,214,160,.14),transparent 55%),radial-gradient(110% 150% at 10% 120%,rgba(139,108,255,.12),transparent 55%)">'
+      +'<div class="kick">The AI supply chain \u00b7 worldwide</div>'
+      +'<div class="herorow"><h2>Where models <span>come from</span></h2>'
+      +'<button class="herobtn" onclick="document.getElementById(\'ecodisc\').classList.toggle(\'vis\')">&#9432; About</button></div>'
+      +'<div class="aidisc" id="ecodisc">AI-assembled July 2026 from vendor pricing pages, licences and published energy studies. Prices and valuations move fast \u2014 verify before relying on them. Personal capacity; not procurement advice.</div>'
+    +'</div>'
+    +secFrameHTML("eco-groups","1","#3ad6a0","The six worlds of AI supply","Who gives you what, under which licence, from where",
+      '<p class="secsub" style="margin-top:4px">Every architecture on the Cortex reaches you through one of six supply models. Tap an architecture chip to jump to its Cortex card.</p><div class="ecogrid">'+groupCards+'</div>', false)
+    +secFrameHTML("eco-power","2","#38d6e0","Power &amp; energy","Training vs inference \u2014 orders of magnitude",powerBody, false)
+    +secFrameHTML("eco-vendors","3","#8b6cff","Vendor atlas","Influence, scale, token cost, licence, origin",
+      '<p class="secsub" style="margin-top:4px">Significant vendors in each world. <b>Influence</b> is a judgement-based 0\u2013100 (reach + capability + ecosystem pull); token costs are July 2026 list prices per million tokens (input / output).</p>'
+      +'<div class="stab-toggle"><button class="on" id="evChartBtn" onclick="ecoVendorView(\'chart\')">&#9737; Chart</button><button id="evCardsBtn" onclick="ecoVendorView(\'cards\')">&#9635; Cards</button></div>'
+      +'<div id="evChart"><p class="secsub" style="margin:0 2px 8px">Every vendor plotted by <b>influence</b> (vertical) against <b>output token price</b> (horizontal, log scale). Free-weight and bundled vendors sit in the green band. Dot size scales with influence; colours match the six worlds. Tap or hover a dot for detail.</p>'+ecoVendorChart()+'</div>'
+      +'<div id="evCards" hidden>'+vendorSecs+'</div>'
+      +'<p style="font-size:11.5px;color:var(--faint);margin:12px 2px 0">Pricing verified against vendor pages and July 2026 roundups (<a href="https://devtk.ai/en/blog/ai-api-pricing-comparison-2026/" target="_blank" rel="noopener">DevTk</a>, <a href="https://benchlm.ai/llm-pricing" target="_blank" rel="noopener">BenchLM</a>, <a href="https://www.morphllm.com/llm-api" target="_blank" rel="noopener">Morph</a>); valuations from public reporting and are approximate. Each card links to the vendor\u2019s own page \u2014 the authoritative source. Influence scores are the author\u2019s judgement, not a market metric.</p>', false)
+    +secFrameHTML("eco-single","4","#3ad6a0","Built on one architecture","Impactful apps powered by a single model type",
+      '<p class="secsub" style="margin-top:4px">Some of the most consequential AI systems run on <b>one</b> architecture, used brilliantly. Tap any architecture to open its Cortex card.</p><div class="appgrid">'+APPS_SINGLE.map(appSingleCard).join("")+'</div>', false)
+    +secFrameHTML("eco-multi","5","#8b6cff","Built on many architectures","How real products stack models together",
+      '<p class="secsub" style="margin-top:4px">Most flagship products are <b>pipelines</b> of architectures working in concert \u2014 this is why AlphaFold sits here, not among the single-architecture apps. Each pill links to its Cortex card.</p><div class="appgrid">'+APPS_MULTI.map(appMultiCard).join("")+'</div>', false);
+}
+
 function buildThreats(){
   var root=document.getElementById("threatroot"); if(!root) return;
   var risks=SEC.risks.map(function(r){
