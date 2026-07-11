@@ -389,6 +389,67 @@
   .clog{border-left:2px solid var(--f3); padding:2px 0 2px 14px; margin-bottom:14px}
   .clogd{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--f1); margin-bottom:3px}
   .clog p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.5}
+  .artcard{display:block; border:1px solid var(--line); border-radius:13px; padding:13px 15px; margin-bottom:10px; text-decoration:none; transition:.15s; background:rgba(255,255,255,.02)}
+  .artcard:hover{border-color:var(--f3); background:rgba(106,168,255,.06); transform:translateY(-1px)}
+  .artcard .arth{font-family:var(--disp); font-weight:600; font-size:15px; color:var(--star)}
+  .artcard .artarrow{color:var(--f3); font-size:13px}
+  .artcard p{font-size:12.5px; color:var(--muted); margin:4px 0 0; line-height:1.45}
+  .artprofile{display:flex; align-items:center; gap:9px; margin-top:14px; padding:12px 15px; border-radius:12px; text-decoration:none; font-family:var(--disp); font-weight:600; font-size:14px; color:#fff; background:linear-gradient(90deg,#0a66c2,#378fe9)}
+  .artprofile:hover{filter:brightness(1.1)}
+  .artfeedback{display:block; margin-top:10px; padding:11px 15px; border-radius:12px; border:1px dashed var(--f3); text-decoration:none; font-size:13px; color:var(--f1); text-align:center}
+  .artfeedback:hover{background:rgba(106,168,255,.08)}
+  /* ---- plan tab ---- */
+  .planwrap{max-width:100%}
+  .planform{display:grid; gap:14px; margin-top:4px}
+  .planq{border:1px solid var(--line); border-radius:14px; padding:13px 14px; background:rgba(255,255,255,.015)}
+  .planpq{font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin:14px 0 8px}
+  .personasel{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); gap:9px}
+  .personabtn{display:flex; flex-direction:column; gap:2px; text-align:left; padding:12px 14px; border-radius:13px; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--muted); cursor:pointer; transition:.15s}
+  .personabtn b{font-family:var(--disp); font-size:15px; color:var(--star)}
+  .personabtn span{font-size:11px; color:var(--faint)}
+  .personabtn:hover{border-color:var(--f4)}
+  .personabtn.on{border-color:var(--f3); background:rgba(106,168,255,.16); box-shadow:0 0 0 1px var(--f3) inset}
+  .personabtn.on b{color:#fff}
+  .personablurb{font-size:12.5px; color:var(--muted); margin:9px 2px 4px; font-style:italic}
+  .teamgrouph{display:flex; align-items:center; gap:8px; grid-column:1/-1; font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; background:rgba(255,255,255,.03); padding:8px 12px}
+  .teamgrouph .dot{width:8px; height:8px; border-radius:50%; box-shadow:0 0 8px currentColor}
+  .planql{font-family:var(--disp); font-weight:600; font-size:14.5px; margin-bottom:9px; color:var(--star)}
+  .planmulti{font-family:var(--mono); font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); margin-left:6px}
+  .planopts{display:flex; flex-wrap:wrap; gap:7px}
+  .planopt{font-size:12.5px; padding:8px 13px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--muted); cursor:pointer; transition:.15s}
+  .planopt:hover{border-color:var(--f4); color:var(--star)}
+  .planopt.on{background:rgba(106,168,255,.18); border-color:var(--f3); color:#fff; box-shadow:0 0 0 1px var(--f3) inset}
+  .planbtns{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0}
+  .planbtn{font-family:var(--disp); font-weight:600; font-size:14px; padding:12px 20px; border-radius:12px; border:0; cursor:pointer; color:#fff; background:linear-gradient(90deg,var(--f4),var(--f2))}
+  .planbtn.go{font-size:15px; padding:13px 24px}
+  .planbtn:hover{filter:brightness(1.08)}
+  .planbtn.ghost{background:transparent; border:1px solid var(--line); color:var(--muted)}
+  .planout{margin-top:8px; border:1px solid var(--f5); border-radius:18px; padding:18px; background:linear-gradient(180deg,rgba(106,168,255,.05),transparent 40%); animation:fade .25s ease}
+  .planouth h2{font-family:var(--disp); font-size:21px; margin:4px 0 6px}
+  .psummary{font-size:13px; color:var(--muted); margin:0 0 8px; line-height:1.5}
+  .plansec{border-top:1px solid var(--line); padding:15px 0}
+  .psh{display:flex; align-items:center; gap:10px; font-family:var(--disp); font-weight:700; font-size:16px; margin-bottom:10px; color:var(--star); flex-wrap:wrap}
+  .psn{width:24px; height:24px; border-radius:7px; display:inline-flex; align-items:center; justify-content:center; font-size:13px; color:#fff; flex:none}
+  .pstag{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); border:1px solid var(--line); border-radius:999px; padding:3px 9px}
+  .plist{margin:4px 0 0; padding-left:18px} .plist li{font-size:13px; color:var(--muted); line-height:1.55; margin:4px 0}
+  .pmini{font-size:12px; color:var(--faint); margin:8px 0 0}
+  .pmini .lnk, .psummary .lnk{cursor:pointer}
+  .proute{font-size:14px; color:var(--star); margin-bottom:10px}
+  .pcols{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:11px}
+  .pcol{border:1px solid var(--line); border-radius:12px; padding:11px 13px}
+  .pcol.pros{border-left:3px solid #3ad6a0} .pcol.cons{border-left:3px solid #ffb347}
+  .pcolh{font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:6px}
+  .pcol ul{margin:0; padding-left:16px} .pcol li{font-size:12.5px; color:var(--muted); line-height:1.5; margin:4px 0}
+  .pssub{font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin:6px 0 2px}
+  .lnkchip{cursor:pointer; background:transparent; color:#dfe3ff; transition:.15s}
+  .lnkchip:hover{filter:brightness(1.3); background:rgba(255,255,255,.05)}
+  .teamtbl{display:grid; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+  .teamrow{display:grid; grid-template-columns:1.1fr 1.4fr 1.5fr; gap:1px; background:var(--line)}
+  .teamrow>div{background:var(--bg); padding:10px 12px; font-size:12.5px; color:var(--muted); line-height:1.45}
+  .teamrow.teamhd>div{font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); background:rgba(255,255,255,.03)}
+  .teamrole{font-family:var(--disp); font-weight:600; color:var(--star)!important}
+  .plandisc{margin-top:16px; border:1px solid #6a4a2a; background:rgba(255,150,60,.08); border-radius:12px; padding:14px 16px; font-size:12.5px; color:#f4d9b8; line-height:1.6}
+  @media(max-width:560px){ .teamrow{grid-template-columns:1fr} .teamrow.teamhd{display:none} .teamrow>div{padding:7px 12px} .teamrole{padding-top:11px!important} }
   /* ---- ecosystem tab ---- */
   .ecogrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr)); gap:14px}
   .ecocard{border:1px solid var(--line); border-left:3px solid var(--ec); border-radius:16px; padding:16px 17px; background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 60%)}
@@ -738,6 +799,7 @@
   <button data-tab="ecosystem" onclick="showTab('ecosystem')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><path d="M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18"/></svg>Ecosystem</button>
   <button data-tab="security" onclick="showTab('security')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>Security</button>
   <button data-tab="threats" onclick="showTab('threats')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>Threats</button>
+  <button data-tab="plan" onclick="showTab('plan')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Plan</button>
 </nav>
 
 <div class="hmenu" id="hmenu" hidden role="menu">
@@ -748,6 +810,8 @@
   <button role="menuitem" onclick="hmenuAct('copy')"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg><span id="copyLbl">Copy link</span></button>
   <button role="menuitem" onclick="hmenuAct('print')"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4v-6h16v6h-2M8 14h8v7H8z"/></svg>Save as PDF</button>
   <button role="menuitem" onclick="hmenuAct('changelog')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>What’s new</button>
+  <button role="menuitem" onclick="hmenuAct('articles')"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg>More from the author</button>
+  <button role="menuitem" onclick="hmenuAct('feedback')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Feedback</button>
 </div>
 
 <main class="appmain">
@@ -783,6 +847,10 @@
 
   <section class="view" id="view-threats" role="tabpanel" hidden>
     <div class="secwrap" id="threatroot"></div>
+  </section>
+
+  <section class="view" id="view-plan" role="tabpanel" hidden>
+    <div class="secwrap" id="planroot"></div>
   </section>
 
   <footer>Personal capacity · AI-assembled · not advice · Stuart Okin · 9 Jul 2026</footer>
@@ -1907,9 +1975,11 @@ function showTab(name){
   document.getElementById("view-ecosystem").hidden = (name!=="ecosystem");
   document.getElementById("view-security").hidden = (name!=="security");
   document.getElementById("view-threats").hidden = (name!=="threats");
+  document.getElementById("view-plan").hidden = (name!=="plan");
   if(name==="ecosystem" && !window._ecoBuilt){ buildEcosystem(); window._ecoBuilt=true; }
   if(name==="security" && !window._secBuilt){ buildSecurity(); window._secBuilt=true; }
   if(name==="threats" && !window._threatBuilt){ buildThreats(); window._threatBuilt=true; }
+  if(name==="plan" && !window._planBuilt){ buildPlan(); window._planBuilt=true; }
   if(name==="cortex"){ setTimeout(function(){ window.dispatchEvent(new Event("resize")); },40); }
   try{ history.replaceState(null,"","#"+name); }catch(e){}
   window.scrollTo({top:0,behavior:"smooth"});
@@ -1926,6 +1996,8 @@ function hmenuAct(a){ document.getElementById("hmenu").hidden=true; document.get
   else if(a==="print") window.print();
   else if(a==="search") openSearch();
   else if(a==="changelog") openSheet(changelogHTML());
+  else if(a==="articles") openSheet(articlesHTML());
+  else if(a==="feedback") window.open("https://www.linkedin.com/in/stuart-okin-b37ab69","_blank","noopener");
 }
 function openSheet(html){ document.getElementById("sheetbody").innerHTML=html; document.getElementById("sheetwrap").hidden=false; }
 var VERIFIED="11 Jul 2026";
@@ -1968,8 +2040,22 @@ function gotoIncident(kind,id){
     if(kind!=="attack" && typeof buildTimeline==="function"){ buildTimeline(); }
   },90);
 }
+function articlesHTML(){
+  var arts=[
+    {t:"AI Finding Zero-Day Bugs, Fast",d:"How AI is accelerating vulnerability discovery \u2014 and what that means for defenders.",u:"https://www.linkedin.com/pulse/ai-finding-zero-day-bugs-fast-stuart-okin-khv1e/"},
+    {t:"Mapping AI Governance &amp; Standards",d:"A guided map through the tangle of AI governance frameworks, standards and laws.",u:"https://www.linkedin.com/pulse/mapping-ai-governance-standards-stuart-okin-w8oqe/"},
+    {t:"I Built a Q-Day Clock. It Kept Speeding Up.",d:"Building an interactive post-quantum \u2018Q-Day\u2019 countdown \u2014 and why the deadline keeps moving.",u:"https://www.linkedin.com/pulse/i-built-q-day-clock-kept-speeding-up-stuart-okin-ku1me"}
+  ];
+  return '<span class="mi-k" style="color:#6aa8ff">Stuart Okin \u00b7 written in a personal capacity</span><h2>More from the author</h2>'
+    +'<p style="font-size:13.5px;color:var(--muted);margin:0 0 12px">Related pieces on AI security, governance and interactive tools \u2014 all on LinkedIn.</p>'
+    +arts.map(function(a){ return '<a class="artcard" href="'+a.u+'" target="_blank" rel="noopener"><div class="arth">'+a.t+' <span class="artarrow">\u2197</span></div><p>'+a.d+'</p></a>'; }).join("")
+    +'<a class="artprofile" href="https://www.linkedin.com/in/stuart-okin-b37ab69" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>Follow &amp; connect on LinkedIn \u2197</a>'
+    +'<a class="artfeedback" href="https://www.linkedin.com/in/stuart-okin-b37ab69" target="_blank" rel="noopener">\ud83d\udcac Have feedback on this tool? Send it via LinkedIn \u2197</a>';
+}
 function changelogHTML(){
   var items=[
+    ["11 Jul 2026","New <b>Plan</b> tab: an interactive build planner — answer as an executive or architect and it generates architectures, an ecosystem/licensing route with pros &amp; cons, standards in scope, security considerations and a starting team, all cross-linked, with a clear disclaimer."],
+    ["11 Jul 2026","Added <b>example applications</b> (single- and multi-architecture) to the Ecosystem tab, plus <b>Feedback</b> and <b>More from the author</b> links to Stuart Okin’s LinkedIn articles."],
     ["11 Jul 2026","New <b>Ecosystem</b> tab: the six worlds of AI supply (licensing, distribution, origin), training vs inference energy charts, and a vendor atlas with July-2026 token prices — all linked to the Cortex cards. Tour rewritten to cover every feature."],
     ["11 Jul 2026","Accuracy pass: corrected CVE-2025-53773 to CVSS 7.8; re-sourced the LiteLLM / PyTorch Lightning / Bitwarden supply-chain items to the TeamPCP \u2018Mini Shai-Hulud\u2019 campaign. Added cross-tab links, global search, deep links, and small-screen fixes."],
     ["10 Jul 2026","Added JadePuffer (first fully agentic ransomware). Reorganised Security &amp; Threats into collapsible frames; combined timeline filters; multi-lane timeline labels."],
@@ -1985,7 +2071,7 @@ function applyHash(){
   if(parts[0]==="threat"&&parts[1]) gotoThreat(parts[1]);
   else if(parts[0]==="std"&&parts[1]){ showTab("security"); setTimeout(function(){ if(typeof openStd==="function") openStd(parts[1]); },90); }
   else if(parts[0]==="model"&&parts[1]&&window.openModel) window.openModel(decodeURIComponent(parts[1]));
-  else if(["cortex","ecosystem","security","threats"].indexOf(parts[0])>=0) showTab(parts[0]);
+  else if(["cortex","ecosystem","security","threats","plan"].indexOf(parts[0])>=0) showTab(parts[0]);
 }
 window.addEventListener("hashchange",applyHash);
 window.addEventListener("load",function(){ setTimeout(applyHash,700); });
@@ -2047,7 +2133,9 @@ var TOUR=[
   {h:"The Ecosystem tab \u2014 where models come from", b:"<p>Next to the Cortex: the <b>AI supply chain</b>. <b>Six worlds</b> of supply \u2014 frontier commercial, open-weight challengers, fully open, small &amp; on-device, classical repositories, and domain-specific \u2014 each with its licensing, distribution channels and countries of origin.</p><p>Plus <b>power &amp; energy</b> charts (training vs inference, on log scales) and a <b>vendor atlas</b> comparing influence, scale, token cost and licence regime. Architecture chips link back to their Cortex cards.</p>"},
   {h:"The Security tab", b:"<p>Three frames: the <b>secure-AI lifecycle</b> (design \u2192 develop \u2192 deploy \u2192 operate), an interactive <b>control map</b> linking architecture families \u2192 lifecycle controls \u2192 <b>56 standards and laws worldwide</b> (NCSC to NIST AI 600-1, the EU AI Act to Ofgem\u2019s Ethical AI guidance), and a <b>standards library</b> with a 3D orbital view. Tap any node to light up its connections \u2014 every card links to its primary source.</p>"},
   {h:"The Threats tab \u2014 an observatory for defenders", b:"<p>Six frames: a pan-and-pinch <b>timeline</b> of real attacks, CVEs and techniques (with an off-by-default <b>\u25b2 AI-assisted attacks</b> layer \u2014 WormGPT to JadePuffer); <b>threats by architecture</b> with a linked map; <b>attack techniques</b>; <b>disclosed vulnerabilities</b>; <b>attack trends</b>; and <b>AI misuse</b>. Threat sheets link to mitigating controls, and controls link back to threats.</p>"},
-  {h:"Search, share &amp; the \u22ee menu", b:"<p>Top-right: <b>Search everything</b> (models, threats, standards, attacks in one box), the <b>glossary</b>, <b>all sources</b>, <b>what\u2019s new</b>, copy-link and save-as-PDF. The URL updates as you navigate \u2014 so you can <b>share a link to any tab, threat, standard or model</b>. The <b>speaker</b> mutes the ambient music; the <b>sun/moon</b> switches theme. Works from phone to large monitor.</p>"}
+  {h:"Search, share &amp; the \u22ee menu", b:"<p>Top-right: <b>Search everything</b> (models, threats, standards, attacks in one box), the <b>glossary</b>, <b>all sources</b>, <b>what\u2019s new</b>, copy-link and save-as-PDF. The URL updates as you navigate \u2014 so you can <b>share a link to any tab, threat, standard or model</b>. The <b>speaker</b> mutes the ambient music; the <b>sun/moon</b> switches theme. Works from phone to large monitor.</p>"},
+  {h:"The Plan tab \u2014 scope a build", b:"<p>The newest tab is an <b>interactive plan builder</b>. Answer a handful of questions as an <b>executive</b> or a <b>technical architect</b>, and it assembles a high-level plan: which <b>architectures</b> to use (alone or combined), a recommended <b>ecosystem &amp; licensing route with pros and cons</b>, the <b>rules, laws and standards</b> in scope, <b>security considerations</b>, and an <b>initial team with matching skills</b> \u2014 every item linking into the other tabs. A clear disclaimer follows each generated plan.</p>"},
+  {h:"Feedback &amp; more from the author", b:"<p>This is a <b>personal-capacity</b> project by <b>Stuart Okin</b>, built to make the AI landscape easier to explore. If it\u2019s useful \u2014 or if you spot something to fix \u2014 <b>feedback is very welcome</b>.</p><p><a href=\"https://www.linkedin.com/in/stuart-okin-b37ab69\" target=\"_blank\" rel=\"noopener\"><b>Send feedback / connect on LinkedIn \u2197</b></a></p><p style=\"margin-top:8px\">Related reading (\u22ee menu \u2192 <b>More from the author</b>):</p><ul><li><a href=\"https://www.linkedin.com/pulse/ai-finding-zero-day-bugs-fast-stuart-okin-khv1e/\" target=\"_blank\" rel=\"noopener\">AI Finding Zero-Day Bugs, Fast \u2197</a></li><li><a href=\"https://www.linkedin.com/pulse/mapping-ai-governance-standards-stuart-okin-w8oqe/\" target=\"_blank\" rel=\"noopener\">Mapping AI Governance &amp; Standards \u2197</a></li><li><a href=\"https://www.linkedin.com/pulse/i-built-q-day-clock-kept-speeding-up-stuart-okin-ku1me\" target=\"_blank\" rel=\"noopener\">I Built a Q-Day Clock. It Kept Speeding Up. \u2197</a></li></ul>"}
 ];
 var _ti=0;
 function showTour(){ _ti=0; renderTour(); document.getElementById("welcome").hidden=false; }
@@ -3611,6 +3699,229 @@ function buildEcosystem(){
       '<p class="secsub" style="margin-top:4px">Some of the most consequential AI systems run on <b>one</b> architecture, used brilliantly. Tap any architecture to open its Cortex card.</p><div class="appgrid">'+APPS_SINGLE.map(appSingleCard).join("")+'</div>', false)
     +secFrameHTML("eco-multi","5","#8b6cff","Built on many architectures","How real products stack models together",
       '<p class="secsub" style="margin-top:4px">Most flagship products are <b>pipelines</b> of architectures working in concert \u2014 this is why AlphaFold sits here, not among the single-architecture apps. Each pill links to its Cortex card.</p><div class="appgrid">'+APPS_MULTI.map(appMultiCard).join("")+'</div>', false);
+}
+
+
+/* ================= PLAN TAB ================= */
+var OPT_DATA=[{v:"public",l:"Public / low"},{v:"internal",l:"Internal confidential"},{v:"personal",l:"Personal data (GDPR/DPA)"},{v:"regulated",l:"Regulated / critical (finance, health, CNI)"}];
+var OPT_SECTOR=[{v:"general",l:"General commercial"},{v:"energy",l:"Energy / CNI"},{v:"finance",l:"Finance"},{v:"health",l:"Health"},{v:"public",l:"Public sector"},{v:"eu",l:"EU market"}];
+var OPT_APP=[{v:"assistant",l:"Conversational assistant"},{v:"rag",l:"Knowledge search / Q&A (RAG)"},{v:"code",l:"Code / developer tools"},{v:"agents",l:"Autonomous agents / automation"},{v:"tabular",l:"Tabular prediction (churn, scoring)"},{v:"anomaly",l:"Anomaly / fraud detection"},{v:"forecasting",l:"Forecasting / time-series"},{v:"recommendation",l:"Recommendation / personalisation"},{v:"idp",l:"Document processing (IDP / OCR)"},{v:"vision",l:"Image / video understanding"},{v:"speech",l:"Speech / audio"},{v:"content",l:"Content generation (text / image)"},{v:"science",l:"Scientific / domain-specific"}];
+var OPT_CONTROL=[{v:"api",l:"Off-the-shelf API is fine"},{v:"rag",l:"API + prompt + our data (RAG)"},{v:"tune",l:"Fine-tune / adapt a model"},{v:"weights",l:"Full control of the weights"}];
+var OPT_DEPLOY=[{v:"cloud",l:"Public cloud (fastest)"},{v:"region",l:"Specific region / sovereign cloud"},{v:"onprem",l:"On-prem / private only"},{v:"edge",l:"On-device / edge"},{v:"hybrid",l:"Hybrid"}];
+var OPT_SCALE=[{v:"proto",l:"Pilot / proof-of-concept"},{v:"dept",l:"Single department"},{v:"prod",l:"Production, moderate"},{v:"ent",l:"Enterprise-wide"},{v:"critical",l:"Mission-critical"}];
+var OPT_BUILD=[{v:"buy",l:"Buy off-the-shelf / SaaS"},{v:"build",l:"Build in-house"},{v:"partner",l:"Partner &amp; co-build"},{v:"unsure",l:"Not decided yet"}];
+var OPT_RISK=[{v:"pioneer",l:"Pioneer \u2014 first-mover"},{v:"follower",l:"Fast-follower"},{v:"conservative",l:"Conservative"},{v:"reg",l:"Highly regulated / risk-averse"}];
+var OPT_OUTCOME=[{v:"cost",l:"Cost &amp; efficiency"},{v:"revenue",l:"Revenue growth"},{v:"risk",l:"Risk &amp; compliance"},{v:"cx",l:"Customer experience"},{v:"prod",l:"Workforce productivity"},{v:"innov",l:"New capability / innovation"}];
+var PLANSETS={
+ exec:[
+  {id:"outcome",q:"What business outcome matters most?",multi:false,opts:OPT_OUTCOME},
+  {id:"domain",q:"Which part of the enterprise will it serve?",multi:false,opts:[{v:"cs",l:"Customer service &amp; support"},{v:"sales",l:"Sales &amp; marketing"},{v:"finance",l:"Finance, risk &amp; audit"},{v:"ops",l:"Operations &amp; supply chain"},{v:"hr",l:"HR &amp; workforce"},{v:"it",l:"IT &amp; cyber security"},{v:"rnd",l:"R&amp;D &amp; engineering"},{v:"knowledge",l:"Knowledge &amp; documents"},{v:"product",l:"Core product / service"}]},
+  {id:"data",q:"How sensitive is the data involved?",multi:false,opts:OPT_DATA},
+  {id:"buildbuy",q:"Instinct: build, buy or partner?",multi:false,opts:OPT_BUILD},
+  {id:"risk",q:"What is your risk appetite?",multi:false,opts:OPT_RISK},
+  {id:"scale",q:"Ambition &amp; scale?",multi:false,opts:OPT_SCALE},
+  {id:"sovereignty",q:"How important is data sovereignty?",multi:false,opts:[{v:"no",l:"Not a concern"},{v:"pref",l:"Preferred"},{v:"must",l:"Mandatory"}]},
+  {id:"change",q:"Organisational readiness for change?",multi:false,opts:[{v:"high",l:"AI-ready, adaptable"},{v:"mixed",l:"Mixed"},{v:"low",l:"Low \u2014 needs heavy support"}]},
+  {id:"sector",q:"Sector / regulatory context?",multi:true,opts:OPT_SECTOR}
+ ],
+ arch:[
+  {id:"apptype",q:"What kind of system are you building?",multi:true,opts:OPT_APP},
+  {id:"data",q:"Data sensitivity?",multi:false,opts:OPT_DATA},
+  {id:"dataready",q:"How ready is your data?",multi:false,opts:[{v:"rich",l:"Rich &amp; labelled"},{v:"unlabelled",l:"Plentiful but unlabelled"},{v:"sparse",l:"Sparse / messy"},{v:"none",l:"Little to none yet"}]},
+  {id:"latency",q:"Latency &amp; throughput?",multi:false,opts:[{v:"batch",l:"Batch / offline"},{v:"interactive",l:"Interactive (seconds)"},{v:"realtime",l:"Real-time (&lt;1s)"},{v:"highqps",l:"High-QPS"}]},
+  {id:"deploy",q:"Deployment target?",multi:false,opts:OPT_DEPLOY},
+  {id:"control",q:"Control &amp; customisation?",multi:false,opts:OPT_CONTROL},
+  {id:"integration",q:"Integration surface?",multi:false,opts:[{v:"standalone",l:"Standalone app"},{v:"embed",l:"Into an existing app"},{v:"workflow",l:"Into a workflow / BPM"},{v:"data",l:"Into the data platform"}]},
+  {id:"mlops",q:"MLOps / platform maturity?",multi:false,opts:[{v:"green",l:"Greenfield"},{v:"some",l:"Some ML in production"},{v:"mature",l:"Mature MLOps"}]},
+  {id:"security",q:"Security &amp; identity posture?",multi:false,opts:[{v:"standard",l:"Standard enterprise"},{v:"zerotrust",l:"Zero-trust required"},{v:"airgap",l:"Air-gapped"}]},
+  {id:"sector",q:"Sector / regulatory context?",multi:true,opts:OPT_SECTOR}
+ ],
+ both:[
+  {id:"outcome",q:"What business outcome matters most?",multi:false,opts:OPT_OUTCOME},
+  {id:"apptype",q:"What kind of system are you building?",multi:true,opts:OPT_APP},
+  {id:"data",q:"Data sensitivity?",multi:false,opts:OPT_DATA},
+  {id:"deploy",q:"Deployment target?",multi:false,opts:OPT_DEPLOY},
+  {id:"control",q:"Control &amp; customisation?",multi:false,opts:OPT_CONTROL},
+  {id:"buildbuy",q:"Build, buy or partner?",multi:false,opts:OPT_BUILD},
+  {id:"risk",q:"Risk appetite?",multi:false,opts:OPT_RISK},
+  {id:"scale",q:"Ambition &amp; scale?",multi:false,opts:OPT_SCALE},
+  {id:"sector",q:"Sector / regulatory context?",multi:true,opts:OPT_SECTOR}
+ ]
+};
+var PERSONA_BLURB={exec:"High-level, strategic questions \u2014 outcomes, risk, sourcing and readiness.",arch:"Detailed, technical questions \u2014 workload, data, deployment and control.",both:"A blended set drawn from both the executive and architect views."};
+function buildPlan(){
+  var root=document.getElementById("planroot"); if(!root) return;
+  if(!window._plan) window._plan={persona:"both",ans:{}};
+  var P=window._plan;
+  var personas=[["exec","Executive","Strategic &amp; outcome-led"],["arch","Technical architect","Detailed &amp; technical"],["both","A bit of both","Blended"]];
+  var pSel='<div class="personasel">'+personas.map(function(x){return '<button class="personabtn'+(P.persona===x[0]?" on":"")+'" data-persona="'+x[0]+'"><b>'+x[1]+'</b><span>'+x[2]+'</span></button>';}).join("")+'</div>';
+  var qs=PLANSETS[P.persona].map(function(q){
+    var opts=q.opts.map(function(o){
+      var cur=P.ans[q.id], sel=q.multi?(Array.isArray(cur)&&cur.indexOf(o.v)>=0):(cur===o.v);
+      return '<button class="planopt'+(sel?" on":"")+'" data-q="'+q.id+'" data-v="'+o.v+'" data-multi="'+(q.multi?1:0)+'">'+o.l+'</button>';
+    }).join("");
+    return '<div class="planq"><div class="planql">'+q.q+(q.multi?' <span class="planmulti">choose any</span>':'')+'</div><div class="planopts">'+opts+'</div></div>';
+  }).join("");
+  root.innerHTML='<div class="planwrap">'
+    +'<div class="thero" style="background:radial-gradient(120% 160% at 85% -20%,rgba(106,168,255,.14),transparent 55%)"><div class="kick">Plan builder \u00b7 interactive</div><div class="herorow"><h2>Scope an <span>AI build</span></h2><button class="herobtn" onclick="openSheet(planMethodHTML())">&#9432; How it works</button></div><p>Choose your perspective, then answer a few questions. The tool assembles a high-level plan \u2014 architectures, ecosystem &amp; licensing with pros and cons, the rules and standards in scope, security considerations and a starting team (business <b>and</b> technical) \u2014 with links into every other tab. A starting point for a strategic conversation, not advice.</p></div>'
+    +'<div class="planpq">Plan as\u2026</div>'+pSel
+    +'<div class="personablurb">'+PERSONA_BLURB[P.persona]+'</div>'
+    +'<div class="planform">'+qs+'</div>'
+    +'<div class="planbtns"><button class="planbtn go" onclick="planGenerate()">Generate the plan &#8595;</button><button class="planbtn ghost" onclick="planReset()">Reset</button></div>'
+    +'<div id="planresult"></div>'
+    +'</div>';
+  if(!root._ph){ root._ph=1; root.addEventListener("click",function(e){
+    var pb=e.target.closest(".personabtn"); if(pb){ window._plan.persona=pb.dataset.persona; buildPlan(); return; }
+    var b=e.target.closest(".planopt"); if(!b) return;
+    var q=b.dataset.q, v=b.dataset.v, A=window._plan.ans;
+    if(b.dataset.multi==="1"){ if(!Array.isArray(A[q])) A[q]=[]; var i=A[q].indexOf(v); if(i>=0) A[q].splice(i,1); else A[q].push(v); }
+    else { A[q]=v; }
+    buildPlan();
+  }); }
+}
+function planReset(){ window._plan={persona:window._plan?window._plan.persona:"both",ans:{}}; buildPlan(); }
+function planChip(name){ return (typeof ecoArchChip==="function")?ecoArchChip(name):name; }
+function planStd(id,label){ if(typeof stdById==="function" && stdById(id)) return '<button class="rchip lnkchip" onclick="openStd(\''+id+'\')">'+label+' \u2192</button>'; return '<span class="rchip">'+label+'</span>'; }
+function planThreat(id,label){ if(typeof thrById==="function" && thrById(id)) return '<button class="rchip lnkchip" onclick="gotoThreat(\''+id+'\')" style="border-color:#ff7a7a">'+label+' \u2192</button>'; return '<span class="rchip">'+label+'</span>'; }
+function planCtl(n,label){ return '<button class="rchip lnkchip" onclick="gotoControl(\''+n+'\')" style="border-color:#6fe0b0">'+n+' \u00b7 '+label+' \u2192</button>'; }
+function planMethodHTML(){
+  return '<span class="mi-k" style="color:#6aa8ff">Transparent by design</span><h2>How your answers build the plan</h2>'
+   +'<p>This is a <b>rules engine, not a black box</b>. Every recommendation is a direct, inspectable consequence of what you select \u2014 there is no AI model deciding behind the scenes. Here is the mapping:</p>'
+   +'<div class="methstep"><b>Your perspective</b> sets the <i>depth</i> of the questions. Executives get high-level, outcome-led questions; architects get detailed technical ones; \u2018a bit of both\u2019 blends them. Executive answers are translated into the same underlying technical picture \u2014 e.g. a business <i>domain</i> maps to likely <i>workloads</i>.</div>'
+   +'<div class="methstep"><b>What the system does</b> (or the enterprise domain) selects the <i>candidate architectures</i>. Tabular scoring points to gradient boosting, not an LLM; knowledge search points to an LLM plus retrieval; agents add an orchestration layer. Pick several and you get a multi-architecture build.</div>'
+   +'<div class="methstep"><b>Data sensitivity + deployment + control + risk/budget</b> choose the <i>ecosystem &amp; licensing route</i>. Edge or \u2018data can\u2019t leave\u2019 \u2192 on-device or self-hosted open weights; best-capability + non-sensitive + cloud \u2192 frontier API; otherwise a hybrid. Each route lists its real pros and cons.</div>'
+   +'<div class="methstep"><b>Sector + data sensitivity</b> select the <i>rules, laws and standards</i> in scope \u2014 personal data pulls in UK GDPR and a DPIA; the EU market pulls in the EU AI Act; energy/CNI pulls in the NCSC CAF and NIS; generative systems pull in NIST AI 600-1 and the OWASP LLM Top 10.</div>'
+   +'<div class="methstep"><b>Architecture + route</b> drive the <i>security considerations</i> \u2014 LLMs surface prompt-injection and guardrails; self-hosting surfaces supply-chain and secrets; personal data surfaces memorisation and data governance.</div>'
+   +'<div class="methstep"><b>The whole picture</b> sizes the <i>team</i> \u2014 and deliberately includes <b>business, governance and change roles</b>, not just engineers, because most AI programmes fail on adoption, data and governance rather than modelling.</div>'
+   +'<p style="font-size:12px;color:var(--faint);margin-top:10px">Because it is deterministic, the same answers always produce the same plan \u2014 useful for comparing options by changing one variable at a time. It is intentionally simple and generalised: treat it as a prompt for discussion, then validate with experts.</p>';
+}
+function planModel(){
+  var A=window._plan.ans, P=window._plan.persona;
+  function g(id,d){ return A[id]!==undefined?A[id]:d; }
+  var M={};
+  /* tasks */
+  var tasks=[];
+  if(Array.isArray(A.apptype)&&A.apptype.length) tasks=A.apptype.slice();
+  else if(A.domain){ var DM={cs:["assistant","rag"],sales:["content","rag","recommendation"],finance:["tabular","anomaly"],ops:["forecasting","agents","tabular"],hr:["rag","tabular"],it:["anomaly","agents","code"],rnd:["science","content","code"],knowledge:["rag"],product:["assistant"]}; tasks=DM[A.domain]||["assistant"]; }
+  else if(A.outcome){ var OM={cost:["agents","tabular"],revenue:["recommendation","content"],risk:["anomaly","tabular"],cx:["assistant","rag"],prod:["assistant","rag"],innov:["content","agents"]}; tasks=OM[A.outcome]||["assistant"]; }
+  if(!tasks.length) tasks=["assistant"];
+  M.tasks=tasks;
+  M.data=g("data","internal");
+  /* residency */
+  var dep=A.deploy;
+  if(!dep && A.sovereignty){ dep=(A.sovereignty==="must")?"region":(A.sovereignty==="pref")?"region":"cloud"; }
+  M.residency=dep||"cloud";
+  /* control */
+  var ctl=A.control;
+  if(!ctl && A.buildbuy){ ctl=(A.buildbuy==="buy")?"api":(A.buildbuy==="build")?"tune":(A.buildbuy==="partner")?"tune":"api"; }
+  M.control=ctl||"api";
+  /* capability/budget inference */
+  var cap="balance";
+  if(A.risk==="pioneer") cap="best"; else if(A.risk==="conservative"||A.risk==="reg") cap="cost";
+  if(A.outcome==="cost") cap="cost"; if(A.outcome==="innov") cap="best";
+  M.cap=cap;
+  M.scale=g("scale","prod");
+  M.sector=Array.isArray(A.sector)&&A.sector.length?A.sector:["general"];
+  M.risk=A.risk||""; M.buildbuy=A.buildbuy||""; M.change=A.change||""; M.mlops=A.mlops||""; M.security=A.security||""; M.dataready=A.dataready||""; M.outcome=A.outcome||"";
+  M.persona=P;
+  return M;
+}
+function planGenerate(){
+  var M=planModel();
+  var TL={assistant:"Conversational assistant",rag:"Knowledge search (RAG)",code:"Code / dev tools",agents:"Autonomous agents",tabular:"Tabular prediction",anomaly:"Anomaly / fraud detection",forecasting:"Forecasting / time-series",recommendation:"Recommendation",idp:"Document processing",vision:"Vision",speech:"Speech / audio",content:"Content generation",science:"Scientific / domain"};
+  var AM={
+   assistant:{a:["Transformers / LLMs","Mixture-of-Experts (MoE)","Reinforcement Learning (RL / RLHF)"],n:"A large language model is the core; MoE variants cut cost at scale; RLHF aligns tone and safety. Ground it with retrieval to curb hallucination."},
+   rag:{a:["Transformers / LLMs"],n:"Combine an LLM with vector search over <b>your own documents</b> (Retrieval-Augmented Generation) so answers are grounded in your content."},
+   code:{a:["Transformers / LLMs","Agentic & Multi-Agent AI"],n:"A code-tuned LLM, optionally in an agent loop to run tools, tests and edits."},
+   agents:{a:["Agentic & Multi-Agent AI","Transformers / LLMs"],n:"An orchestration layer drives one or more LLMs to plan, call tools and act \u2014 highest capability and highest risk."},
+   tabular:{a:["Gradient Boosting (XGBoost)","Decision Trees & Random Forests"],n:"For structured prediction you very likely do <b>not</b> need an LLM \u2014 gradient boosting is cheaper, faster, more accurate and explainable."},
+   anomaly:{a:["Gradient Boosting (XGBoost)","Clustering & k-NN","Variational Autoencoders (VAE)"],n:"Fraud/anomaly work blends supervised boosting with unsupervised outlier detection (clustering, autoencoders)."},
+   forecasting:{a:["Recurrent Networks (RNN/LSTM)","Gradient Boosting (XGBoost)"],n:"Time-series forecasting: gradient boosting on engineered features is a strong, cheap baseline; recurrent nets for long temporal patterns."},
+   recommendation:{a:["Graph Neural Networks (GNN)","Feedforward Networks (MLP)","Reinforcement Learning (RL / RLHF)"],n:"Model users/items as a graph, rank with deep nets, optimise for long-term engagement \u2014 a pipeline, not one model."},
+   idp:{a:["Convolutional Networks (CNN)","Multimodal & Vision Transformers","Transformers / LLMs"],n:"Document processing: CNN/vision models for layout &amp; OCR, an LLM to understand and extract."},
+   vision:{a:["Convolutional Networks (CNN)","Multimodal & Vision Transformers"],n:"CNNs for classic detection/classification; vision Transformers for richer scene and multimodal understanding."},
+   speech:{a:["Transformers / LLMs","Recurrent Networks (RNN/LSTM)"],n:"Modern speech-to-text is Transformer-based (e.g. Whisper); recurrent models still feature in streaming."},
+   content:{a:["Diffusion Models","Variational Autoencoders (VAE)","Transformers / LLMs"],n:"Diffusion generates images; a Transformer text-encoder conditions it; a VAE keeps it efficient. For written content, an LLM."},
+   science:{a:["Graph Neural Networks (GNN)","Convolutional Networks (CNN)","World Models (JEPA)"],n:"Domain-specific \u2014 often GNNs (molecules, grids), CNNs (imaging) or purpose-built scientific models."}
+  };
+  var archs=[], notes=[];
+  M.tasks.forEach(function(t){ var m=AM[t]; if(m){ m.a.forEach(function(a){ if(archs.indexOf(a)<0) archs.push(a); }); notes.push('<li><b>'+(TL[t]||t)+':</b> '+m.n+'</li>'); } });
+  var multiArch=archs.length>1;
+  var gen=(M.tasks.indexOf("assistant")>=0||M.tasks.indexOf("rag")>=0||M.tasks.indexOf("code")>=0||M.tasks.indexOf("agents")>=0||M.tasks.indexOf("content")>=0||M.tasks.indexOf("idp")>=0||M.tasks.indexOf("speech")>=0);
+  /* route */
+  var route;
+  if(M.residency==="edge") route="ondevice";
+  else if(M.residency==="onprem"||M.control==="weights"||M.data==="regulated"||M.security==="airgap") route="openweights";
+  else if(M.cap==="cost") route="openweights";
+  else if(M.cap==="best"&&(M.data==="public"||M.data==="internal")&&(M.residency==="cloud"||M.residency==="hybrid")) route="frontier";
+  else route="hybrid";
+  var ROUTES={
+   frontier:{name:"Frontier commercial API",gid:"frontier",pros:["Best raw capability, immediately","No infrastructure to run \u2014 provider handles hosting, safety and updates","Fastest path to a working prototype","Elastic scale"],cons:["Your data leaves your estate \u2014 check processing &amp; retention terms","Per-token cost grows with volume","Vendor lock-in and model-deprecation risk","Least control over weights and behaviour"]},
+   openweights:{name:"Open-weight, self-hosted",gid:"openweights",pros:["Data never leaves your boundary \u2014 residency &amp; sovereignty by design","Full control: fine-tune, quantise, pin versions","No per-token fee; predictable infra cost at scale","Auditable end-to-end"],cons:["You own the hosting, GPUs, security and MLOps","Capability gap vs frontier (narrowing fast)","Licences vary \u2014 read them (Llama, Gemma, Apache-2.0, MIT)","Slower to stand up"]},
+   ondevice:{name:"Small / on-device",gid:"ondevice",pros:["Runs on the device \u2014 data never leaves it","No per-query cost; works offline; lowest latency","Strongest privacy story"],cons:["Lower capability ceiling","Model + memory constraints on device","Fleet update/versioning is harder"]},
+   hybrid:{name:"Hybrid \u2014 frontier for the hard parts, open weights for the rest",gid:null,pros:["Frontier only where capability truly demands it; open/self-hosted for bulk or sensitive work","Cost and residency optimised per task","Avoids single-vendor lock-in"],cons:["Two stacks to build, secure and evaluate","Routing logic and consistent evaluation add complexity","Governance must cover both paths"]}
+  };
+  var R=ROUTES[route];
+  var ecoLinkBtn=R.gid?'<button class="rchip lnkchip" onclick="gotoEcoGroup(\''+R.gid+'\')" style="border-color:#3ad6a0">Open this supply world \u2192</button>':'<button class="rchip lnkchip" onclick="showTab(\'ecosystem\')" style="border-color:#3ad6a0">Explore the Ecosystem tab \u2192</button>';
+  /* standards */
+  var std=[]; std.push(planStd("nist","NIST AI RMF")); std.push(planStd("iso42001","ISO/IEC 42001"));
+  if(gen){ std.push(planStd("nist600","NIST AI 600-1 (GenAI)")); std.push(planStd("owasp","OWASP LLM Top 10")); std.push(planStd("etsi","ETSI TS 104 223")); }
+  if(M.data==="personal"||M.data==="regulated") std.push(planStd("ico","UK GDPR / DPA \u00b7 ICO"));
+  if(M.sector.indexOf("eu")>=0) std.push(planStd("euact","EU AI Act"));
+  if(M.sector.indexOf("energy")>=0){ std.push(planStd("caf","NCSC CAF")); std.push(planStd("nisreg","UK NIS Regulations")); std.push(planStd("ofgem","Ofgem Ethical AI")); }
+  if(M.sector.indexOf("public")>=0) std.push(planStd("dsit","UK AI Playbook / DSIT"));
+  var stdNotes=[];
+  if(M.data==="personal"||M.data==="regulated") stdNotes.push("A <b>DPIA</b> is likely mandatory before processing begins.");
+  if(M.sector.indexOf("finance")>=0) stdNotes.push("Finance: factor in <b>FCA/PRA operational-resilience</b> and model-risk expectations.");
+  if(M.sector.indexOf("health")>=0) stdNotes.push("Health: clinical-safety governance and <b>MHRA</b> \u2018AI as a medical device\u2019 rules may apply.");
+  if(M.sector.indexOf("energy")>=0) stdNotes.push("Energy/CNI: assess against the <b>Cyber Assessment Framework</b> and NIS obligations for operators of essential services.");
+  /* security */
+  var thr=[], ctl=[]; ctl.push(planCtl("01","Govern")); ctl.push(planCtl("02","Threat-model")); ctl.push(planCtl("08","Test / red-team"));
+  if(gen){ thr.push(planThreat("injection","Prompt injection")); thr.push(planThreat("jailbreak","Jailbreak")); thr.push(planThreat("disclosure","Sensitive disclosure")); ctl.push(planCtl("10","Guardrails")); ctl.push(planCtl("13","Monitoring")); }
+  if(M.tasks.indexOf("agents")>=0){ thr.push(planThreat("agency","Excessive agency")); thr.push(planThreat("memory","Memory poisoning")); ctl.push(planCtl("15","Agentic control plane")); ctl.push(planCtl("11","Access &amp; rate limits")); }
+  if(route==="openweights"||route==="ondevice"){ thr.push(planThreat("supply","Supply-chain compromise")); ctl.push(planCtl("05","Supply-chain security")); ctl.push(planCtl("07","Pipeline &amp; secrets")); ctl.push(planCtl("09","Protect model &amp; infra")); }
+  if(M.data==="personal"||M.data==="regulated"){ thr.push(planThreat("memorise","Training-data memorisation")); thr.push(planThreat("inversion","Model inversion")); ctl.push(planCtl("04","Data governance &amp; DPIA")); ctl.push(planCtl("16","Data end-of-life")); }
+  if(M.tasks.indexOf("content")>=0||M.tasks.indexOf("vision")>=0){ thr.push(planThreat("deepfake","Harmful / deepfake output")); ctl.push(planCtl("12","Responsible release")); }
+  function uniq(a){ var s={},o=[]; a.forEach(function(x){ if(!s[x]){s[x]=1;o.push(x);} }); return o; }
+  thr=uniq(thr); ctl=uniq(ctl);
+  /* team \u2014 business, governance and technical */
+  var reg=(M.data==="personal"||M.data==="regulated"||M.sector.indexOf("finance")>=0||M.sector.indexOf("health")>=0||M.sector.indexOf("energy")>=0||M.sector.indexOf("public")>=0||M.sector.indexOf("eu")>=0);
+  var bigScale=(M.scale==="ent"||M.scale==="critical");
+  var team=[];
+  function T(role,skill,why,kind){ team.push([role,skill,why,kind]); }
+  if(M.persona!=="arch"||bigScale) T("Executive sponsor / SRO","Strategy, budget, accountability for residual risk","Someone senior must own the outcome and sign off the risk.","Business");
+  T("Product owner","Vision, prioritisation, success metrics","Keeps the build tied to a real, measurable business need.","Business");
+  T("Business analyst / process owner","Domain processes, requirements, value mapping","Most value comes from redesigning the process, not just the model.","Business");
+  T("Domain expert (SME)","Deep subject-matter knowledge","Judges whether outputs are actually right and useful.","Business");
+  if(M.change==="low"||M.change==="mixed"||bigScale){ T("Change &amp; adoption lead","Change management, stakeholder engagement","AI programmes fail on adoption far more than on modelling.","Business"); T("Communications &amp; training lead","Enablement, comms, upskilling","People must trust and know how to use the system.","Business"); }
+  if(M.buildbuy==="buy"||M.buildbuy==="partner"||M.buildbuy==="unsure") T("Procurement &amp; vendor manager","Sourcing, contracts, exit &amp; lock-in terms","Buying or partnering is a commercial decision, not just technical.","Business");
+  if(M.persona!=="arch"||bigScale) T("Finance / benefits owner","Business case, cost model, benefits tracking","Token costs and infra can surprise you; track the return.","Business");
+  if(reg){ T("Legal &amp; regulatory counsel","Regulatory interpretation, liability, contracts","The rules above need a human who owns them.","Governance"); T("Data protection officer / privacy","DPIA, lawful basis, data-subject rights","Mandatory where personal or regulated data is involved.","Governance"); }
+  if(reg||M.tasks.indexOf("agents")>=0||M.sector.indexOf("public")>=0) T("Responsible-AI / ethics lead","Fairness, transparency, impact assessment","Builds trust and heads off harm before it happens.","Governance");
+  T("AI / ML engineer","Model selection, prompting/fine-tuning, evaluation","Turns the architecture choice into a measured, working system.","Technical");
+  if(M.tasks.indexOf("tabular")>=0||M.tasks.indexOf("anomaly")>=0||M.tasks.indexOf("forecasting")>=0||M.tasks.indexOf("recommendation")>=0) T("Data scientist","Feature engineering, statistics, model validation","Classical/predictive workloads need statistical rigour.","Technical");
+  T("Data engineer","Pipelines, retrieval / vector stores, data quality","Most AI value and risk lives in the data.","Technical");
+  T("MLOps / platform engineer","Deployment, scaling, observability, cost control","Gets it to production and keeps it there affordably.","Technical");
+  T("Security / AppSec engineer","Threat modelling, guardrails, red-teaming","Owns the security considerations above.","Technical");
+  if(route==="openweights"||route==="ondevice") T("ML infrastructure / GPU ops","Self-hosting, inference optimisation, quantisation","Required once you run your own weights.","Technical");
+  if(M.tasks.indexOf("agents")>=0) T("Agent orchestration engineer","Tool integration, autonomy limits, guardrails","Agents multiply both capability and blast radius.","Technical");
+  if(M.tasks.indexOf("science")>=0||M.tasks.indexOf("vision")>=0||M.tasks.indexOf("content")>=0) T("Applied researcher","Model adaptation, domain evaluation","Bridges the model and the specialist domain.","Technical");
+  if(M.scale==="critical"||bigScale) T("SRE / reliability engineer","Latency, availability, capacity","High-volume or critical systems need dedicated reliability.","Technical");
+  var kinds=["Business","Governance","Technical"], kc={Business:"#38d6e0",Governance:"#ffd23d",Technical:"#8b6cff"};
+  var teamHTML=kinds.map(function(k){ var rows=team.filter(function(t){return t[3]===k;}); if(!rows.length) return "";
+    return '<div class="teamgrouph" style="color:'+kc[k]+'"><span class="dot" style="background:'+kc[k]+'"></span>'+k+' roles</div>'+rows.map(function(t){ return '<div class="teamrow"><div class="teamrole">'+t[0]+'</div><div class="teamskill">'+t[1]+'</div><div class="teamwhy">'+t[2]+'</div></div>'; }).join(""); }).join("");
+  var personaNote=M.persona==="exec"?"Executive framing \u2014 the emphasis is on the sourcing trade-offs, regulatory exposure and the investment in people.":M.persona==="arch"?"Architect framing \u2014 the emphasis is on the architecture combination, the security controls and the build team.":"A blended sponsor-and-architect view.";
+  var out='<div class="planout">'
+    +'<div class="planouth"><span class="kick" style="color:#6aa8ff">Generated plan</span><h2>High-level AI build plan</h2><p class="psummary">'+personaNote+' Primary functions: <b>'+M.tasks.map(function(t){return TL[t]||t;}).join(", ")+'</b>; data <b>'+M.data+'</b>; deployment <b>'+M.residency+'</b>; scale <b>'+M.scale+'</b>.</p></div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#8b6cff">1</span>Recommended architectures'+(multiArch?' <span class="pstag">multi-architecture build</span>':' <span class="pstag">single architecture</span>')+'</div><div class="uses" style="margin:2px 0 10px">'+archs.map(planChip).join("")+'</div><ul class="plist">'+notes.join("")+'</ul>'+(multiArch?'<p class="pmini">Several models working together \u2014 see <a class="lnk" onclick="showTab(\'ecosystem\');return false" href="#ecosystem">how real products combine architectures</a>.</p>':'')+'</div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#3ad6a0">2</span>Ecosystem &amp; licensing route</div><div class="proute">Recommended route: <b>'+R.name+'</b></div><div class="pcols"><div class="pcol pros"><div class="pcolh">Pros</div><ul>'+R.pros.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div><div class="pcol cons"><div class="pcolh">Cons / watch-outs</div><ul>'+R.cons.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div></div><div style="margin-top:8px">'+ecoLinkBtn+'</div></div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#ffd23d;color:#111">3</span>Rules, laws &amp; standards in scope</div><div class="rchips" style="margin:2px 0 8px">'+std.join("")+'</div>'+(stdNotes.length?'<ul class="plist">'+stdNotes.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>':'')+'<p class="pmini">Tap any standard for its primary source, or open the full <a class="lnk" onclick="showTab(\'security\');return false" href="#security">standards &amp; law library</a>.</p></div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#ff6b6b">4</span>Security considerations</div><div class="pssub">Priority threats to design against</div><div class="rchips" style="margin:2px 0 9px">'+thr.join("")+'</div><div class="pssub">Priority controls to put in place</div><div class="rchips" style="margin:2px 0 8px">'+ctl.join("")+'</div><p class="pmini">Explore these on the <a class="lnk" onclick="showTab(\'threats\');return false" href="#threats">Threats</a> and <a class="lnk" onclick="showTab(\'security\');return false" href="#security">Security</a> tabs.</p></div>'
+    +'<div class="plansec"><div class="psh"><span class="psn" style="background:#38d6e0;color:#111">5</span>Initial team &amp; skills</div><p class="pmini" style="margin:0 0 10px">The hardest parts of an AI build are usually <b>not</b> the modelling \u2014 note how many roles are business and governance, not engineering.</p><div class="teamtbl"><div class="teamrow teamhd"><div>Role</div><div>Key skills</div><div>Why</div></div>'+teamHTML+'</div></div>'
+    +'<div class="plandisc"><b>\u26a0 Important \u2014 read before relying on this plan.</b> This plan was <b>auto-generated from your selections by a simple, deterministic rules-based tool</b> (see \u2018How it works\u2019). It is a <b>starting point for discussion, not professional, legal, security, financial or procurement advice</b>. It was assembled by an AI system as part of a <b>personal-capacity</b> project by Stuart Okin and does <b>not</b> represent the position of Ofgem or any other organisation. Architecture, ecosystem, licensing, regulatory and team suggestions are indicative and generalised; model names, prices, laws and standards change frequently. <b>Validate every recommendation against primary sources and qualified professional, legal and security advisors before acting.</b></div>'
+    +'<div class="planbtns"><button class="planbtn" onclick="window.print()">Save / print this plan</button><button class="planbtn ghost" onclick="document.getElementById(\'planresult\').innerHTML=\'\';window.scrollTo({top:0,behavior:\'smooth\'})">Clear</button></div>'
+    +'</div>';
+  var box=document.getElementById("planresult"); box.innerHTML=out; box.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 function buildThreats(){
