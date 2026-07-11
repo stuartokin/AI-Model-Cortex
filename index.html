@@ -95,7 +95,7 @@
   /* grid */
   .grid-wrap{padding:20px clamp(16px,4vw,40px) 40px}
   .count{font-family:var(--mono); font-size:12px; color:var(--faint); letter-spacing:.14em; margin-bottom:16px; text-transform:uppercase}
-  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:16px}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,258px),1fr)); gap:16px}
   .card{position:relative; text-align:left; cursor:pointer; overflow:hidden; color:var(--star);
     background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
     border:1px solid var(--line); border-radius:16px; padding:0 0 16px;
@@ -179,10 +179,12 @@
     .skybadge{font-size:10px; letter-spacing:.14em; padding:5px 11px}
     .hint{font-size:10px; bottom:12px}
   }
+  @media(max-width:400px){ .brand h1{font-size:15px} .ibtn{width:34px;height:34px} }
+  @media(max-width:430px){ .cmap{grid-template-columns:1fr; gap:6px} .cmap #cmsvg,.cmap #tmsvg{display:none} .cmhead{margin-top:6px} }
   /* large monitors: use the space */
   @media(min-width:1600px){
     .hero{height:min(80vh,1000px)}
-    .grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:20px}
     .drawer{width:min(680px,96vw)}
     body{font-size:16.5px}
   }
@@ -343,7 +345,7 @@
   .tag:hover{border-color:var(--f3); color:#fff; background:rgba(106,168,255,.2)}
 
   /* architecture risk cards */
-  .riskgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px}
+  .riskgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:14px}
   .tchip{cursor:pointer; font-family:var(--body); font-size:11.5px; color:#fff; border-color:color-mix(in srgb, var(--tcol) 48%, var(--line)); background:color-mix(in srgb, var(--tcol) 14%, transparent)}
   .tchip:hover{border-color:var(--tcol); background:color-mix(in srgb, var(--tcol) 28%, transparent)}
   .miul{margin:4px 0 8px; padding-left:18px}
@@ -361,7 +363,7 @@
   .rchip{font-size:11.5px; padding:4px 9px; border-radius:7px; border:1px solid var(--line); background:rgba(255,90,95,.09); color:#ffb3b0}
 
   /* standards library */
-  .stdgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:13px}
+  .stdgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr)); gap:13px}
   .stdcard{text-align:left; cursor:pointer; border:1px solid var(--line); border-radius:15px; padding:16px 17px; background:rgba(255,255,255,.03); transition:.2s; color:var(--star)}
   .stdcard:hover{transform:translateY(-3px); border-color:var(--f1); box-shadow:0 16px 40px -24px var(--f1)}
   .stdcard .so{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--f1)}
@@ -377,7 +379,7 @@
   .obsnav .cnt{font-size:9.5px; opacity:.7}
   /* timeline chart */
   .tl-controls{display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap}
-  .tl-bar{display:flex; align-items:center; gap:10px 16px; flex-wrap:wrap; margin-bottom:10px; padding:10px 12px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.02)}
+  .tl-bar{display:flex; align-items:center; gap:10px 16px; flex-wrap:wrap; margin:10px 0 0; padding:10px 12px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.02)}
   .tl-fset{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
   .tl-flab{font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
   .tl-chips{display:flex; gap:6px; flex-wrap:wrap}
@@ -393,6 +395,9 @@
   .tl-zoom{display:flex; gap:5px; margin-left:auto}
   .tl-zoom button{width:32px; height:32px; border-radius:9px; border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--muted); font-size:16px; cursor:pointer}
   .tl-zoom button:hover{color:var(--star); border-color:var(--f5)}
+  .tmap-tools{display:flex; justify-content:flex-end; margin:0 2px 8px}
+  .tmap-all{font-family:var(--mono); font-size:11px; padding:6px 13px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--muted); cursor:pointer; transition:.15s}
+  .tmap-all:hover{color:var(--star); border-color:var(--f3)}
   .tl-legend{display:flex; flex-wrap:wrap; gap:14px; font-family:var(--mono); font-size:10.5px; color:var(--faint); margin:8px 2px 10px}
   .tl-legend span{display:flex; align-items:center; gap:6px}
   .tl-legend i.ld{width:11px; height:11px; border-radius:50%; display:inline-block}
@@ -424,12 +429,13 @@
   .tlband{opacity:.05}
   .tlgrid{stroke:rgba(255,255,255,.06); stroke-width:1}
   .tlaxis{fill:var(--faint); font-family:ui-monospace,monospace; font-size:10px}
-  .tllab{font-family:ui-monospace,monospace; font-size:8.6px; pointer-events:none}
-  .tllab.attack{fill:#ffd0c8} .tllab.vuln{fill:#dbe6ff} .tllab.tech{fill:#aab3d6}
+  .tllab{font-family:ui-monospace,monospace; font-size:8.6px; pointer-events:none; fill:#cfd6ee}
+  .tllab.attack{fill:#ffd0c8} .tllab.vuln{fill:#dbe6ff} .tllab.tech{fill:#aab3d6} .tllab.aiattack{fill:#ff9fe4}
+  .tllead{stroke:rgba(255,255,255,.16); stroke-width:1; pointer-events:none}
   .tlbandlab{fill:var(--faint); font-family:ui-monospace,monospace; font-size:9px; opacity:.7}
   .tlnow{stroke:#ff6b6b; stroke-width:1; stroke-dasharray:3 3; opacity:.4}
   /* CVE cards */
-  .cvegrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:13px}
+  .cvegrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr)); gap:13px}
   .cvecard{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:linear-gradient(180deg,rgba(255,90,95,.05),rgba(255,255,255,.01)); transition:.2s}
   .cvecard:hover{border-color:#ff8a7a; transform:translateY(-2px)}
   .cvecard .ch{padding:13px 15px 11px; border-bottom:1px solid var(--line); display:flex; align-items:flex-start; gap:10px}
@@ -448,7 +454,7 @@
   .cvecard .clink{font-family:var(--mono); font-size:11px; color:#9fb6ff; text-decoration:none}
   .cvecard .clink:hover{text-decoration:underline}
   /* trend tiles */
-  .trendstats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:11px; margin-bottom:18px}
+  .trendstats{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); gap:11px; margin-bottom:18px}
   .tstat{border:1px solid var(--line); border-radius:14px; padding:16px; background:radial-gradient(120% 120% at 0% 0%, rgba(255,90,95,.1), transparent 60%)}
   .tstat .big{font-family:var(--disp); font-weight:800; font-size:30px; line-height:1; background:linear-gradient(90deg,#ff6b6b,#ffb347); -webkit-background-clip:text; background-clip:text; color:transparent}
   .tstat .tlab{font-size:12px; color:var(--muted); margin:8px 0 6px; line-height:1.4}
@@ -600,7 +606,7 @@
   .tfil{font-family:var(--mono); font-size:11px; padding:7px 13px; border-radius:999px; border:1px solid var(--line);
     background:rgba(255,255,255,.03); color:var(--muted); cursor:pointer; transition:.15s}
   .tfil.on{color:#fff; border-color:var(--tc); background:color-mix(in srgb, var(--tc) 25%, transparent)}
-  .tgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:12px}
+  .tgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr)); gap:12px}
   .tcard{border:1px solid var(--line); border-radius:14px; overflow:hidden; cursor:pointer; transition:.2s; background:rgba(255,255,255,.02)}
   .tcard:hover{transform:translateY(-3px); border-color:var(--tc)}
   .tcard .th{padding:13px 15px 11px; border-bottom:1px solid var(--line); border-left:3px solid var(--tc)}
@@ -2330,7 +2336,7 @@ var THREATCATALOG=[
   {id:"supply",name:"AI supply-chain attack",color:"#c2703d",fams:["neural","generative","transformer","agents"],ctrls:["05","07","08"],
    def:"Malicious code, weights or data injected into a dependency (model hub, package, dataset, MCP tool) that propagates to every downstream deployment.",
    analogy:"Poisoning the town\u2019s water supply rather than each household\u2019s cup.",
-   examples:["torchtriton and PyTorch Lightning PyPI compromises.","Malicious Hugging Face models opening reverse shells.","LiteLLM breach exposing ~500k credentials."],
+   examples:["torchtriton and PyTorch Lightning PyPI compromises.","Malicious Hugging Face models opening reverse shells.","LiteLLM and Bitwarden CLI hit in the TeamPCP supply-chain campaign."],
    mitigations:["Keep an AIBOM; verify provenance and signatures.","Isolated build and fine-tune environments.","Prefer safetensors over pickle; code signing."],
    sources:[{t:"MITRE ATLAS AML.T0010",u:"https://atlas.mitre.org/techniques/AML.T0010"},{t:"NCSC Secure AI",u:"https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development"}]}
 ];
@@ -2353,7 +2359,7 @@ function threatHTML(t){
     +'<div class="rl" style="margin-top:8px">Sources</div><p style="font-size:12.5px">'+srcs+'</p>';
 }
 function threatDetail(id){ openSheet(threatHTML(thrById(id))); }
-var TME=[], tmSel=null, _tmView="cards";
+var TME=[], tmSel=null, _tmView="map";
 function secThreatView(v){
   _tmView=v;
   document.getElementById("tcardsBtn").classList.toggle("on",v==="cards");
@@ -2384,6 +2390,7 @@ function tmLayout(){
     el.setAttribute("d","M"+p1.x+" "+p1.y+" C"+(p1.x+dx)+" "+p1.y+", "+(p2.x-dx)+" "+p2.y+", "+p2.x+" "+p2.y);
   });
 }
+function tmReset(){ tmSel=null; var box=document.getElementById('tmap'); if(!box) return; box.querySelectorAll('[data-tk]').forEach(function(n){ n.classList.remove('sel','dim'); }); TME.forEach(function(e,i){ var el=document.getElementById('tme'+i); if(el){ el.classList.remove('hi','lo'); } }); tmInfo(); }
 function tmSelect(k){
   tmSel=(tmSel===k)?null:k;
   var box=document.getElementById("tmap");
@@ -2798,15 +2805,15 @@ var ATTACKS=[
   {id:"A06",name:"nullifAI pickle-scan bypass in the wild",cat:"poisoning",dnum:2025.10,sev:7.5,date:"2025",
    desc:"Malicious models stored in PyTorch format but compressed with 7z slipped past Hugging Face\u2019s Picklescan defence and executed their payload on load \u2014 a blind spot actively abused before it was closed.",
    arch:["Transformers / LLMs","Neural foundations"],who:"ReversingLabs",src:"https://www.reversinglabs.com/blog/rl-identifies-malware-ml-model-hosted-on-hugging-face"},
-  {id:"A07",name:"LiteLLM PyPI compromise \u2014 ~500k credentials",cat:"supply",dnum:2026.20,sev:9.2,date:"Mar 2026",
-   desc:"The LiteLLM package on PyPI was compromised, potentially exposing around 500,000 credentials including API keys for Meta, OpenAI and Anthropic. Meta reportedly froze AI data work after the breach put training secrets at risk.",
-   arch:["Transformers / LLMs","Agentic & Multi-Agent AI"],who:"reported May 2026",src:"https://thenextweb.com/news/hugging-face-clawhub-malware-ai-supply-chain"},
-  {id:"A08",name:"PyTorch Lightning \u2018Mini Shai-Hulud\u2019 malware",cat:"supply",dnum:2026.25,sev:8.6,date:"2026",
-   desc:"PyPI \u2018lightning\u2019 releases 2.6.2/2.6.3 carried credential-stealing malware that ran on import \u2014 a trusted ML dependency turned into a delivery path for GitHub, cloud and model-infra secrets, live for only 42 minutes.",
-   arch:["Transformers / LLMs","Neural foundations"],who:"Semgrep / Socket / Snyk",src:"https://www.penligent.ai/hackinglabs/pytorch-lightning-supply-chain-attack/"},
-  {id:"A09",name:"npm hijack targeting AI coding tools",cat:"supply",dnum:2026.28,sev:8.0,date:"2026",
-   desc:"A Bitwarden CLI npm package was hijacked for 90 minutes with a payload built specifically to harvest credentials from AI coding assistants \u2014 Claude Code, Cursor, Codex CLI and Aider.",
-   arch:["Agentic & Multi-Agent AI","Transformers / LLMs"],who:"reported 2026",src:"https://thenextweb.com/news/hugging-face-clawhub-malware-ai-supply-chain"},
+  {id:"A07",name:"LiteLLM & the TeamPCP \u2018Mini Shai-Hulud\u2019 campaign",cat:"supply",dnum:2026.32,sev:8.5,date:"Apr 2026",
+   desc:"The LiteLLM LLM-gateway package was among the AI and developer packages hit in the TeamPCP \u2018Mini Shai-Hulud\u2019 supply-chain campaign, which planted credential-stealing payloads to harvest cloud keys, GitHub and CI/CD tokens from developer and build environments.",
+   arch:["Transformers / LLMs","Agentic & Multi-Agent AI"],who:"Socket / Semgrep, 2026",src:"https://socket.dev/blog/lightning-pypi-package-compromised"},
+  {id:"A08",name:"PyTorch Lightning \u2018ShaiWorm\u2019 compromise",cat:"supply",dnum:2026.33,sev:8.6,date:"Apr 2026",
+   desc:"PyPI \u2018lightning\u2019 releases 2.6.2/2.6.3 (30 Apr 2026) carried a credential-stealing payload that ran on import \u2014 harvesting cloud keys, GitHub tokens and browser secrets and even planting persistence hooks in Claude Code and VS Code. Caught and quarantined within 42 minutes.",
+   arch:["Transformers / LLMs","Neural foundations"],who:"Semgrep / Socket / Lightning AI advisory",src:"https://semgrep.dev/blog/2026/malicious-dependency-in-pytorch-lightning-used-for-ai-training/"},
+  {id:"A09",name:"Bitwarden CLI npm hijack (TeamPCP)",cat:"supply",dnum:2026.31,sev:8.0,date:"Apr 2026",
+   desc:"The Bitwarden CLI npm package was hijacked in the same TeamPCP campaign, left live long enough to harvest AWS keys, GitHub tokens and SSH credentials from developer environments, including AI coding toolchains.",
+   arch:["Agentic & Multi-Agent AI","Transformers / LLMs"],who:"Socket / Cyber Kendra, 2026",src:"https://www.cyberkendra.com/2026/04/lightning-pypi-package-compromised-in.html"},
   {id:"A10",name:"HF infrastructure token exposure",cat:"extraction",dnum:2023.40,sev:7.0,date:"2023",
    desc:"Wiz uncovered exposed tokens and weak tenant isolation in Hugging Face\u2019s hosting platform, opening a path to tamper with or exfiltrate models via the infrastructure rather than the model file.",
    arch:["Transformers / LLMs","Diffusion Models"],who:"Wiz Research",src:"https://www.wiz.io/blog/wiz-and-hugging-face-address-risks-to-ai-infrastructure"}
@@ -2817,7 +2824,7 @@ var DISCLOSED=[
   {id:"CVE-2025-32711", cat:"injection", dnum:2025.45, cvssNum:9.3, name:"EchoLeak \u2014 Microsoft 365 Copilot", date:"Jun 2025", cvss:"9.3", who:"Disclosed by Aim Security \u00b7 patched by Microsoft",
    desc:"The first documented zero-click prompt injection against a production AI system. A single crafted email could make Copilot retrieve internal files and forward them to an attacker-controlled server \u2014 with no user interaction at all.",
    arch:["Transformers / LLMs","Agentic AI"], src:"https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-32711"},
-  {id:"CVE-2025-53773", cat:"injection", dnum:2025.60, cvssNum:9.6, name:"GitHub Copilot / VS Code RCE", date:"2025", cvss:"9.6", who:"Disclosed 2025 \u00b7 patched by Microsoft",
+  {id:"CVE-2025-53773", cat:"injection", dnum:2025.62, cvssNum:7.8, name:"GitHub Copilot / VS Code RCE", date:"Aug 2025", cvss:"7.8", who:"Disclosed 2025 \u00b7 patched by Microsoft",
    desc:"A hidden prompt injection in a pull-request description achieved remote code execution by making Copilot modify .vscode/settings.json without approval \u2014 a route to compromising millions of developer machines.",
    arch:["Transformers / LLMs","Agentic AI"], src:"https://nvd.nist.gov/vuln/detail/CVE-2025-53773"},
   {id:"CVE-2025-54135 / 54136", cat:"injection", dnum:2025.62, cvssNum:8.6, name:"CurXecute \u2014 Cursor IDE", date:"2025", cvss:"8.6", who:"Cursor \u00b7 fixed in 1.3.9",
@@ -2915,7 +2922,7 @@ function tlOpen(kind,id){
   openSheet(h);
 }
 function tlLabel(e){
-  var L={"A01":"torchtriton","A02":"HF malicious models","A03":"ShadowRay","A04":"NullBulge","A05":"PI campaigns 90+","A06":"nullifAI","A07":"LiteLLM breach","A08":"Lightning malware","A09":"npm AI hijack","A10":"HF token exposure","CVE-2025-32711":"EchoLeak","CVE-2025-53773":"Copilot RCE","CVE-2025-54135 / 54136":"CurXecute","CVE-2025-68143/4/5":"Anthropic MCP","Slack AI leak":"Slack AI leak","Now Assist":"Now Assist","Memory poisoning":"Memory poisoning","AI1":"WormGPT/FraudGPT","AI2":"Deepfake $25M fraud","AI3":"GhostGPT AIaaS","AI4":"PromptLock","AI5":"Vibe-hacking (17 orgs)","AI6":"AI espionage GTG-1002","AI7":"Self-writing malware","AI8":"AI phishing at scale"};
+  var L={"A01":"torchtriton","A02":"HF malicious models","A03":"ShadowRay","A04":"NullBulge","A05":"PI campaigns 90+","A06":"nullifAI","A07":"LiteLLM breach","A08":"Lightning malware","A09":"npm AI hijack","A10":"HF token exposure","CVE-2025-32711":"EchoLeak","CVE-2025-53773":"Copilot RCE","CVE-2025-54135 / 54136":"CurXecute","CVE-2025-68143/4/5":"Anthropic MCP","Slack AI leak":"Slack AI leak","Now Assist":"Now Assist","Memory poisoning":"Memory poisoning","AI1":"WormGPT/FraudGPT","AI2":"Deepfake $25M fraud","AI3":"GhostGPT AIaaS","AI4":"PromptLock","AI5":"Vibe-hacking (17 orgs)","AI6":"AI espionage GTG-1002","AI7":"Self-writing malware","AI8":"AI phishing at scale","AI9":"JadePuffer"};
   if(L[e.id]) return L[e.id];
   var n=e.name||""; return n.length>22?n.slice(0,21)+"\u2026":n;
 }
@@ -2940,12 +2947,18 @@ function tlRender(){
     svg+='<text class="tlaxis" x="'+gx+'" y="'+(mT+plotH+18)+'" text-anchor="middle">'+yr+'</text>';
   }
   var vis=ev.filter(function(e){return e.x>=t0-0.03 && e.x<=t1+0.03;});
-  /* label declutter: greedy two-row placement by x */
+  /* multi-lane label packer: fit as many labels as possible, with leader lines */
   var sorted=vis.slice().sort(function(a,b){return X(a.x)-X(b.x);});
-  var rowLast=[-1e9,-1e9], minGap=66, labelRow={};
-  sorted.forEach(function(e){ var x=X(e.x); var row=(rowLast[0]<=rowLast[1])?0:1;
-    if(x-rowLast[row]<minGap){ var o=1-row; if(x-rowLast[o]>=minGap){ row=o; } else { return; } }
-    rowLast[row]=x; labelRow[e.id]=row; });
+  var lanes=[14,-12,28,-26,42,-40,56,-54,70,-68,84,-82];
+  var laneLast=lanes.map(function(){return -1e9;});
+  var place={};
+  sorted.forEach(function(e){
+    var cx=X(e.x), w=tlLabel(e).length*5.2+10, startX=cx+9;
+    var li=-1, best=0, bestLast=1e18;
+    for(var k=0;k<lanes.length;k++){ if(startX>=laneLast[k]+4){ li=k; break; } if(laneLast[k]<bestLast){ bestLast=laneLast[k]; best=k; } }
+    if(li<0) li=best;
+    laneLast[li]=startX+w; place[e.id]={off:lanes[li], w:w};
+  });
   vis.forEach(function(e){
     var cat=THREATS.cats.find(function(c){return c.key===e.cat;}); var col=e.kind==="aiattack"?"#ff4fd8":(cat?cat.color:"#9fb6ff");
     var jy=((tlHash(e.id)%7)-3)*1.6;
@@ -2959,9 +2972,14 @@ function tlRender(){
     else if(e.kind==="aiattack"){ var a=8;
       svg+='<path d="M'+cx+' '+(cy-a)+' L'+(cx+a*0.92)+' '+(cy+a*0.72)+' L'+(cx-a*0.92)+' '+(cy+a*0.72)+' Z" fill="#ff4fd8" stroke="#fff" stroke-width="1.4"/>'; }
     else { svg+='<circle cx="'+cx+'" cy="'+cy+'" r="5" fill="#0a0f22" stroke="'+col+'" stroke-width="2"/>'; }
-    if(e.id in labelRow){ var row=labelRow[e.id];
-      var anchor=(cx>W*0.8)?"end":"start", lx=(anchor==="end")?cx-9:cx+9, ly=(row===0)?cy-10:cy+15;
-      svg+='<text class="tllab '+e.kind+'" x="'+lx+'" y="'+ly+'" text-anchor="'+anchor+'">'+tlLabel(e)+'</text>'; }
+    var pl=place[e.id];
+    if(pl){
+      var off=pl.off, ly=Math.max(mT+9,Math.min(mT+plotH-3,cy+off));
+      var anchor="start", lx=cx+9;
+      if(cx+9+pl.w > W-4){ anchor="end"; lx=cx-9; }
+      if(Math.abs(off)>16){ svg+='<line class="tllead" x1="'+cx+'" y1="'+cy+'" x2="'+(anchor==="end"?lx-2:lx+2)+'" y2="'+ly+'"/>'; }
+      svg+='<text class="tllab '+e.kind+'" x="'+lx+'" y="'+(ly+3)+'" text-anchor="'+anchor+'">'+tlLabel(e)+'</text>';
+    }
     svg+='<title>'+e.name+' ('+e.meta+')</title></g>';
   });
   svg+='</svg>';
@@ -2999,8 +3017,19 @@ function buildTimeline(){
     +[["all","All"],["attack","Attacks"],["vuln","Vulns"],["tech","Techniques"]].map(function(L){return '<button class="'+(_tl.layer===L[0]?"on":"")+'" onclick="tlLayer(\''+L[0]+'\')">'+L[1]+'</button>';}).join("")
     +'</div>';
   var aiBtn='<button class="ai-toggle'+(_tl.ai?" on":"")+'" onclick="tlAi()">\u25b2 AI-assisted attacks '+(_tl.ai?"\u2715":"\u2192 off")+'</button>';
+  /* legend: severity always; markers reflect the active layers, incl. AI when selected */
+  var legend='<div class="tl-legend"><b class="lg-h">Severity</b>'
+    +'<span><i class="ld crit"></i>Critical</span><span><i class="ld hi"></i>High</span><span><i class="ld md"></i>Medium</span><span><i class="ld lo"></i>Low</span>'
+    +'<b class="lg-h">Markers</b>';
+  if(_tl.layer==="all"||_tl.layer==="attack") legend+='<span><i class="ld attackmk"></i>Real-world attack</span>';
+  if(_tl.ai) legend+='<span><i class="ld aimk"></i>AI-assisted attack</span>';
+  if(_tl.layer==="all"||_tl.layer==="vuln") legend+='<span><i class="ld vulnmk"></i>Disclosed CVE</span><span><i class="ld estmk"></i>Impact estimated</span>';
+  if(_tl.layer==="all"||_tl.layer==="tech") legend+='<span><i class="ld techmk"></i>Technique</span>';
+  legend+='</div>';
   host.innerHTML=
-     '<div class="tl-bar">'
+     '<div class="tl-wrap" id="tlWrap"></div>'
+    +legend
+    +'<div class="tl-bar">'
        +'<div class="tl-fset"><span class="tl-flab">Show</span>'+layers+'</div>'
        +'<div class="tl-fset"><span class="tl-flab">Type</span><div class="tl-chips">'+catChips+'</div></div>'
        +'<div class="tl-fset">'+aiBtn+'</div>'
@@ -3008,9 +3037,7 @@ function buildTimeline(){
          +'<div class="tl-zoom"><button onclick="tlZoom(1)" aria-label="Zoom in">+</button><button onclick="tlZoom(-1)" aria-label="Zoom out">\u2212</button></div></div>'
      +'</div>'
     +'<div class="tl-note" id="tlNote"><p>Real-world attacks, disclosed vulnerabilities and attack techniques over the <b>last five years</b>, by <b>time</b> (x) and <b>severity / impact</b> (y). <b>Drag</b> to pan, <b>pinch</b> or <b>+/\u2212</b> to zoom, tap a point for detail. Labels thin out when zoomed out and fill in as you zoom in.</p>'
-      +'<p style="font-size:11px;color:var(--faint);margin:6px 0 0">Scope: 2021 onward. Attacks and CVEs are real, dated events (impact = CVSS or an assigned estimate). Technique years are approximate \u201cfirst widely documented\u201d dates for orientation. Verify each against its linked source.</p></div>'
-    +'<div class="tl-legend"><b class="lg-h">Severity</b><span><i class="ld crit"></i>Critical</span><span><i class="ld hi"></i>High</span><span><i class="ld md"></i>Medium</span><span><i class="ld lo"></i>Low</span><b class="lg-h">Markers</b><span><i class="ld attackmk"></i>Real-world attack</span><span><i class="ld aimk"></i>AI-assisted attack</span><span><i class="ld vulnmk"></i>Disclosed CVE</span><span><i class="ld estmk"></i>Impact estimated</span><span><i class="ld techmk"></i>Technique</span></div>'
-    +'<div class="tl-wrap" id="tlWrap"></div>';
+      +'<p style="font-size:11px;color:var(--faint);margin:6px 0 0">Scope: 2021 onward. Attacks and CVEs are real, dated events (impact = CVSS or an assigned estimate). Technique years are approximate \u201cfirst widely documented\u201d dates for orientation. Verify each against its linked source.</p></div>';
   tlRender(); requestAnimationFrame(tlRender);
 }
 
@@ -3074,17 +3101,18 @@ function buildThreats(){
       +'<div class="tmeta"><a href="'+t.u+'" target="_blank" rel="noopener">'+t.m+' \u2197</a></div></div>';
   }).join("");
   var archBody=
-     '<div class="stab-toggle"><button class="on" id="tcardsBtn" onclick="secThreatView(\'cards\')">&#9635; Cards</button><button id="tmapBtn" onclick="secThreatView(\'map\')">&#9741; Linked map</button></div>'
-    +'<div id="tcardsWrap"><div class="riskgrid">'+risks+'</div></div>'
-    +'<div id="tmapWrap" hidden>'
+     '<div class="stab-toggle"><button class="on" id="tmapBtn" onclick="secThreatView(\'map\')">&#9741; Linked map</button><button id="tcardsBtn" onclick="secThreatView(\'cards\')">&#9635; Cards</button></div>'
+    +'<div id="tmapWrap">'
       +'<p class="secsub" style="margin:0 2px 10px">Every top threat linked to the <b>models</b> it hits and the <b>controls</b> that mitigate it. Tap a threat, a model or a control to light up its connections; tap a threat chip for full detail.</p>'
+      +'<div class="tmap-tools"><button class="tmap-all" onclick="tmReset()">&#9673; Select all</button></div>'
       +'<div class="cmap" id="tmap"><svg id="tmsvg"></svg>'
         +'<div class="cmcol"><div class="cmhead">Architectures</div>'+tmFam+'</div>'
         +'<div class="cmcol"><div class="cmhead">Top threats</div>'+tmThr+'</div>'
         +'<div class="cmcol"><div class="cmhead">Controls</div>'+tmCtl+'</div>'
       +'</div>'
       +'<div class="mapinfo" id="tmapinfo"><span class="mi-k">Explore</span><h4>Tap any node</h4>Select a threat to see the models it affects and the controls that mitigate it.</div>'
-    +'</div>';
+    +'</div>'
+    +'<div id="tcardsWrap" hidden><div class="riskgrid">'+risks+'</div></div>';
   var cveBody='<p class="secsub" style="margin:0 2px 12px">Real, publicly disclosed AI vulnerabilities and incidents \u2014 CVE identifiers, CVSS where assigned, and the affected architecture families. Links go to the primary advisory or database.</p><div class="cvegrid">'+cveCards+'</div>'
     +'<p style="font-size:11.5px;color:var(--faint);margin:14px 2px 0">CVE links resolve to NVD, MSRC or CVE.org. Details are summarised from public reporting (Aim Security, PromptArmor, Cyata, CrowdStrike, VentureBeat, NSFOCUS) and should be verified against the primary advisory before action.</p>';
   var trendBody='<div class="trendstats">'+stats+'</div>'+tcards
