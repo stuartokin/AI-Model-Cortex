@@ -322,6 +322,8 @@
   .wstep p{color:var(--muted); font-size:15px; margin-bottom:10px}
   .wstep ul{margin:0 0 6px; padding-left:20px; color:var(--muted); font-size:14px}
   .wstep li{margin:5px 0}
+  .wvideo{display:inline-flex; align-items:center; gap:8px; margin:10px 0 2px; padding:9px 16px; border-radius:999px; border:1px solid var(--f3); background:rgba(139,108,255,.14); color:#dfe6ff; font-family:var(--disp); font-weight:600; font-size:13.5px; cursor:pointer; transition:.15s}
+  .wvideo:hover{background:rgba(139,108,255,.26)}
   .wstep b{color:var(--star)}
   .wstep a{color:#8fbcff; text-decoration:underline; text-underline-offset:2px}
   .wstep a:hover{color:#b8d4ff}
@@ -854,6 +856,7 @@
 <div class="hmenu" id="hmenu" hidden role="menu">
   <button role="menuitem" onclick="hmenuAct('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>Search everything</button>
   <button role="menuitem" onclick="hmenuAct('tour')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z"/></svg>Take the tour</button>
+  <button role="menuitem" onclick="hmenuAct('video')"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="14" rx="3"/><path d="M17 10l4-2.5v9L17 14z"/></svg>Watch the video demo</button>
   <button role="menuitem" onclick="hmenuAct('play')"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" opacity=".35"/><path d="M9 8l7 4-7 4z"/></svg>Play skull (display mode)</button>
   <button role="menuitem" onclick="hmenuAct('gloss')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Glossary</button>
   <button role="menuitem" onclick="hmenuAct('sources')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.6" r=".7" fill="currentColor" stroke="none"/></svg>All sources</button>
@@ -903,7 +906,7 @@
     <div class="secwrap" id="planroot"></div>
   </section>
 
-  <footer>Personal capacity · AI-assembled · not advice · Stuart Okin · 12 Jul 2026 · build r14-0712e</footer>
+  <footer>Personal capacity · AI-assembled · not advice · Stuart Okin · 12 Jul 2026 · build r15-0712f</footer>
 </main>
 
 <div class="scrim" id="scrim"></div>
@@ -930,6 +933,7 @@
     <button class="wclose2" onclick="closeTour()" aria-label="Close tour">×</button>
     <div class="kick">Guided tour</div>
     <h2>Welcome to <span>The AI Model Cortex</span></h2>
+    <button class="wvideo" onclick="openVideoDemo()">&#9654; Prefer to watch? 3-minute video demo</button>
     <div class="wsteps" id="wsteps"></div>
     <div class="wnav">
       <div class="wdots" id="wdots"></div>
@@ -2121,7 +2125,7 @@ window.addEventListener("error",function(ev){
 <script>
 /* ================= APP SHELL LOGIC ================= */
 (function(){
-  try{ console.log("AI Model Cortex build r14-0712e"); }catch(e){}
+  try{ console.log("AI Model Cortex build r15-0712f"); }catch(e){}
   var root=document.documentElement;
   if(!root.getAttribute("data-theme")) root.setAttribute("data-theme","dark");
   var sun='<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>';
@@ -2163,6 +2167,7 @@ function hmenuAct(a){ document.getElementById("hmenu").hidden=true; document.get
   else if(a==="search") openSearch();
   else if(a==="changelog") openSheet(changelogHTML());
   else if(a==="play") playSkullPrompt();
+  else if(a==="video") openVideoDemo();
   else if(a==="articles") openSheet(articlesHTML());
   else if(a==="feedback") window.open("https://www.linkedin.com/in/stuart-okin-b37ab69","_blank","noopener");
 }
@@ -2219,9 +2224,16 @@ function articlesHTML(){
     +'<a class="artprofile" href="https://www.linkedin.com/in/stuart-okin-b37ab69" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>Follow &amp; connect on LinkedIn \u2197</a>'
     +'<a class="artfeedback" href="https://www.linkedin.com/in/stuart-okin-b37ab69" target="_blank" rel="noopener">\ud83d\udcac Have feedback on this tool? Send it via LinkedIn \u2197</a>';
 }
+function openVideoDemo(){
+  if(typeof closeTour==="function"){ try{ var w=document.getElementById("welcome"); if(w && !w.hidden) closeTour(); }catch(e){} }
+  openSheet('<span class="mi-k" style="color:#8b6cff">Video demo \u00b7 3 minutes</span><h2>The AI Model Cortex \u2014 tour</h2>'
+    +'<video controls playsinline preload="metadata" style="width:100%;max-height:68vh;border-radius:14px;background:#000;display:block" src="Aimodelcortexdemo.mp4">Your browser cannot play this video.</video>'
+    +'<p style="font-size:12px;color:var(--faint);margin-top:10px">A guided walk through the Cortex, Ecosystem, Security, Threats and Plan tabs. If the video does not load, make sure <span style="font-family:var(--mono)">Aimodelcortexdemo.mp4</span> is published alongside this page.</p>');
+}
 function playSkullPrompt(){ openSheet('<span class="mi-k" style="color:#8b6cff">Display / video mode</span><h2>Play the skull</h2><p>A cinematic opening: a 3\u20132\u20131 countdown, then the robot skull and brain fill the screen and each brain region lights up in turn \u2014 with a call-out naming the region and the AI models mapped to it (with sound, if not muted).</p><p style="font-size:12.5px;color:var(--faint)">All controls are hidden. Press any key or tap the screen to exit and return to the Cortex.</p><div class="planbtns"><button class="planbtn go" onclick="closeSheet(true);window.playSkull(false)">\u25b6 Play once</button><button class="planbtn" onclick="closeSheet(true);window.playSkull(true)">\u27f3 Play &amp; loop</button></div>'); }
 function changelogHTML(){
   var items=[
+    ["12 Jul 2026","Added a <b>3-minute video demo</b>, launchable from the guided tour and the \u22ee menu. New \u2018Play skull\u2019 display mode for screens and filming."],
     ["11 Jul 2026","New <b>Plan</b> tab: an interactive build planner — answer as an executive or architect and it generates architectures, an ecosystem/licensing route with pros &amp; cons, standards in scope, security considerations and a starting team, all cross-linked, with a clear disclaimer."],
     ["11 Jul 2026","Added <b>example applications</b> (single- and multi-architecture) to the Ecosystem tab, plus <b>Feedback</b> and <b>More from the author</b> links to Stuart Okin’s LinkedIn articles."],
     ["11 Jul 2026","New <b>Ecosystem</b> tab: the six worlds of AI supply (licensing, distribution, origin), training vs inference energy charts, and a vendor atlas with July-2026 token prices — all linked to the Cortex cards. Tour rewritten to cover every feature."],
@@ -2230,7 +2242,7 @@ function changelogHTML(){
     ["9 Jul 2026","Added the AI Security Observatory: attack timeline, disclosed CVEs, trends and offensive-AI (AI-misuse) cases. Added NIST AI 600-1 and the threat\u2194control map."],
     ["Earlier","Built the 3D robotic-skull cortex of 23 architectures across 9 brain regions, the secure-AI lifecycle, control map and standards/law library."]
   ];
-  return '<span class="mi-k" style="color:#6aa8ff">build r14-0712e</span><h2>What\u2019s new</h2>'+items.map(function(it){return '<div class="clog"><div class="clogd">'+it[0]+'</div><p>'+it[1]+'</p></div>';}).join("")+'<p style="font-size:11.5px;color:var(--faint);margin-top:10px">Personal-capacity project \u00b7 AI-assembled \u00b7 verify against primary sources.</p>';
+  return '<span class="mi-k" style="color:#6aa8ff">build r15-0712f</span><h2>What\u2019s new</h2>'+items.map(function(it){return '<div class="clog"><div class="clogd">'+it[0]+'</div><p>'+it[1]+'</p></div>';}).join("")+'<p style="font-size:11.5px;color:var(--faint);margin-top:10px">Personal-capacity project \u00b7 AI-assembled \u00b7 verify against primary sources.</p>';
 }
 /* ---- URL hash deep-linking ---- */
 function applyHash(){
